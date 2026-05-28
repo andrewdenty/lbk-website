@@ -1,8 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const photo = `${base}/lotte.jpg`;
+import { Image } from 'astro:assets';
+import lottePhoto from '../assets/lotte-bjerre-knudsen.webp';
 
 const education = [
   {
@@ -68,11 +67,12 @@ const positions = [
   <!-- HERO ---------------------------------------------------------- -->
   <section id="hero" class="hero">
     <div class="container hero__inner">
-      <img
+      <Image
         class="hero__photo"
-        src={photo}
-        width="280"
-        height="350"
+        src={lottePhoto}
+        widths={[340, 600, 900]}
+        sizes="(min-width: 640px) 300px, 70vw"
+        loading="eager"
         alt="Portrait of Lotte Bjerre Knudsen"
       />
       <div class="hero__text">
@@ -250,6 +250,7 @@ const positions = [
     height: auto;
     aspect-ratio: 4 / 5;
     object-fit: cover;
+    object-position: 50% 28%;
     border-radius: 8px;
     flex-shrink: 0;
   }
