@@ -64,22 +64,21 @@ const positions = [
 <BaseLayout>
   <!-- HERO ---------------------------------------------------------- -->
   <section id="hero" class="hero">
-    <div class="container">
-      <p class="hero__eyebrow">Scientist · Novo Nordisk</p>
-      <h1 class="hero__name">
-        Lotte<br />Bjerre<br />Knudsen
-      </h1>
-      <p class="hero__title">Chief Scientific Advisor, Novo Nordisk</p>
-      <p class="hero__intro">
-        A pioneer of GLP-1 medicines whose work reshaped the treatment of
-        diabetes and obesity for millions of people worldwide.
-      </p>
-      <nav class="hero__links" aria-label="Section shortcuts">
-        <a href="#about">About</a>
-        <a href="#research">Research</a>
-        <a href="#recognition">Recognition</a>
-        <a href="#writing">Writing</a>
-      </nav>
+    <div class="container hero__container">
+      <div class="hero__text">
+        <p class="hero__eyebrow">Scientist · Novo Nordisk</p>
+        <h1 class="hero__name">
+          Lotte<br />Bjerre<br />Knudsen
+        </h1>
+        <p class="hero__title">Chief Scientific Advisor, Novo Nordisk</p>
+        <p class="hero__intro">
+          A pioneer of GLP-1 medicines whose work reshaped the treatment of
+          diabetes and obesity for millions of people worldwide.
+        </p>
+      </div>
+      <div class="hero__photo-wrap">
+        <img class="hero__photo" src="/profile.jpg" alt="Lotte Bjerre Knudsen" />
+      </div>
     </div>
   </section>
 
@@ -222,6 +221,39 @@ const positions = [
     padding-block: clamp(4rem, 10vw, 8rem) clamp(5rem, 12vw, 9rem);
   }
 
+  .hero__container {
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(2rem, 5vw, 5rem);
+  }
+
+  .hero__text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .hero__photo-wrap {
+    flex-shrink: 0;
+    width: clamp(160px, 22vw, 300px);
+    padding-top: 0.5rem;
+  }
+
+  .hero__photo {
+    width: 100%;
+    display: block;
+    border-radius: 0;
+  }
+
+  @media (max-width: 640px) {
+    .hero__container {
+      flex-direction: column;
+    }
+    .hero__photo-wrap {
+      width: 100%;
+      max-width: 220px;
+    }
+  }
+
   .hero__eyebrow {
     font-family: var(--font-mono);
     font-size: 0.85rem;
@@ -232,7 +264,7 @@ const positions = [
   }
 
   .hero__name {
-    font-size: clamp(3.5rem, 16vw, 12rem);
+    font-size: clamp(3.5rem, 10vw, 8rem);
     line-height: 0.92;
     letter-spacing: -0.03em;
     margin: 0;
@@ -251,28 +283,6 @@ const positions = [
     line-height: 1.5;
     max-width: 32ch;
     margin: 1.5rem 0 0;
-  }
-
-  .hero__links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.25rem 2.5rem;
-    margin-top: 3.5rem;
-  }
-
-  .hero__links a {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding-bottom: 0.35rem;
-    border-bottom: 1px solid var(--ink);
-    transition: color 0.2s ease, border-color 0.2s ease;
-  }
-
-  .hero__links a:hover {
-    color: var(--accent);
-    border-color: var(--accent);
   }
 
   /* ABOUT */
