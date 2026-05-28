@@ -1,0 +1,131 @@
+---
+const links = [
+  { href: '#about', label: 'About' },
+  { href: '#research', label: 'Research' },
+  { href: '#recognition', label: 'Recognition' },
+  { href: '#writing', label: 'Writing' },
+];
+---
+
+<header class="nav">
+  <div class="nav__inner container">
+    <a class="nav__brand" href="#hero">LBK</a>
+    <nav aria-label="Primary">
+      <ul class="nav__list">
+        {
+          links.map((link) => (
+            <li>
+              <a class="nav__link" href={link.href} data-nav={link.href}>
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--bg);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    height: 4.5rem;
+  }
+
+  .nav__brand {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: 0.02em;
+  }
+
+  .nav__list {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2.75rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .nav__link {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-block: 0.4rem;
+    position: relative;
+    transition: color 0.2s ease;
+  }
+
+  .nav__link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+
+  .nav__link:hover,
+  .nav__link[aria-current='true'] {
+    color: var(--ink);
+  }
+
+  .nav__link:hover::after,
+  .nav__link[aria-current='true']::after {
+    transform: scaleX(1);
+  }
+
+  @media (max-width: 540px) {
+    .nav__brand {
+      display: none;
+    }
+
+    .nav__inner {
+      justify-content: center;
+    }
+  }
+</style>
+
+<script>
+  const links = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>('[data-nav]'),
+  );
+  const byId = new Map(
+    links.map((link) => [link.getAttribute('data-nav')!.slice(1), link]),
+  );
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          links.forEach((link) => link.removeAttribute('aria-current'));
+          byId.get(entry.target.id)?.setAttribute('aria-current', 'true');
+        }
+      });
+    },
+    { rootMargin: '-45% 0px -50% 0px', threshold: 0 },
+  );
+
+  byId.forEach((_, id) => {
+    const section = document.getElementById(id);
+    if (section) observer.observe(section);
+  });
+</script>

@@ -1,0 +1,405 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const education = [
+  {
+    label: 'Chemical Engineering',
+    org: 'Technical University of Denmark',
+  },
+  {
+    label: 'Doctor of Medical Sciences (DMSc), 2014',
+    org: 'University of Copenhagen',
+  },
+  {
+    label: 'Adjunct Professor, Translational Medicine, 2015–2020',
+    org: 'Aarhus University',
+  },
+];
+
+const awards = [
+  {
+    year: '2025',
+    name: 'Breakthrough Prize in Life Sciences',
+    body: 'Breakthrough Prize Foundation',
+  },
+  {
+    year: '2024',
+    name: 'Lasker~DeBakey Clinical Medical Research Award',
+    body: 'Lasker Foundation · shared with Svetlana Mojsov and Joel Habener',
+  },
+  {
+    year: '2024',
+    name: 'Mani L. Bhaumik Breakthrough of the Year Award',
+    body: 'American Association for the Advancement of Science (AAAS)',
+  },
+  {
+    year: '2024',
+    name: 'Golden Plate Award',
+    body: 'American Academy of Achievement',
+  },
+  {
+    year: '2023',
+    name: 'Paul Langerhans Medal',
+    body: 'German Diabetes Society (DDG)',
+  },
+  {
+    year: '2023',
+    name: 'STAT Biomedical Innovation Award',
+    body: 'STAT',
+  },
+];
+
+const positions = [
+  {
+    label: 'Chief Scientific Advisor, Research & Early Development',
+    org: 'Novo Nordisk · since 1989',
+  },
+  {
+    label: 'Adjunct Professor of Translational Medicine',
+    org: 'Aarhus University · 2015–2020',
+  },
+];
+---
+
+<BaseLayout>
+  <!-- HERO ---------------------------------------------------------- -->
+  <section id="hero" class="hero">
+    <div class="container">
+      <p class="hero__eyebrow">Scientist · Novo Nordisk</p>
+      <h1 class="hero__name">
+        Lotte<br />Bjerre<br />Knudsen
+      </h1>
+      <p class="hero__title">Chief Scientific Advisor, Novo Nordisk</p>
+      <p class="hero__intro">
+        A pioneer of GLP-1 medicines whose work reshaped the treatment of
+        diabetes and obesity for millions of people worldwide.
+      </p>
+      <nav class="hero__links" aria-label="Section shortcuts">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#recognition">Recognition</a>
+        <a href="#writing">Writing</a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ABOUT --------------------------------------------------------- -->
+  <section id="about" class="section section--alt">
+    <div class="container about">
+      <div class="about__intro">
+        <p class="eyebrow">About</p>
+        <h2 class="section-title">
+          Four decades at the frontier of metabolic science.
+        </h2>
+      </div>
+      <div class="about__body">
+        <p>
+          Lotte Bjerre Knudsen (born 10 March 1964 in Ringsted, Denmark) is a
+          Danish scientist who has spent her entire career at Novo Nordisk,
+          joining the company in 1989. As Chief Scientific Advisor in Research
+          and Early Development, she has guided some of the most consequential
+          drug programmes in modern medicine.
+        </p>
+        <p>
+          She trained as a chemical engineer at the Technical University of
+          Denmark and earned a Doctor of Medical Sciences from the University of
+          Copenhagen in 2014. Her insight into GLP-1 biology turned a fragile
+          hormone into a new class of long-acting medicines.
+        </p>
+        <ul class="facts">
+          {
+            education.map((item) => (
+              <li class="facts__item">
+                <span class="facts__label">{item.label}</span>
+                <span class="facts__org">{item.org}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH ------------------------------------------------------ -->
+  <section id="research" class="section">
+    <div class="container">
+      <p class="eyebrow">Research</p>
+      <h2 class="section-title">Engineering the GLP-1 receptor agonists.</h2>
+      <p class="lead research__lead">
+        Glucagon-like peptide-1 (GLP-1) is a gut hormone that stimulates
+        insulin, curbs appetite and slows digestion — but in its natural form it
+        breaks down within minutes. Knudsen's work centred on re-engineering the
+        molecule so it could last for hours, then days, unlocking a new
+        therapeutic class.
+      </p>
+
+      <div class="drugs">
+        <article class="drug">
+          <h3 class="drug__name">Liraglutide</h3>
+          <p class="drug__meta">Victoza · FDA-approved 2010</p>
+          <p>
+            Liraglutide was the breakthrough that proved the concept. By
+            attaching a fatty-acid chain to the peptide, the molecule binds
+            reversibly to albumin in the bloodstream, shielding it from rapid
+            degradation and extending its action to a full day.
+          </p>
+          <p>
+            Approved as Victoza in 2010 for type 2 diabetes, it later reached
+            patients living with obesity. In practice, liraglutide reduces food
+            intake by roughly 15%, translating decades of receptor biology into
+            a once-daily injection.
+          </p>
+        </article>
+
+        <article class="drug">
+          <h3 class="drug__name">Semaglutide</h3>
+          <p class="drug__meta">Ozempic 2017 · Wegovy 2021</p>
+          <p>
+            Semaglutide refined the approach further, with modifications that
+            extend its half-life to about a week and allow once-weekly dosing —
+            and, eventually, an oral formulation.
+          </p>
+          <p>
+            Marketed as Ozempic for diabetes (approved 2017) and Wegovy for
+            weight management (approved 2021), semaglutide can reduce food intake
+            by up to 35%. Its impact on obesity and cardiometabolic health has
+            made it one of the defining medicines of the decade.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECOGNITION --------------------------------------------------- -->
+  <section id="recognition" class="section section--alt">
+    <div class="container">
+      <p class="eyebrow">Recognition</p>
+      <h2 class="section-title">Honoured across medicine and science.</h2>
+
+      <ol class="awards">
+        {
+          awards.map((award) => (
+            <li class="award">
+              <span class="award__year accent">{award.year}</span>
+              <div class="award__detail">
+                <h3 class="award__name">{award.name}</h3>
+                <p class="award__body">{award.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="positions">
+        <h3 class="positions__title">Academic & institutional positions</h3>
+        <ul class="facts">
+          {
+            positions.map((item) => (
+              <li class="facts__item">
+                <span class="facts__label">{item.label}</span>
+                <span class="facts__org">{item.org}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- WRITING ------------------------------------------------------- -->
+  <section id="writing" class="section">
+    <div class="container writing">
+      <p class="eyebrow">Writing</p>
+      <h2 class="section-title">Essays & articles</h2>
+      <p class="lead">Essays and articles coming soon.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* HERO */
+  .hero {
+    padding-block: clamp(4rem, 10vw, 8rem) clamp(5rem, 12vw, 9rem);
+  }
+
+  .hero__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 2rem;
+  }
+
+  .hero__name {
+    font-size: clamp(3.5rem, 16vw, 12rem);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    margin: 0;
+  }
+
+  .hero__title {
+    font-family: var(--font-mono);
+    font-size: clamp(1rem, 1.6vw, 1.25rem);
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    margin: 2rem 0 0;
+  }
+
+  .hero__intro {
+    font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+    line-height: 1.5;
+    max-width: 32ch;
+    margin: 1.5rem 0 0;
+  }
+
+  .hero__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem 2.5rem;
+    margin-top: 3.5rem;
+  }
+
+  .hero__links a {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--ink);
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .hero__links a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  /* ABOUT */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+
+  @media (min-width: 820px) {
+    .about {
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: start;
+    }
+  }
+
+  .facts {
+    list-style: none;
+    margin: 2.5rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .facts__item {
+    display: grid;
+    gap: 0.25rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.14);
+  }
+
+  .facts__label {
+    font-weight: 500;
+  }
+
+  .facts__org {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  /* RESEARCH */
+  .research__lead {
+    color: var(--ink);
+    max-width: 58ch;
+    margin-bottom: clamp(3rem, 7vw, 5rem);
+  }
+
+  .drugs {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  @media (min-width: 820px) {
+    .drugs {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .drug__name {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+  }
+
+  .drug__meta {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0.75rem 0 1.75rem;
+  }
+
+  /* RECOGNITION */
+  .awards {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .award {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: 1.5rem;
+    padding-block: 1.75rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.14);
+  }
+
+  .award:last-child {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+  }
+
+  .award__year {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding-top: 0.15rem;
+  }
+
+  .award__name {
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    font-weight: 700;
+  }
+
+  .award__body {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--muted);
+    margin: 0.5rem 0 0;
+    max-width: 50ch;
+  }
+
+  .positions {
+    margin-top: clamp(3rem, 7vw, 5rem);
+  }
+
+  .positions__title {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  /* WRITING */
+  .writing .lead {
+    color: var(--ink);
+  }
+</style>
