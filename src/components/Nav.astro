@@ -1,15 +1,16 @@
 ---
 const links = [
   { href: '#about', label: 'About' },
-  { href: '#research', label: 'Research' },
+  { href: '#career', label: 'Career' },
+  { href: '#publications', label: 'Publications' },
   { href: '#recognition', label: 'Recognition' },
-  { href: '#writing', label: 'Writing' },
+  { href: '#contact', label: 'Contact' },
 ];
 ---
 
 <header class="nav">
   <div class="nav__inner container">
-    <a class="nav__brand" href="#hero">LBK</a>
+    <a class="nav__brand" href="#top"><span>Lotte Bjerre Knudsen</span></a>
     <nav aria-label="Primary">
       <ul class="nav__list">
         {
@@ -25,62 +26,6 @@ const links = [
     </nav>
   </div>
 </header>
-
-<style>
-  .nav {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: saturate(180%) blur(12px);
-    border-bottom: 1px solid var(--line);
-  }
-
-  .nav__inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    height: 4rem;
-  }
-
-  .nav__brand {
-    font-weight: 650;
-    font-size: 1.0625rem;
-    letter-spacing: -0.01em;
-  }
-
-  .nav__list {
-    display: flex;
-    align-items: center;
-    gap: clamp(1rem, 3vw, 2rem);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .nav__link {
-    font-size: 0.9375rem;
-    color: var(--muted);
-    padding-block: 0.4rem;
-    transition: color 0.2s ease;
-  }
-
-  .nav__link:hover,
-  .nav__link[aria-current='true'] {
-    color: var(--ink);
-  }
-
-  @media (max-width: 540px) {
-    .nav__brand {
-      display: none;
-    }
-
-    .nav__inner {
-      justify-content: center;
-    }
-  }
-</style>
 
 <script>
   const links = Array.from(

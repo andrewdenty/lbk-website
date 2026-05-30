@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title = 'Lotte Bjerre Knudsen',
-  description = 'Lotte Bjerre Knudsen — Chief Scientific Advisor at Novo Nordisk and a pioneer of GLP-1 medicines.',
+  description = 'Lotte Bjerre Knudsen — the scientist behind the GLP-1 receptor agonist medicines that reshaped the treatment of diabetes and obesity.',
 } = Astro.props;
 
 const favicon = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`;
@@ -31,12 +31,16 @@ const favicon = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
 
-    <link rel="preconnect" href="https://rsms.me/" />
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <Nav />
-    <main>
+    <main id="top">
       <slot />
     </main>
     <Footer />
