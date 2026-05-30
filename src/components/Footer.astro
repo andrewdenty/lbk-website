@@ -4,38 +4,7 @@ const year = new Date().getFullYear();
 
 <footer class="footer">
   <div class="footer__inner container">
-    <p class="footer__name">Lotte Bjerre Knudsen</p>
-    <p class="footer__meta">
-      Chief Scientific Advisor, Novo Nordisk · © {year}
-    </p>
+    <span>© {year} Lotte Bjerre Knudsen</span>
+    <span>Copenhagen, Denmark</span>
   </div>
 </footer>
-
-<style>
-  .footer {
-    background: var(--bg);
-    color: var(--muted);
-    border-top: 1px solid var(--line);
-    padding-block: clamp(2.5rem, 5vw, 3.5rem);
-  }
-
-  .footer__inner {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 0.5rem 2rem;
-  }
-
-  .footer__name {
-    font-weight: 650;
-    font-size: 1.0625rem;
-    color: var(--ink);
-    margin: 0;
-  }
-
-  .footer__meta {
-    font-size: 0.9375rem;
-    margin: 0;
-  }
-</style>

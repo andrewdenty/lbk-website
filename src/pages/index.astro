@@ -1,389 +1,251 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
-import lottePhoto from '../assets/lotte-bjerre-knudsen.webp';
+import lottePortrait from '../assets/lotte-bjerre-knudsen-lab.webp';
+
+const milestones = [
+  { label: 'Joined Novo Nordisk', detail: '1989' },
+  { label: 'Victoza (liraglutide) approved', detail: '2010' },
+  { label: 'Ozempic (semaglutide) approved', detail: '2017' },
+  { label: 'Wegovy (semaglutide) approved', detail: '2021' },
+];
 
 const education = [
+  { label: 'Chemical Engineering, Technical University of Denmark', detail: '' },
+  { label: 'DMSc, University of Copenhagen', detail: '2014' },
+  { label: 'Adjunct Professor, Aarhus University', detail: '2015–2020' },
+];
+
+const publications = [
   {
-    label: 'Chemical Engineering',
-    org: 'Technical University of Denmark',
+    title:
+      'Potent derivatives of glucagon-like peptide-1 with pharmacokinetic properties suitable for once-daily administration',
+    sub: 'Knudsen LB, et al.',
+    venue: 'Journal of Medicinal Chemistry',
+    year: '2000',
   },
   {
-    label: 'Doctor of Medical Sciences (DMSc), 2014',
-    org: 'University of Copenhagen',
+    title: 'Discovery of the once-weekly GLP-1 analogue semaglutide',
+    sub: 'Lau J, … Knudsen LB, et al.',
+    venue: 'Journal of Medicinal Chemistry',
+    year: '2015',
   },
   {
-    label: 'Adjunct Professor, Translational Medicine, 2015–2020',
-    org: 'Aarhus University',
+    title: 'The discovery and development of liraglutide and semaglutide',
+    sub: 'Knudsen LB, Lau J',
+    venue: 'Frontiers in Endocrinology',
+    year: '2019',
   },
 ];
 
 const awards = [
   {
     year: '2025',
-    name: 'Breakthrough Prize in Life Sciences',
-    body: 'Breakthrough Prize Foundation',
+    title: 'Breakthrough Prize in Life Sciences',
+    sub: 'Breakthrough Prize Foundation',
   },
   {
     year: '2024',
-    name: 'Lasker~DeBakey Clinical Medical Research Award',
-    body: 'Lasker Foundation · shared with Svetlana Mojsov and Joel Habener',
+    title: 'Lasker~DeBakey Clinical Medical Research Award',
+    sub: 'Lasker Foundation · shared with Svetlana Mojsov and Joel Habener',
   },
   {
     year: '2024',
-    name: 'Mani L. Bhaumik Breakthrough of the Year Award',
-    body: 'American Association for the Advancement of Science (AAAS)',
+    title: 'Mani L. Bhaumik Breakthrough of the Year Award',
+    sub: 'American Association for the Advancement of Science (AAAS)',
   },
   {
     year: '2024',
-    name: 'Golden Plate Award',
-    body: 'American Academy of Achievement',
+    title: 'Golden Plate Award',
+    sub: 'American Academy of Achievement',
   },
   {
     year: '2023',
-    name: 'Paul Langerhans Medal',
-    body: 'German Diabetes Society (DDG)',
+    title: 'Paul Langerhans Medal',
+    sub: 'German Diabetes Society (DDG)',
   },
   {
     year: '2023',
-    name: 'STAT Biomedical Innovation Award',
-    body: 'STAT',
-  },
-];
-
-const positions = [
-  {
-    label: 'Chief Scientific Advisor, Research & Early Development',
-    org: 'Novo Nordisk · since 1989',
-  },
-  {
-    label: 'Adjunct Professor of Translational Medicine',
-    org: 'Aarhus University · 2015–2020',
+    title: 'STAT Biomedical Innovation Award',
+    sub: 'STAT',
   },
 ];
 ---
 
 <BaseLayout>
-  <!-- HERO ---------------------------------------------------------- -->
-  <section id="hero" class="hero">
-    <div class="container hero__inner">
-      <Image
-        class="hero__photo"
-        src={lottePhoto}
-        widths={[340, 600, 900]}
-        sizes="(min-width: 640px) 300px, 70vw"
-        loading="eager"
-        alt="Portrait of Lotte Bjerre Knudsen"
-      />
-      <div class="hero__text">
-        <h1 class="hero__name">Lotte Bjerre Knudsen</h1>
-        <p class="hero__intro">
-          A pioneer of GLP-1 medicines whose work reshaped the treatment of
-          diabetes and obesity for millions of people worldwide.
-        </p>
-        <nav class="hero__links" aria-label="Section shortcuts">
-          <a href="#about">About</a>
-          <a href="#research">Research</a>
-          <a href="#recognition">Recognition</a>
-          <a href="#writing">Writing</a>
-        </nav>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT --------------------------------------------------------- -->
-  <section id="about" class="section">
-    <div class="container about">
-      <div class="about__intro">
-        <p class="eyebrow">About</p>
-        <h2 class="section-title">
-          Four decades at the frontier of metabolic science.
-        </h2>
-      </div>
-      <div class="about__body">
-        <p>
-          Lotte Bjerre Knudsen (born 10 March 1964 in Ringsted, Denmark) is a
-          Danish scientist who has spent her entire career at Novo Nordisk,
-          joining the company in 1989. As Chief Scientific Advisor in Research
-          and Early Development, she has guided some of the most consequential
-          drug programmes in modern medicine.
-        </p>
-        <p>
-          She trained as a chemical engineer at the Technical University of
-          Denmark and earned a Doctor of Medical Sciences from the University of
-          Copenhagen in 2014. Her insight into GLP-1 biology turned a fragile
-          hormone into a new class of long-acting medicines.
-        </p>
-        <ul class="facts">
-          {
-            education.map((item) => (
-              <li class="facts__item">
-                <span class="facts__label">{item.label}</span>
-                <span class="facts__org">{item.org}</span>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- RESEARCH ------------------------------------------------------ -->
-  <section id="research" class="section">
+  <!-- Hero -->
+  <section class="hero">
     <div class="container">
-      <p class="eyebrow">Research</p>
-      <h2 class="section-title">Engineering the GLP-1 receptor agonists.</h2>
-      <p class="lead research__lead">
-        Glucagon-like peptide-1 (GLP-1) is a gut hormone that stimulates
-        insulin, curbs appetite and slows digestion — but in its natural form it
-        breaks down within minutes. Knudsen's work centred on re-engineering the
-        molecule so it could last for hours, then days, unlocking a new
-        therapeutic class.
-      </p>
-
-      <div class="drugs">
-        <article class="drug">
-          <h3 class="drug__name">Liraglutide</h3>
-          <p class="drug__meta">Victoza · FDA-approved 2010</p>
-          <p>
-            Liraglutide was the breakthrough that proved the concept. By
-            attaching a fatty-acid chain to the peptide, the molecule binds
-            reversibly to albumin in the bloodstream, shielding it from rapid
-            degradation and extending its action to a full day.
-          </p>
-          <p>
-            Approved as Victoza in 2010 for type 2 diabetes, it later reached
-            patients living with obesity. In practice, liraglutide reduces food
-            intake by roughly 15%, translating decades of receptor biology into
-            a once-daily injection.
-          </p>
-        </article>
-
-        <article class="drug">
-          <h3 class="drug__name">Semaglutide</h3>
-          <p class="drug__meta">Ozempic 2017 · Wegovy 2021</p>
-          <p>
-            Semaglutide refined the approach further, with modifications that
-            extend its half-life to about a week and allow once-weekly dosing —
-            and, eventually, an oral formulation.
-          </p>
-          <p>
-            Marketed as Ozempic for diabetes (approved 2017) and Wegovy for
-            weight management (approved 2021), semaglutide can reduce food intake
-            by up to 35%. Its impact on obesity and cardiometabolic health has
-            made it one of the defining medicines of the decade.
-          </p>
-        </article>
+      <div class="hero-stage">
+        <h1 class="wordmark">Lotte Bjerre Knudsen</h1>
+        <div class="hero-photo">
+          <Image
+            src={lottePortrait}
+            alt="Lotte Bjerre Knudsen in the laboratory"
+            widths={[400, 600, 900]}
+            sizes="(max-width: 760px) 74vw, 440px"
+            loading="eager"
+          />
+        </div>
+      </div>
+      <div class="hero-tagline">
+        <span class="role">Scientist</span>
+        <span class="field">GLP-1 receptor agonists · diabetes &amp; obesity research</span>
       </div>
     </div>
   </section>
 
-  <!-- RECOGNITION --------------------------------------------------- -->
-  <section id="recognition" class="section">
+  <!-- About -->
+  <section id="about">
     <div class="container">
-      <p class="eyebrow">Recognition</p>
-      <h2 class="section-title">Honoured across medicine and science.</h2>
-
-      <ol class="awards">
-        {
-          awards.map((award) => (
-            <li class="award">
-              <span class="award__year accent">{award.year}</span>
-              <div class="award__detail">
-                <h3 class="award__name">{award.name}</h3>
-                <p class="award__body">{award.body}</p>
-              </div>
-            </li>
-          ))
-        }
-      </ol>
-
-      <div class="positions">
-        <h3 class="positions__title">Academic & institutional positions</h3>
-        <ul class="facts">
-          {
-            positions.map((item) => (
-              <li class="facts__item">
-                <span class="facts__label">{item.label}</span>
-                <span class="facts__org">{item.org}</span>
-              </li>
-            ))
-          }
-        </ul>
+      <div class="grid">
+        <div class="col-label">About</div>
+        <div class="col-body">
+          <h2>Three decades at the frontier of metabolic science</h2>
+          <p class="lead">
+            I joined Novo Nordisk in 1989 as a student, initially working on
+            enzymes used in laundry detergents. I moved into diabetes research
+            soon after, and spent the next three decades on a class of molecules
+            called GLP-1 receptor agonists.
+          </p>
+          <p>
+            I led the team that developed liraglutide, which was approved as
+            Victoza in 2010, and oversaw the development of semaglutide, which
+            became Ozempic in 2017 and Wegovy in 2021. The work began as a search
+            for a better diabetes drug and ended up changing how obesity is
+            treated.
+          </p>
+          <p>
+            I hold a DMSc from the University of Copenhagen and was adjunct
+            professor in translational medicine at Aarhus University from 2015 to
+            2020. I left Novo Nordisk in May 2026.
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- WRITING ------------------------------------------------------- -->
-  <section id="writing" class="section">
-    <div class="container writing">
-      <p class="eyebrow">Writing</p>
-      <h2 class="section-title">Essays & articles</h2>
-      <p class="lead">Essays and articles coming soon.</p>
+  <!-- Career -->
+  <section id="career">
+    <div class="container">
+      <div class="grid">
+        <div class="col-label">Career</div>
+        <div class="col-body">
+          <h2>From enzymes to a new class of medicine</h2>
+          <p class="lead">
+            My career followed a single family of molecules further than almost
+            anyone in the field — from early target biology through to medicines
+            now used by millions of people worldwide.
+          </p>
+          <p>
+            What began as fundamental research into how the gut signals to the
+            brain became liraglutide and then semaglutide: compounds that
+            reshaped the standard of care in both type 2 diabetes and obesity.
+          </p>
+
+          <div class="two-col">
+            <div>
+              <div class="list-head">Milestones</div>
+              <ul class="facts">
+                {
+                  milestones.map((m) => (
+                    <li>
+                      <span class="label">{m.label}</span>
+                      <span class="detail">{m.detail}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+            <div>
+              <div class="list-head">Education</div>
+              <ul class="facts">
+                {
+                  education.map((e) => (
+                    <li>
+                      <span class="label">{e.label}</span>
+                      <span class="detail">{e.detail}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Publications -->
+  <section id="publications">
+    <div class="container">
+      <div class="grid">
+        <div class="col-label">Publications</div>
+        <div class="col-body">
+          <h2>Selected publications</h2>
+          <ul class="entries">
+            {
+              publications.map((p) => (
+                <li class="entry">
+                  <div>
+                    <div class="entry__title">{p.title}</div>
+                    <div class="entry__sub">{p.sub}</div>
+                  </div>
+                  <div class="entry__meta">
+                    <span class="year">{p.year}</span>
+                    {p.venue}
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recognition -->
+  <section id="recognition">
+    <div class="container">
+      <div class="grid">
+        <div class="col-label">Recognition</div>
+        <div class="col-body">
+          <h2>Honoured across medicine and science</h2>
+          <ul class="entries">
+            {
+              awards.map((a) => (
+                <li class="entry">
+                  <div>
+                    <div class="entry__title">{a.title}</div>
+                    <div class="entry__sub">{a.sub}</div>
+                  </div>
+                  <div class="entry__meta">
+                    <span class="year">{a.year}</span>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="grid">
+        <div class="col-label">Contact</div>
+        <div class="col-body">
+          <h2>Get in touch</h2>
+          <p class="lead">For speaking, advisory, and research enquiries.</p>
+          <ul class="contact-links">
+            <li><a href="mailto:hello@lottebjerreknudsen.com">Email</a></li>
+            <li><a href="https://www.linkedin.com/" rel="noopener">LinkedIn</a></li>
+            <li><a href="https://orcid.org/" rel="noopener">ORCID</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  /* HERO */
-  .hero {
-    padding-block: clamp(4.5rem, 12vw, 9rem) clamp(4.5rem, 11vw, 8rem);
-  }
-
-  .hero__inner {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: clamp(2.5rem, 6vw, 4.5rem);
-  }
-
-  @media (min-width: 640px) {
-    .hero__inner {
-      flex-direction: row;
-      align-items: center;
-      gap: clamp(3rem, 7vw, 5rem);
-    }
-  }
-
-  .hero__photo {
-    width: clamp(170px, 42vw, 300px);
-    height: auto;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    object-position: 50% 28%;
-    border-radius: 8px;
-    flex-shrink: 0;
-  }
-
-  .hero__name {
-    font-size: clamp(2.25rem, 7vw, 3.5rem);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    margin: 0;
-  }
-
-  .hero__intro {
-    font-size: 1.25rem;
-    line-height: 1.6;
-    color: var(--muted);
-    max-width: 38ch;
-    margin: 1.75rem 0 0;
-  }
-
-  .hero__links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem 1.75rem;
-    margin-top: 2.5rem;
-  }
-
-  .hero__links a {
-    font-size: 0.9375rem;
-    color: var(--accent);
-    transition: opacity 0.2s ease;
-  }
-
-  .hero__links a:hover {
-    opacity: 0.6;
-  }
-
-  /* ABOUT */
-  .about {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: clamp(1.5rem, 4vw, 2.5rem);
-  }
-
-  .facts {
-    list-style: none;
-    margin: 2rem 0 0;
-    padding: 0;
-    display: grid;
-    gap: 1rem;
-  }
-
-  .facts__item {
-    display: grid;
-    gap: 0.15rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--line);
-  }
-
-  .facts__label {
-    font-weight: 550;
-  }
-
-  .facts__org {
-    font-size: 0.9375rem;
-    color: var(--muted);
-  }
-
-  /* RESEARCH */
-  .research__lead {
-    color: var(--muted);
-    max-width: 60ch;
-    margin-bottom: clamp(2rem, 5vw, 3rem);
-  }
-
-  .drugs {
-    display: grid;
-    gap: clamp(2rem, 5vw, 3rem);
-  }
-
-  .drug__name {
-    font-size: clamp(1.25rem, 3vw, 1.5rem);
-  }
-
-  .drug__meta {
-    font-size: 0.9375rem;
-    color: var(--accent);
-    margin: 0.35rem 0 1rem;
-  }
-
-  /* RECOGNITION */
-  .awards {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .award {
-    display: grid;
-    grid-template-columns: 4rem 1fr;
-    gap: 1.25rem;
-    padding-block: 1.25rem;
-    border-top: 1px solid var(--line);
-  }
-
-  .award:last-child {
-    border-bottom: 1px solid var(--line);
-  }
-
-  .award__year {
-    font-weight: 550;
-    padding-top: 0.1rem;
-  }
-
-  .award__name {
-    font-size: 1.0625rem;
-    font-weight: 600;
-  }
-
-  .award__body {
-    font-size: 0.9375rem;
-    line-height: 1.5;
-    color: var(--muted);
-    margin: 0.25rem 0 0;
-    max-width: 55ch;
-  }
-
-  .positions {
-    margin-top: clamp(2.5rem, 6vw, 3.5rem);
-  }
-
-  .positions__title {
-    font-size: 0.8125rem;
-    font-weight: 550;
-    color: var(--muted);
-  }
-</style>
