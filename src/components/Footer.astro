@@ -1,10 +1,36 @@
 ---
 const year = new Date().getFullYear();
+
+const links = [
+  { href: '#about', label: 'About' },
+  { href: '#career', label: 'Career' },
+  { href: '#publications', label: 'Publications' },
+  { href: '#recognition', label: 'Recognition' },
+  { href: '#contact', label: 'Contact' },
+];
 ---
 
 <footer class="footer">
   <div class="footer__inner container">
-    <span>© {year} Lotte Bjerre Knudsen</span>
-    <span>Copenhagen, Denmark</span>
+    <p class="footer__brand">
+      <span>Lotte</span>
+      <span>Bjerre</span>
+      <span>Knudsen</span>
+    </p>
+
+    <nav class="footer__nav" aria-label="Footer">
+      <span class="footer__dot" aria-hidden="true"></span>
+      <ul>
+        {
+          links.map((link) => (
+            <li>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <p class="footer__copy">© {year} Lotte Bjerre Knudsen</p>
   </div>
 </footer>
