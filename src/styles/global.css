@@ -196,52 +196,86 @@ section {
 }
 
 .hero-stage {
+  position: relative;
   display: grid;
-  min-height: clamp(420px, 62vh, 680px);
+  grid-template-columns: 1fr;
+  min-height: clamp(440px, 64vh, 660px);
 }
 
-.hero-stage > .wordmark,
-.hero-stage > .hero-photo {
-  grid-area: 1 / 1;
+/* Photo pinned to the right, full height of the stage */
+.hero-photo {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: clamp(300px, 46%, 600px);
+  z-index: 1;
 }
 
-.wordmark {
-  align-self: end;
+.hero-photo :global(img) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Left-hand column: stacked wordmark with the tagline woven between lines */
+.hero-lead {
+  position: relative;
   z-index: 2;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  padding-block: clamp(48px, 9vw, 110px);
+}
+
+/* display:contents lets the three name lines flow as flex items of .hero-lead
+   (so the tagline can sit between them) while keeping the single <h1>. */
+.wordmark {
+  display: contents;
   font-weight: 800;
   text-transform: uppercase;
   color: var(--pink);
-  letter-spacing: -0.025em;
-  line-height: 0.9;
-  font-size: clamp(40px, 8.1vw, 104px);
-  padding-bottom: clamp(40px, 8vh, 96px);
-  white-space: nowrap;
+  letter-spacing: -0.02em;
+  line-height: 0.92;
+  font-size: clamp(48px, 9vw, 116px);
 }
 
-.hero-photo {
-  align-self: end;
-  justify-self: end;
-  z-index: 1;
-  width: min(42%, 440px);
+.wordmark__line {
+  display: block;
+  white-space: nowrap;
+  padding-inline: var(--gutter);
+}
+
+/* Visual order: Lotte → Bjerre → Knudsen → tagline */
+.wordmark__line--1 {
+  order: 1;
+}
+
+/* Each line steps further to the right; the last overlaps the photo */
+.wordmark__line--2 {
+  order: 2;
+  margin-left: clamp(40px, 14vw, 200px);
+}
+
+.wordmark__line--3 {
+  order: 3;
+  margin-left: clamp(90px, 34vw, 470px);
 }
 
 .hero-tagline {
+  order: 4;
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 6px 16px;
-  padding: 26px 0 30px;
-  border-top: 1px solid rgba(24, 23, 26, 0.1);
-  font-size: 15px;
-  color: var(--ink);
+  flex-direction: column;
+  gap: 4px;
+  padding-inline: var(--gutter);
+  margin-block: clamp(22px, 3.2vw, 40px);
+  color: var(--pink);
+  font-size: clamp(15px, 1.45vw, 19px);
+  font-weight: 500;
+  line-height: 1.45;
 }
 
-.hero-tagline .role {
-  font-weight: 600;
-}
-
-.hero-tagline .field {
-  color: var(--muted);
+.hero-tagline .sep {
+  margin-inline: 7px;
 }
 
 /* Fact lists (career) --------------------------------------------- */
@@ -331,7 +365,6 @@ section {
 
 /* Contact ---------------------------------------------------------- */
 .contact {
-  background: var(--pink-bg);
   border-bottom: none;
 }
 
@@ -359,17 +392,76 @@ section {
 
 /* Footer ----------------------------------------------------------- */
 .footer {
-  padding-block: 36px;
+  background: var(--pink-bg);
+  padding-block: clamp(56px, 9vw, 110px);
 }
 
 .footer__inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  column-gap: clamp(32px, 6vw, 80px);
+  row-gap: clamp(72px, 14vh, 168px);
+  align-items: start;
+}
+
+.footer__brand {
+  grid-column: 1;
+  grid-row: 1;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  font-size: 13px;
-  color: var(--faint);
+  flex-direction: column;
+  color: var(--pink);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.92;
+  font-size: clamp(40px, 7vw, 92px);
+}
+
+.footer__nav {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: end;
+  justify-self: end;
+  text-align: right;
+}
+
+.footer__dot {
+  display: block;
+  width: 9px;
+  height: 9px;
+  margin-left: auto;
+  margin-bottom: 18px;
+  border-radius: 50%;
+  background: var(--pink);
+}
+
+.footer__nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.footer__nav a {
+  font-weight: 700;
+  font-size: clamp(16px, 1.5vw, 19px);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  transition: color 0.2s ease;
+}
+
+.footer__nav a:hover {
+  color: var(--pink);
+}
+
+.footer__copy {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: end;
+  font-size: clamp(14px, 1.3vw, 17px);
+  font-weight: 600;
+  color: var(--ink);
 }
 
 /* Responsive ------------------------------------------------------- */
@@ -407,22 +499,35 @@ section {
   .hero-stage {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     min-height: 0;
-    padding-top: 44px;
+  }
+
+  /* Photo back into flow, sitting above the stacked name */
+  .hero-photo {
+    position: static;
+    width: 100%;
+    height: clamp(320px, 62vh, 460px);
+    order: 1;
+  }
+
+  .hero-lead {
+    order: 2;
+    align-self: stretch;
+    padding-block: clamp(28px, 8vw, 48px);
   }
 
   .wordmark {
-    order: 2;
-    padding-bottom: 24px;
-    font-size: clamp(40px, 14vw, 84px);
-    white-space: normal;
+    /* Sized so the longest word (KNUDSEN) clears its indent on a 360px screen */
+    font-size: clamp(32px, 11.5vw, 72px);
   }
 
-  .hero-photo {
-    order: 1;
-    width: 74%;
-    align-self: flex-end;
+  /* Smaller diagonal step so nothing runs off-screen */
+  .wordmark__line--2 {
+    margin-left: clamp(14px, 7vw, 56px);
+  }
+
+  .wordmark__line--3 {
+    margin-left: clamp(28px, 14vw, 112px);
   }
 
   .two-col {
@@ -436,6 +541,28 @@ section {
 
   .entry__meta {
     text-align: left;
+  }
+
+  /* Footer: stack brand, links (left-aligned), then copyright */
+  .footer__inner {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    row-gap: clamp(36px, 9vw, 64px);
+  }
+
+  .footer__nav {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: start;
+    text-align: left;
+  }
+
+  .footer__dot {
+    margin-left: 0;
+  }
+
+  .footer__copy {
+    grid-row: 3;
   }
 }
 
