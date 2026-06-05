@@ -1,17 +1,28 @@
 ---
-const links = [
-  { href: '#about', label: 'About' },
-  { href: '#career', label: 'Career' },
-  { href: '#publications', label: 'Publications' },
-  { href: '#recognition', label: 'Recognition' },
-  { href: '#contact', label: 'Contact' },
-];
+import type { Locale, NavItem } from '../data/content';
+
+interface Props {
+  lang: Locale;
+  links: NavItem[];
+  langAria: string;
+}
+
+const { lang, links, langAria } = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+const withBase = (path = '') => `${base.replace(/\/$/, '')}/${path}`.replace(/\/+$/, '/');
+
+const enHref = withBase();
+const daHref = withBase('da/');
 ---
 
 <header class="nav">
   <div class="nav__inner container">
-    <a class="nav__brand" href="#top"><span>Lotte Bjerre Knudsen</span></a>
-    <nav aria-label="Primary">
+    <a class="nav__brand" href={lang === 'da' ? daHref : enHref}>
+      <span>Lotte Bjerre Knudsen</span>
+    </a>
+
+    <nav class="nav__primary" aria-label="Primary">
       <ul class="nav__list">
         {
           links.map((link) => (
@@ -24,6 +35,24 @@ const links = [
         }
       </ul>
     </nav>
+
+    <div class="nav__lang" role="group" aria-label={langAria}>
+      <a
+        class="nav__lang-opt"
+        href={enHref}
+        aria-current={lang === 'en' ? 'true' : undefined}
+        hreflang="en"
+        lang="en">EN</a
+      >
+      <span class="nav__lang-sep" aria-hidden="true">/</span>
+      <a
+        class="nav__lang-opt"
+        href={daHref}
+        aria-current={lang === 'da' ? 'true' : undefined}
+        hreflang="da"
+        lang="da">DA</a
+      >
+    </div>
   </div>
 </header>
 

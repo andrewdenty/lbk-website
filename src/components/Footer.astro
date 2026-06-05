@@ -1,13 +1,12 @@
 ---
-const year = new Date().getFullYear();
+import type { NavItem } from '../data/content';
 
-const links = [
-  { href: '#about', label: 'About' },
-  { href: '#career', label: 'Career' },
-  { href: '#publications', label: 'Publications' },
-  { href: '#recognition', label: 'Recognition' },
-  { href: '#contact', label: 'Contact' },
-];
+interface Props {
+  links: NavItem[];
+}
+
+const { links } = Astro.props;
+const year = new Date().getFullYear();
 ---
 
 <footer class="footer">

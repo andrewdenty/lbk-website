@@ -40,18 +40,30 @@ If the site does not appear, enable Pages manually under
 
 ```
 ├── .github/workflows/deploy.yml   # GitHub Pages deploy workflow
-├── public/                        # static assets (favicon, .nojekyll)
+├── public/                        # static assets (favicon, robots.txt, .nojekyll)
 ├── src/
-│   ├── components/                # Nav, Footer
+│   ├── components/                # Nav (with language toggle), Footer, PageContent, Entry
+│   ├── data/                      # content.ts — all copy + links for both languages
 │   ├── layouts/                   # BaseLayout
-│   ├── pages/                     # index.astro (the single page)
+│   ├── pages/                     # index.astro (English), da.astro (Danish)
 │   └── styles/                    # global.css
 ├── astro.config.mjs
 └── package.json
 ```
 
+## Content & languages
+
+The site is bilingual: English at `/` and Danish at `/da/`, switched via the
+`EN / DA` toggle in the top-right of the nav. All copy and links live in
+[`src/data/content.ts`](src/data/content.ts) as a single `content` record keyed
+by locale — edit the text there and both the page and its translation update.
+`PageContent.astro` renders every section from that data, so the two pages stay
+structurally identical.
+
 ## Design
 
-- **Type:** Syne (display) + DM Sans (body) + DM Mono (labels), via Google Fonts
-- **Palette:** muted pink `#FFD4DE`, ink `#000000`, bold pink accent `#FF5070`,
-  muted grey-pink `#896A6F`, white section alt `#FFFFFF`
+- **Type:** Hanken Grotesk (display + body + labels), via Google Fonts
+- **Palette:** pink accent `#FF2F81`, soft pink section background `#FFF0F8`,
+  ink `#18171A`, muted grey `#6F6C70`, hairline rule `#E9E6EA`, white `#FFFFFF`
+- **Layout:** a Swiss-style label/body grid, a diagonal pink wordmark hero, and
+  a large editorial footer.

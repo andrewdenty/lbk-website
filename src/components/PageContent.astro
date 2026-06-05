@@ -1,0 +1,202 @@
+---
+import { Image } from 'astro:assets';
+import lottePortrait from '../assets/lotte-bjerre-knudsen-lab.webp';
+import { content, type Locale } from '../data/content';
+import Entry from './Entry.astro';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const c = content[lang];
+const portraitAlt =
+  lang === 'da'
+    ? 'Lotte Bjerre Knudsen i laboratoriet'
+    : 'Lotte Bjerre Knudsen in the laboratory';
+const mailto = `mailto:${c.contact.email}`;
+---
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-stage">
+    <div class="hero-photo">
+      <Image
+        src={lottePortrait}
+        alt={portraitAlt}
+        widths={[500, 750, 1100]}
+        sizes="(max-width: 760px) 100vw, 48vw"
+        loading="eager"
+      />
+    </div>
+    <div class="hero-lead">
+      <h1 class="wordmark">
+        <span class="wordmark__line wordmark__line--1">Lotte</span>
+        <span class="wordmark__line wordmark__line--2">Bjerre</span>
+        <span class="wordmark__line wordmark__line--3">Knudsen</span>
+      </h1>
+      <p class="hero-tagline">
+        {
+          c.hero.taglineRows.map((row) => (
+            <span class="hero-tagline__row">
+              {row.map((seg, i) => (
+                <>
+                  {i > 0 && (
+                    <span class="sep" aria-hidden="true">
+                      •
+                    </span>
+                  )}
+                  {seg}
+                </>
+              ))}
+            </span>
+          ))
+        }
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="container">
+    <div class="grid">
+      <div class="col-label">{c.about.label}</div>
+      <div class="col-body">
+        <h2>{c.about.heading}</h2>
+        <p class="lead">{c.about.lead}</p>
+        {c.about.body.map((para) => <p>{para}</p>)}
+
+        <div class="two-col">
+          <div>
+            <div class="list-head">{c.about.milestonesHead}</div>
+            <ul class="facts">
+              {
+                c.about.milestones.map((m) => (
+                  <li>
+                    <span class="label">{m.label}</span>
+                    <span class="detail">{m.detail}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+          <div>
+            <div class="list-head">{c.about.educationHead}</div>
+            <ul class="facts">
+              {
+                c.about.education.map((e) => (
+                  <li>
+                    <span class="label">{e.label}</span>
+                    <span class="detail">{e.detail}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mission -->
+<section id="mission" class="mission">
+  <div class="container">
+    <div class="grid">
+      <div class="col-label">{c.mission.label}</div>
+      <div class="col-body">
+        <p class="statement">{c.mission.statement}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Speaking -->
+<section id="speaking">
+  <div class="container">
+    <div class="grid">
+      <div class="col-label">{c.speaking.label}</div>
+      <div class="col-body">
+        <h2>{c.speaking.heading}</h2>
+        <p class="lead">{c.speaking.lead}</p>
+        <p>{c.speaking.body}</p>
+        <p class="questions-intro">{c.speaking.questionsIntro}</p>
+        <ul class="questions">
+          {c.speaking.questions.map((q) => <li>{q}</li>)}
+        </ul>
+        <a class="cta" href={mailto}>
+          {c.speaking.ctaText}
+          <span class="cta__arrow" aria-hidden="true">→</span>
+        </a>
+        <p class="cta-note">
+          <a href={mailto}>{c.contact.email}</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Recognition -->
+<section id="recognition">
+  <div class="container">
+    <div class="grid">
+      <div class="col-label">{c.recognition.label}</div>
+      <div class="col-body">
+        <h2>{c.recognition.heading}</h2>
+        <ul class="entries">
+          {c.recognition.awards.map((a) => <Entry entry={a} />)}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Media -->
+<section id="media">
+  <div class="container">
+    <div class="grid">
+      <div class="col-label">{c.media.label}</div>
+      <div class="col-body">
+        <h2>{c.media.heading}</h2>
+        {
+          c.media.groups.map((group) => (
+            <div class="media-group">
+              <div class="subhead">{group.head}</div>
+              <ul class="entries">
+                {group.items.map((item) => (
+                  <Entry entry={item} />
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="contact">
+  <div class="container">
+    <div class="grid">
+      <div class="col-label">{c.contact.label}</div>
+      <div class="col-body">
+        <h2>{c.contact.heading}</h2>
+        <p class="lead">{c.contact.lead}</p>
+        <a class="contact-email" href={mailto}>{c.contact.email}</a>
+        <ul class="contact-links">
+          {
+            c.contact.links.map((link) => (
+              <li>
+                <a href={link.href} target="_blank" rel="noopener">
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
