@@ -1,0 +1,36 @@
+---
+import type { Entry } from '../data/content';
+
+interface Props {
+  entry: Entry;
+}
+
+const { entry } = Astro.props;
+const hasMetaCol = Boolean(entry.year || entry.tag);
+---
+
+<li class="entry" class:list={[{ 'entry--nometa': !hasMetaCol }]}>
+  <div class="entry__main">
+    <div class="entry__title">{entry.title}</div>
+    {entry.meta && <div class="entry__sub">{entry.meta}</div>}
+    {
+      entry.links && entry.links.length > 0 && (
+        <div class="entry__links">
+          {entry.links.map((link) => (
+            <a href={link.href} target="_blank" rel="noopener">
+              {link.label}
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </div>
+  {
+    hasMetaCol && (
+      <div class="entry__meta">
+        {entry.year && <span class="year">{entry.year}</span>}
+        {entry.tag && <span class="tag">{entry.tag}</span>}
+      </div>
+    )
+  }
+</li>
