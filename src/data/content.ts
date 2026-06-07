@@ -221,7 +221,7 @@ export const content: Record<Locale, PageContent> = {
     },
     media: {
       label: 'Media',
-      heading: 'In print, on film, and on air',
+      heading: 'In print, on<br>film, and on air',
       groups: [
         {
           head: 'Press',
@@ -537,7 +537,7 @@ export const content: Record<Locale, PageContent> = {
     },
     media: {
       label: 'Medier',
-      heading: 'På tryk, på film og i æteren',
+      heading: 'På tryk,<br>på film og i æteren',
       groups: [
         {
           head: 'Presse',

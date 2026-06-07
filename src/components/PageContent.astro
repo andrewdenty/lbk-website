@@ -107,7 +107,7 @@ const timeline = c.about.timeline.filter((item) => item.detail);
     <p class="eyebrow">{awardsMediaLabel}</p>
     <div class="am__grid">
       <div id="media" class="am__col">
-        <h2 class="h2">{c.media.heading}</h2>
+        <h2 class="h2" set:html={c.media.heading} />
         <div class="am__lists">
           {
             c.media.groups.map((group) => (

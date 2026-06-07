@@ -453,14 +453,16 @@ section {
 .am__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--col-gap);
+  grid-template-rows: auto auto;
+  column-gap: var(--col-gap);
+  row-gap: 40px;
   align-items: start;
 }
 
 .am__col {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
+  display: grid;
+  grid-row: span 2;
+  grid-template-rows: subgrid;
   min-width: 0;
 }
 
