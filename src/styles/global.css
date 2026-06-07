@@ -4,12 +4,33 @@
   --muted: #6f6c70;
   --faint: #9a979c;
   --pink: #ff2f81;
+  --pink-ink: #c81e63;
   --pink-bg: #fff0f8;
   --rule: #e9e6ea;
 
   --font: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
   --maxw: 1180px;
   --gutter: clamp(24px, 5vw, 40px);
+
+  /* Type scale (one ladder, ~1.2–1.25 ratio) -------------------------- */
+  --fs-eyebrow: 13px;
+  --fs-meta: 14px;
+  --fs-base: 17px;
+  --fs-md: 19px;
+  --fs-lead: clamp(19px, 1.4vw, 21px);
+  --fs-statement: clamp(22px, 2.2vw, 26px);
+  --fs-h2: clamp(27px, 3vw, 36px);
+  --fs-display-sm: clamp(40px, 6.5vw, 80px);
+  --fs-display: clamp(46px, 8vw, 96px);
+
+  /* Spacing scale ----------------------------------------------------- */
+  --space-2xs: 6px;
+  --space-xs: 10px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 64px;
+  --section: clamp(72px, 9vw, 120px);
 }
 
 *,
@@ -30,7 +51,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font);
-  font-size: 17px;
+  font-size: var(--fs-base);
   line-height: 1.65;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
@@ -62,36 +83,51 @@ a {
 }
 
 section {
-  padding-block: clamp(64px, 9vw, 120px);
-  border-bottom: 1px solid var(--rule);
+  padding-top: 0;
+  padding-bottom: var(--section);
 }
 
+/* Single-column content with a kicker label above each heading.
+   An inset hairline (drawn on .grid) introduces each section, so every
+   rule sits on the same left edge as the content — not full-bleed. */
 .grid {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: clamp(32px, 6vw, 72px);
+  border-top: 1px solid var(--rule);
+  padding-top: clamp(40px, 5vw, 64px);
 }
 
 .col-label {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--fs-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--faint);
-  padding-top: 10px;
+  color: var(--muted);
+  margin-bottom: var(--space-sm);
+}
+
+.col-label::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--pink);
+  flex-shrink: 0;
 }
 
 .col-body > h2 {
-  font-size: clamp(28px, 3.6vw, 46px);
+  font-size: var(--fs-h2);
   font-weight: 700;
-  letter-spacing: -0.025em;
-  line-height: 1.08;
-  margin-bottom: 32px;
-  max-width: 18ch;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  margin-bottom: var(--space-md);
+  max-width: 24ch;
+  text-wrap: balance;
 }
 
 .col-body p {
-  margin-bottom: 22px;
+  margin-bottom: var(--space-md);
   max-width: 64ch;
   color: #322f33;
 }
@@ -101,7 +137,7 @@ section {
 }
 
 .lead {
-  font-size: clamp(19px, 2vw, 22px);
+  font-size: var(--fs-lead);
   line-height: 1.55;
   color: var(--ink);
 }
@@ -155,7 +191,7 @@ section {
 .nav__link {
   position: relative;
   color: var(--muted);
-  font-size: 13px;
+  font-size: var(--fs-eyebrow);
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -200,7 +236,7 @@ section {
 }
 
 .nav__lang-opt {
-  color: var(--faint);
+  color: var(--muted);
   transition: color 0.2s ease;
 }
 
@@ -209,7 +245,7 @@ section {
 }
 
 .nav__lang-opt[aria-current='true'] {
-  color: var(--pink);
+  color: var(--pink-ink);
 }
 
 .nav__lang-sep {
@@ -244,21 +280,27 @@ section {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: 30% top;
 }
 
-/* Left-hand column: stacked wordmark with the tagline woven between lines */
+/* Left column shares the site container, so the first wordmark line sits
+   on the same left edge as the nav, kickers, body, and footer. The photo
+   keeps bleeding to the right viewport edge.
+   display:contents lets the three name lines flow as flex items of
+   .hero-lead (so the tagline can sit between them) while keeping one <h1>. */
 .hero-lead {
   position: relative;
   z-index: 2;
   align-self: center;
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  padding-block: clamp(48px, 9vw, 110px);
   display: flex;
   flex-direction: column;
-  padding-block: clamp(48px, 9vw, 110px);
 }
 
-/* display:contents lets the three name lines flow as flex items of .hero-lead
-   (so the tagline can sit between them) while keeping the single <h1>. */
 .wordmark {
   display: contents;
   font-weight: 800;
@@ -266,13 +308,12 @@ section {
   color: var(--pink);
   letter-spacing: -0.02em;
   line-height: 0.92;
-  font-size: clamp(48px, 9vw, 116px);
+  font-size: var(--fs-display);
 }
 
 .wordmark__line {
   display: block;
   white-space: nowrap;
-  padding-inline: var(--gutter);
 }
 
 /* Visual order: Lotte → Bjerre → Knudsen → tagline */
@@ -283,12 +324,12 @@ section {
 /* Each line steps further to the right; the last overlaps the photo */
 .wordmark__line--2 {
   order: 2;
-  margin-left: clamp(40px, 14vw, 200px);
+  margin-left: clamp(40px, 13vw, 180px);
 }
 
 .wordmark__line--3 {
   order: 3;
-  margin-left: clamp(90px, 34vw, 470px);
+  margin-left: clamp(80px, 30vw, 420px);
 }
 
 .hero-tagline {
@@ -296,16 +337,16 @@ section {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding-inline: var(--gutter);
-  margin-block: clamp(22px, 3.2vw, 40px);
-  color: var(--pink);
+  margin-block: clamp(24px, 3.4vw, 44px);
+  color: var(--pink-ink);
   font-size: clamp(15px, 1.45vw, 19px);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.45;
 }
 
 .hero-tagline .sep {
   margin-inline: 7px;
+  color: var(--pink);
 }
 
 /* Fact lists (career) --------------------------------------------- */
@@ -313,16 +354,16 @@ section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(32px, 5vw, 56px);
-  margin-top: 44px;
+  margin-top: var(--space-lg);
 }
 
 .list-head {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-size: var(--fs-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--faint);
-  padding-bottom: 8px;
+  color: var(--muted);
+  padding-bottom: var(--space-xs);
   border-bottom: 1px solid var(--ink);
 }
 
@@ -369,19 +410,19 @@ section {
 
 .entry__title {
   font-weight: 600;
-  font-size: 18px;
+  font-size: var(--fs-md);
   letter-spacing: -0.01em;
-  margin-bottom: 6px;
+  margin-bottom: var(--space-2xs);
 }
 
 .entry__sub {
   color: var(--muted);
-  font-size: 14.5px;
+  font-size: var(--fs-meta);
 }
 
 .entry__meta {
   text-align: right;
-  font-size: 14px;
+  font-size: var(--fs-meta);
   color: var(--muted);
   white-space: nowrap;
 }
@@ -389,7 +430,7 @@ section {
 .entry__meta .year {
   display: block;
   font-weight: 700;
-  color: var(--pink);
+  color: var(--pink-ink);
   font-variant-numeric: tabular-nums;
 }
 
@@ -400,7 +441,7 @@ section {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--faint);
+  color: var(--muted);
 }
 
 .entry--nometa {
@@ -416,10 +457,10 @@ section {
 
 .entry__links a {
   position: relative;
-  font-size: 13.5px;
+  font-size: var(--fs-meta);
   font-weight: 600;
   letter-spacing: 0.01em;
-  color: var(--pink);
+  color: var(--pink-ink);
   transition: color 0.2s ease;
 }
 
@@ -440,42 +481,33 @@ section {
   border-bottom: none;
 }
 
-.statement {
-  font-size: clamp(21px, 2.7vw, 33px);
-  font-weight: 700;
-  letter-spacing: -0.018em;
-  line-height: 1.32;
+/* .col-body specificity to override the 64ch body measure */
+.col-body .statement {
+  font-size: var(--fs-statement);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
   color: var(--ink);
-  max-width: 22ch;
+  max-width: 40ch;
   text-wrap: balance;
-}
-
-.statement::before {
-  content: '';
-  display: block;
-  width: 44px;
-  height: 3px;
-  margin-bottom: clamp(24px, 3vw, 36px);
-  background: var(--pink);
 }
 
 /* Speaking --------------------------------------------------------- */
 .questions-intro {
   font-weight: 600;
   color: var(--ink);
-  margin-bottom: 10px !important;
+  margin-bottom: var(--space-xs) !important;
 }
 
 .questions {
   list-style: none;
   max-width: 62ch;
-  margin-bottom: 40px;
+  margin-bottom: var(--space-lg);
 }
 
 .questions li {
   position: relative;
-  padding: 15px 0 15px 26px;
-  border-bottom: 1px solid var(--rule);
+  padding: var(--space-xs) 0 var(--space-xs) 28px;
   color: #322f33;
 }
 
@@ -483,7 +515,7 @@ section {
   content: '';
   position: absolute;
   left: 0;
-  top: 24px;
+  top: 17px;
   width: 7px;
   height: 7px;
   border-radius: 50%;
@@ -494,11 +526,11 @@ section {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 15px 26px;
+  padding: 15px 28px;
   background: var(--pink);
   color: #fff;
   font-weight: 700;
-  font-size: 16px;
+  font-size: var(--fs-md);
   letter-spacing: 0.01em;
   border-radius: 999px;
   transition: background 0.2s ease, transform 0.2s ease;
@@ -515,8 +547,8 @@ section {
 }
 
 .cta-note {
-  margin-top: 16px;
-  font-size: 14px;
+  margin-top: var(--space-sm);
+  font-size: var(--fs-meta);
   color: var(--muted);
 }
 
@@ -528,7 +560,7 @@ section {
 }
 
 .cta-note a:hover {
-  border-color: var(--pink);
+  border-color: var(--pink-ink);
 }
 
 /* Media groups ----------------------------------------------------- */
@@ -541,7 +573,7 @@ section {
 }
 
 .subhead {
-  font-size: 13px;
+  font-size: var(--fs-eyebrow);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -556,16 +588,19 @@ section {
 
 .contact-email {
   display: inline-block;
-  margin-top: 26px;
-  font-size: clamp(22px, 3.4vw, 38px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  margin-top: var(--space-md);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  letter-spacing: -0.005em;
   color: var(--ink);
-  transition: color 0.2s ease;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .contact-email:hover {
-  color: var(--pink);
+  color: var(--pink-ink);
+  border-color: var(--pink-ink);
 }
 
 .contact-links {
@@ -573,7 +608,7 @@ section {
   flex-wrap: wrap;
   gap: 14px 40px;
   list-style: none;
-  margin-top: 32px;
+  margin-top: var(--space-lg);
 }
 
 .contact-links a {
@@ -587,7 +622,7 @@ section {
 }
 
 .contact-links a:hover {
-  color: var(--pink);
+  color: var(--pink-ink);
 }
 
 /* Footer ----------------------------------------------------------- */
@@ -615,7 +650,7 @@ section {
   text-transform: uppercase;
   letter-spacing: -0.02em;
   line-height: 0.92;
-  font-size: clamp(40px, 7vw, 92px);
+  font-size: var(--fs-display-sm);
 }
 
 .footer__nav {
@@ -652,7 +687,7 @@ section {
 }
 
 .footer__nav a:hover {
-  color: var(--pink);
+  color: var(--pink-ink);
 }
 
 .footer__copy {
@@ -665,17 +700,6 @@ section {
 }
 
 /* Responsive ------------------------------------------------------- */
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
-
-  .col-label {
-    padding-top: 0;
-  }
-}
-
 @media (max-width: 760px) {
   .nav__brand {
     display: none;
