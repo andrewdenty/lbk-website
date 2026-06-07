@@ -390,6 +390,44 @@ section {
   white-space: nowrap;
 }
 
+/* Timeline (combined career + education) -------------------------- */
+.timeline-block {
+  margin-top: var(--space-lg);
+}
+
+.timeline {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 clamp(40px, 5vw, 64px);
+  list-style: none;
+  border-top: 1px solid var(--ink);
+}
+
+.timeline li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.timeline-full {
+  grid-column: 1 / -1;
+}
+
+.timeline .label {
+  font-weight: 600;
+}
+
+.timeline .detail {
+  color: var(--pink-ink);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 /* Entry list (publications + recognition) ------------------------- */
 .entries {
   list-style: none;
@@ -781,6 +819,14 @@ section {
 
   .two-col {
     grid-template-columns: 1fr;
+  }
+
+  .timeline {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-full {
+    grid-column: 1;
   }
 
   .entry {

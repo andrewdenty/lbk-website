@@ -37,12 +37,9 @@ export interface PageContent {
   about: {
     label: string;
     heading: string;
-    lead: string;
     body: string[];
-    milestonesHead: string;
-    milestones: Fact[];
-    educationHead: string;
-    education: Fact[];
+    timelineHead: string;
+    timeline: Fact[];
   };
   mission: { label: string; statement: string };
   speaking: {
@@ -79,7 +76,6 @@ export const content: Record<Locale, PageContent> = {
     nav: [
       { href: '#about', label: 'About' },
       { href: '#mission', label: 'Mission' },
-      { href: '#speaking', label: 'Speaking' },
       { href: '#recognition', label: 'Awards' },
       { href: '#media', label: 'Media' },
       { href: '#contact', label: 'Contact' },
@@ -92,29 +88,26 @@ export const content: Record<Locale, PageContent> = {
     },
     about: {
       label: 'About',
-      heading: 'Three decades at the frontier of metabolic science',
-      lead: 'Lotte Bjerre Knudsen is the scientist whose three decades of persistence helped unlock a new class of medicines — reshaping how the world understands and treats obesity, diabetes, and beyond.',
+      heading: 'About Lotte',
       body: [
-        'I joined Novo Nordisk in 1989, at first working on enzymes for laundry detergents, before moving into diabetes research. I spent the next three decades on a single family of molecules: GLP-1 receptor agonists.',
-        'I led the team that developed liraglutide — approved as Victoza in 2010 — and oversaw the development of semaglutide, which became Ozempic in 2017 and Wegovy in 2021. What began as the search for a better diabetes medicine ended up changing how obesity is treated.',
-        'I hold a DMSc from the University of Copenhagen and was adjunct professor of translational medicine at Aarhus University from 2015 to 2020. After more than three decades at Novo Nordisk, I am now turning to what comes next. In scientific circles I am known as “The Lady in Pink”.',
+        'My three decades of persistence helped unlock a new class of medicines.',
+        'I joined Novo Nordisk in 1989, first working on enzymes for laundry detergents before moving into diabetes research and the family of molecules that would define my career: GLP-1 receptor agonists.',
+        'I led the team that developed liraglutide, approved as Victoza in 2010, and oversaw the development of semaglutide, which became Ozempic in 2017 and Wegovy in 2021. What began as the search for a better diabetes medicine ended up changing how obesity is treated.',
+        'I hold a DMSc from the University of Copenhagen and was adjunct professor of translational medicine at Aarhus University from 2015 to 2020. After more than thirty years at Novo Nordisk, I am now turning to what comes next. In scientific circles I am known as “The Lady in Pink”.',
       ],
-      milestonesHead: 'Milestones',
-      milestones: [
+      timelineHead: 'Timeline',
+      timeline: [
+        { label: 'Chemical Engineering, Technical University of Denmark', detail: '' },
         { label: 'Joined Novo Nordisk', detail: '1989' },
         { label: 'Victoza (liraglutide) approved', detail: '2010' },
+        { label: 'DMSc, University of Copenhagen', detail: '2014' },
+        { label: 'Adjunct Professor, Aarhus University', detail: '2015–2020' },
         { label: 'Ozempic (semaglutide) approved', detail: '2017' },
         { label: 'Wegovy (semaglutide) approved', detail: '2021' },
       ],
-      educationHead: 'Education',
-      education: [
-        { label: 'Chemical Engineering, Technical University of Denmark', detail: '' },
-        { label: 'DMSc, University of Copenhagen', detail: '2014' },
-        { label: 'Adjunct Professor, Aarhus University', detail: '2015–2020' },
-      ],
     },
     mission: {
-      label: 'Mission',
+      label: 'My Mission',
       statement:
         'Having helped unlock one of medicine’s most transformative discoveries, my mission is to use that platform — as a scientist, communicator, and leader — to confront the world’s addiction crisis, starting with food and extending to alcohol, drugs, and the digital world, and to inspire the next generation of scientists and leaders to take the science further than we ever imagined possible.',
     },
@@ -394,7 +387,6 @@ export const content: Record<Locale, PageContent> = {
     nav: [
       { href: '#about', label: 'Om' },
       { href: '#mission', label: 'Mission' },
-      { href: '#speaking', label: 'Foredrag' },
       { href: '#recognition', label: 'Priser' },
       { href: '#media', label: 'Medier' },
       { href: '#contact', label: 'Kontakt' },
@@ -407,29 +399,26 @@ export const content: Record<Locale, PageContent> = {
     },
     about: {
       label: 'Om',
-      heading: 'Tre årtier i front for metabolisk forskning',
-      lead: 'Lotte Bjerre Knudsen er forskeren, hvis tre årtiers vedholdenhed var med til at åbne for en helt ny klasse af lægemidler — og ændre måden, verden forstår og behandler fedme, diabetes og meget mere.',
+      heading: 'Om Lotte',
       body: [
-        'Jeg startede hos Novo Nordisk i 1989, hvor jeg i begyndelsen arbejdede med enzymer til vaskemiddel, før jeg gik over i diabetesforskningen. De næste tre årtier brugte jeg på én familie af molekyler: GLP-1-receptoragonister.',
+        'Mine tre årtiers vedholdenhed var med til at åbne for en ny klasse af lægemidler.',
+        'Jeg startede hos Novo Nordisk i 1989 og arbejdede i begyndelsen med enzymer til vaskemiddel, inden jeg gik over i diabetesforskningen og den molekylfamilie, der kom til at definere min karriere: GLP-1-receptoragonister.',
         'Jeg stod i spidsen for det team, der udviklede liraglutid — godkendt som Victoza i 2010 — og var med til at lede udviklingen af semaglutid, der blev til Ozempic i 2017 og Wegovy i 2021. Det, der begyndte som jagten på et bedre diabeteslægemiddel, endte med at ændre måden, fedme behandles på.',
-        'Jeg har en doktorgrad (DMSc) fra Københavns Universitet og var adjungeret professor i translationel medicin ved Aarhus Universitet fra 2015 til 2020. Efter mere end tre årtier hos Novo Nordisk retter jeg nu blikket mod det, der kommer nu. I videnskabelige kredse er jeg kendt som “The Lady in Pink”.',
+        'Jeg har en doktorgrad (DMSc) fra Københavns Universitet og var adjungeret professor i translationel medicin ved Aarhus Universitet fra 2015 til 2020. Efter mere end tredive år hos Novo Nordisk retter jeg nu blikket mod det, der kommer næste. I videnskabelige kredse er jeg kendt som “The Lady in Pink”.',
       ],
-      milestonesHead: 'Milepæle',
-      milestones: [
+      timelineHead: 'Tidslinje',
+      timeline: [
+        { label: 'Kemiingeniøruddannelse, Danmarks Tekniske Universitet', detail: '' },
         { label: 'Startede hos Novo Nordisk', detail: '1989' },
         { label: 'Victoza (liraglutid) godkendt', detail: '2010' },
+        { label: 'DMSc, Københavns Universitet', detail: '2014' },
+        { label: 'Adjungeret professor, Aarhus Universitet', detail: '2015–2020' },
         { label: 'Ozempic (semaglutid) godkendt', detail: '2017' },
         { label: 'Wegovy (semaglutid) godkendt', detail: '2021' },
       ],
-      educationHead: 'Uddannelse',
-      education: [
-        { label: 'Kemiingeniør, Danmarks Tekniske Universitet', detail: '' },
-        { label: 'DMSc, Københavns Universitet', detail: '2014' },
-        { label: 'Adjungeret professor, Aarhus Universitet', detail: '2015–2020' },
-      ],
     },
     mission: {
-      label: 'Mission',
+      label: 'Min mission',
       statement:
         'Efter at have været med til at åbne for en af medicinens mest skelsættende opdagelser er det min mission at bruge den platform — som forsker, formidler og leder — til at tage kampen op mod verdens afhængighedskrise: først maden, dernæst alkohol, stoffer og den digitale verden. Og at inspirere den næste generation af forskere og ledere til at føre videnskaben længere, end vi nogensinde troede muligt.',
     },
