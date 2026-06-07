@@ -76,7 +76,7 @@ export const content: Record<Locale, PageContent> = {
     nav: [
       { href: '#about', label: 'About' },
       { href: '#mission', label: 'Mission' },
-      { href: '#recognition', label: 'Awards' },
+      { href: '#awards', label: 'Awards' },
       { href: '#media', label: 'Media' },
       { href: '#contact', label: 'Contact' },
     ],
@@ -95,7 +95,7 @@ export const content: Record<Locale, PageContent> = {
         'I led the team that developed liraglutide, approved as Victoza in 2010, and oversaw the development of semaglutide, which became Ozempic in 2017 and Wegovy in 2021. What began as the search for a better diabetes medicine ended up changing how obesity is treated.',
         'I hold a DMSc from the University of Copenhagen and was adjunct professor of translational medicine at Aarhus University from 2015 to 2020. After more than thirty years at Novo Nordisk, I am now turning to what comes next. In scientific circles I am known as “The Lady in Pink”.',
       ],
-      timelineHead: 'Timeline',
+      timelineHead: 'Career Timeline',
       timeline: [
         { label: 'Chemical Engineering, Technical University of Denmark', detail: '' },
         { label: 'Joined Novo Nordisk', detail: '1989' },
@@ -112,8 +112,8 @@ export const content: Record<Locale, PageContent> = {
         'Having helped unlock one of medicine’s most transformative discoveries, my mission is to use that platform — as a scientist, communicator, and leader — to confront the world’s addiction crisis, starting with food and extending to alcohol, drugs, and the digital world, and to inspire the next generation of scientists and leaders to take the science further than we ever imagined possible.',
     },
     speaking: {
-      label: 'Speaking',
-      heading: 'Invite Lotte to speak',
+      label: 'Work with Lotte',
+      heading: 'Invite Lotte to Speak',
       lead: 'Lotte is an internationally recognised keynote speaker who speaks with great passion and knowledge — and always leaves her audiences both wiser and happier.',
       body: 'From the first experiments in the laboratory to medicines now changing the world, Lotte has been part of the entire journey. Talks are tailored to each audience — more or less formal, more or less scientific — so they work just as well for those new to the subject as for specialists.',
       questionsIntro: 'A talk can take you inside:',
@@ -224,14 +224,8 @@ export const content: Record<Locale, PageContent> = {
       heading: 'In print, on film, and on air',
       groups: [
         {
-          head: 'Press & portraits',
+          head: 'Press',
           items: [
-            {
-              title: '60 Minutes',
-              meta: 'CBS — the GLP-1 story',
-              tag: 'Television',
-              links: [{ label: 'Watch', href: 'https://www.youtube.com/watch?v=oHI1Dkqdujc' }],
-            },
             {
               title: 'Monocle',
               meta: 'The scientist behind the weight-loss jabs',
@@ -257,8 +251,14 @@ export const content: Record<Locale, PageContent> = {
           ],
         },
         {
-          head: 'Film & podcasts',
+          head: 'Film & TV',
           items: [
+            {
+              title: '60 Minutes',
+              meta: 'CBS — the GLP-1 story',
+              tag: 'Television',
+              links: [{ label: 'Watch', href: 'https://www.youtube.com/watch?v=oHI1Dkqdujc' }],
+            },
             {
               title: 'The Story of GLP-1',
               meta: 'Novo Nordisk Foundation · a four-part film series',
@@ -282,6 +282,11 @@ export const content: Record<Locale, PageContent> = {
                 },
               ],
             },
+          ],
+        },
+        {
+          head: 'Podcasts',
+          items: [
             {
               title: 'Acquired',
               meta: 'The scientific journey behind Ozempic',
@@ -330,7 +335,7 @@ export const content: Record<Locale, PageContent> = {
           ],
         },
         {
-          head: 'Talks & research',
+          head: 'Talks and research',
           items: [
             {
               year: '2026',
@@ -387,7 +392,7 @@ export const content: Record<Locale, PageContent> = {
     nav: [
       { href: '#about', label: 'Om' },
       { href: '#mission', label: 'Mission' },
-      { href: '#recognition', label: 'Priser' },
+      { href: '#awards', label: 'Priser' },
       { href: '#media', label: 'Medier' },
       { href: '#contact', label: 'Kontakt' },
     ],
@@ -423,7 +428,7 @@ export const content: Record<Locale, PageContent> = {
         'Efter at have været med til at åbne for en af medicinens mest skelsættende opdagelser er det min mission at bruge den platform — som forsker, formidler og leder — til at tage kampen op mod verdens afhængighedskrise: først maden, dernæst alkohol, stoffer og den digitale verden. Og at inspirere den næste generation af forskere og ledere til at føre videnskaben længere, end vi nogensinde troede muligt.',
     },
     speaking: {
-      label: 'Foredrag',
+      label: 'Arbejd med Lotte',
       heading: 'Book Lotte til et foredrag',
       lead: 'Lotte er en internationalt anerkendt foredragsholder, der taler med stor passion og viden — og efterlader sit publikum både klogere og gladere.',
       body: 'Fra de første forsøg i laboratoriet til de lægemidler, der i dag forandrer verden, har Lotte været med hele vejen. Foredragene tilpasses det enkelte publikum — mere eller mindre formelle, mere eller mindre videnskabelige — så de også er for dig, der ikke kender emnet i forvejen.',
@@ -535,14 +540,8 @@ export const content: Record<Locale, PageContent> = {
       heading: 'På tryk, på film og i æteren',
       groups: [
         {
-          head: 'Presse og portrætter',
+          head: 'Presse',
           items: [
-            {
-              title: '60 Minutes',
-              meta: 'CBS — historien om GLP-1',
-              tag: 'Tv',
-              links: [{ label: 'Se', href: 'https://www.youtube.com/watch?v=oHI1Dkqdujc' }],
-            },
             {
               title: 'Monocle',
               meta: 'Forskeren bag vægttabsmidlerne',
@@ -568,8 +567,14 @@ export const content: Record<Locale, PageContent> = {
           ],
         },
         {
-          head: 'Film og podcasts',
+          head: 'Film og TV',
           items: [
+            {
+              title: '60 Minutes',
+              meta: 'CBS — historien om GLP-1',
+              tag: 'Tv',
+              links: [{ label: 'Se', href: 'https://www.youtube.com/watch?v=oHI1Dkqdujc' }],
+            },
             {
               title: 'The Story of GLP-1',
               meta: 'Novo Nordisk Fonden · en filmserie i fire dele',
@@ -593,6 +598,11 @@ export const content: Record<Locale, PageContent> = {
                 },
               ],
             },
+          ],
+        },
+        {
+          head: 'Podcasts',
+          items: [
             {
               title: 'Jagten på det evige liv',
               meta: 'DR · fra idé til verdenssucces',
