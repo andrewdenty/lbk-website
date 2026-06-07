@@ -76,8 +76,7 @@ export const content: Record<Locale, PageContent> = {
     nav: [
       { href: '#about', label: 'About' },
       { href: '#mission', label: 'Mission' },
-      { href: '#awards', label: 'Awards' },
-      { href: '#media', label: 'Media' },
+      { href: '#awards', label: 'Awards & Media' },
       { href: '#contact', label: 'Contact' },
     ],
     hero: {
@@ -392,8 +391,7 @@ export const content: Record<Locale, PageContent> = {
     nav: [
       { href: '#about', label: 'Om' },
       { href: '#mission', label: 'Mission' },
-      { href: '#awards', label: 'Priser' },
-      { href: '#media', label: 'Medier' },
+      { href: '#awards', label: 'Priser & Medier' },
       { href: '#contact', label: 'Kontakt' },
     ],
     hero: {
