@@ -19,6 +19,7 @@ const daHref = withBase('da/');
 <header class="nav">
   <div class="nav__inner container">
     <a class="nav__brand" href={lang === 'da' ? daHref : enHref}>
+      <span class="oval" aria-hidden="true"></span>
       <span>Lotte Bjerre Knudsen</span>
     </a>
 
@@ -44,7 +45,6 @@ const daHref = withBase('da/');
         hreflang="en"
         lang="en">EN</a
       >
-      <span class="nav__lang-sep" aria-hidden="true">/</span>
       <a
         class="nav__lang-opt"
         href={daHref}

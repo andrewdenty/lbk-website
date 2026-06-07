@@ -6,30 +6,28 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const hasMetaCol = Boolean(entry.year || entry.tag);
 ---
 
-<li class="entry" class:list={[{ 'entry--nometa': !hasMetaCol }]}>
-  <div class="entry__main">
-    <div class="entry__title">{entry.title}</div>
-    {entry.meta && <div class="entry__sub">{entry.meta}</div>}
+<li class="entry">
+  <div class="entry__head">
+    <span class="entry__title">{entry.title}</span>
     {
-      entry.links && entry.links.length > 0 && (
-        <div class="entry__links">
-          {entry.links.map((link) => (
-            <a href={link.href} target="_blank" rel="noopener">
-              {link.label}
-            </a>
-          ))}
-        </div>
-      )
+      entry.year ? (
+        <span class="entry__year">{entry.year}</span>
+      ) : entry.tag ? (
+        <span class="entry__tag">{entry.tag}</span>
+      ) : null
     }
   </div>
+  {entry.meta && <p class="entry__sub">{entry.meta}</p>}
   {
-    hasMetaCol && (
-      <div class="entry__meta">
-        {entry.year && <span class="year">{entry.year}</span>}
-        {entry.tag && <span class="tag">{entry.tag}</span>}
+    entry.links && entry.links.length > 0 && (
+      <div class="entry__links">
+        {entry.links.map((link) => (
+          <a class="entry__link" href={link.href} target="_blank" rel="noopener">
+            {link.label}
+          </a>
+        ))}
       </div>
     )
   }

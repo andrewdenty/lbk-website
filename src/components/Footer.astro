@@ -10,25 +10,27 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
-  <div class="footer__inner container">
-    <p class="footer__brand">
-      <span>Lotte</span>
-      <span>Bjerre</span>
-      <span>Knudsen</span>
-    </p>
+  <div class="footer__inner container container--wide">
+    <div class="footer__top">
+      <p class="footer__wordmark">
+        <span class="footer__line">Lotte</span>
+        <span class="footer__line footer__line--2">Bjerre</span>
+        <span class="footer__line footer__line--3">Knudsen</span>
+      </p>
 
-    <nav class="footer__nav" aria-label="Footer">
-      <span class="footer__dot" aria-hidden="true"></span>
-      <ul>
-        {
-          links.map((link) => (
-            <li>
-              <a href={link.href}>{link.label}</a>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
+      <nav class="footer__nav" aria-label="Footer">
+        <span class="oval oval--lg" aria-hidden="true"></span>
+        <ul>
+          {
+            links.map((link) => (
+              <li>
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
 
     <p class="footer__copy">© {year} Lotte Bjerre Knudsen</p>
   </div>
