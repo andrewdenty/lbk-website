@@ -27,7 +27,6 @@ const portraitAlt = isDa
 const mailto = `mailto:${c.contact.email}`;
 const awardsMediaLabel = `${c.recognition.label} & ${c.media.label}`;
 const contactLabel = `${c.contact.label} Lotte:`;
-const timeline = c.about.timeline.filter((item) => item.detail);
 ---
 
 <!-- Hero -->
@@ -66,97 +65,8 @@ const timeline = c.about.timeline.filter((item) => item.detail);
   </div>
 </section>
 
-<!-- About -->
-<section id="about">
-  <div class="container">
-    <div class="block">
-      <p class="eyebrow">{c.about.label}</p>
-      <div class="prose">
-        <h2 class="h2">{c.about.heading}</h2>
-        {c.about.body.map((para) => <p>{para}</p>)}
-      </div>
-    </div>
-
-    <div class="block">
-      <p class="eyebrow">{c.about.timelineHead}</p>
-      <ul class="timeline">
-        {
-          timeline.map((item) => (
-            <li class="timeline__item">
-              <span class="timeline__label">{item.label}</span>
-              <span class="timeline__year">{item.detail}</span>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- Mission -->
-<section id="mission" class="section--cream">
-  <div class="container">
-    <p class="eyebrow">{c.mission.label}</p>
-    <p class="statement">{c.mission.statement}</p>
-  </div>
-</section>
-
-<!-- Awards & Media -->
-<section id="awards">
-  <div class="container">
-    <p class="eyebrow">{awardsMediaLabel}</p>
-    <div class="am__grid">
-      <div id="media" class="am__col">
-        <h2 class="h2" set:html={c.media.heading} />
-        <div class="am__lists">
-          {
-            c.media.groups.map((group) => (
-              <div class="entry-group">
-                <p class="entry-group__head">{group.head}</p>
-                <ul class="entries">
-                  {group.items.map((item) => (
-                    <Entry entry={item} />
-                  ))}
-                </ul>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-
-      <div class="am__col">
-        <h2 class="h2">{c.recognition.heading}</h2>
-        <div class="am__lists">
-          <div class="entry-group">
-            <p class="entry-group__head">{c.recognition.label}</p>
-            <ul class="entries">
-              {
-                c.recognition.awards.map((award, i) => (
-                  <>
-                    <Entry entry={award} />
-                    {i === 1 && (
-                      <li class="entries__photo">
-                        <Image
-                          src={breakthroughPrize}
-                          alt={coupleAlt}
-                          widths={[506, 1012]}
-                          sizes="(max-width: 900px) 100vw, 506px"
-                        />
-                      </li>
-                    )}
-                  </>
-                ))
-              }
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- Work with Lotte (speaking + contact) -->
-<section id="contact" class="section--cream">
+<section id="contact">
   <div class="container">
     <p class="eyebrow">{c.speaking.label}</p>
     <div class="speak__grid">
@@ -188,6 +98,86 @@ const timeline = c.about.timeline.filter((item) => item.detail);
           widths={[327, 420, 654, 840]}
           sizes="(max-width: 900px) 420px, 327px"
         />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mission -->
+<section id="mission" class="section--cream">
+  <div class="container">
+    <p class="eyebrow">{c.mission.label}</p>
+    <p class="statement">{c.mission.statement}</p>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="container">
+    <div class="block">
+      <p class="eyebrow">{c.about.label}</p>
+      <div class="prose">
+        <h2 class="h2">{c.about.heading}</h2>
+        {c.about.body.map((para) => <p>{para}</p>)}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Awards & Media -->
+<section id="awards" class="section--cream">
+  <div class="container">
+    <p class="eyebrow">{awardsMediaLabel}</p>
+    <div class="am__grid">
+      <div id="media" class="am__col">
+        <h2 class="h2" set:html={c.media.heading} />
+        <div class="am__lists">
+          {
+            c.media.groups.map((group) => (
+              <div class="entry-group">
+                <p class="entry-group__head">{group.head}</p>
+                <ul class="entries">
+                  {group.items.map((item) => (
+                    <Entry entry={item} />
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="am__col">
+        <h2 class="h2">{c.recognition.heading}</h2>
+        <div class="am__lists">
+          {
+            c.recognition.groups.map((group, gi) => (
+              <div class:list={['entry-group', { 'entry-group--featured': gi === 0 }]}>
+                <p class="entry-group__head">
+                  {gi === 0 && <span class="oval" aria-hidden="true" />}
+                  {group.head}
+                </p>
+                <ul class="entries">
+                  {group.items.map((award, i) => (
+                    <>
+                      <Entry entry={award} />
+                      {gi === 0 && i === 1 && (
+                        <li class="entries__photo">
+                          <Image
+                            src={breakthroughPrize}
+                            alt={coupleAlt}
+                            widths={[506, 1012]}
+                            sizes="(max-width: 900px) 100vw, 506px"
+                          />
+                        </li>
+                      )}
+                    </>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
       </div>
     </div>
   </div>

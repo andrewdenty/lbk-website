@@ -10,9 +10,10 @@ export interface LinkRef {
   href: string;
 }
 
-export interface Fact {
+export interface Credit {
+  prefix: string;
   label: string;
-  detail: string;
+  href: string;
 }
 
 export interface Entry {
@@ -38,8 +39,6 @@ export interface PageContent {
     label: string;
     heading: string;
     body: string[];
-    timelineHead: string;
-    timeline: Fact[];
   };
   mission: { label: string; statement: string };
   speaking: {
@@ -51,7 +50,7 @@ export interface PageContent {
     questions: string[];
     ctaText: string;
   };
-  recognition: { label: string; heading: string; awards: Entry[] };
+  recognition: { label: string; heading: string; groups: MediaGroup[] };
   media: { label: string; heading: string; groups: MediaGroup[] };
   contact: {
     label: string;
@@ -60,9 +59,11 @@ export interface PageContent {
     email: string;
     links: LinkRef[];
   };
+  footer: { credits: Credit[] };
 }
 
 const scholar = 'https://scholar.google.com/citations?user=s-0BmrMAAAAJ&hl=en';
+const ANDREW_SITE = 'https://andrewdenty.com';
 
 export const content: Record<Locale, PageContent> = {
   en: {
@@ -74,10 +75,10 @@ export const content: Record<Locale, PageContent> = {
     },
     langAria: 'Language',
     nav: [
-      { href: '#about', label: 'About' },
+      { href: '#contact', label: 'Work with Lotte' },
       { href: '#mission', label: 'Mission' },
+      { href: '#about', label: 'About' },
       { href: '#awards', label: 'Awards & Media' },
-      { href: '#contact', label: 'Contact' },
     ],
     hero: {
       taglineRows: [
@@ -93,16 +94,6 @@ export const content: Record<Locale, PageContent> = {
         'I joined Novo Nordisk in 1989, first working on enzymes for laundry detergents before moving into diabetes research and the family of molecules that would define my career: GLP-1 receptor agonists.',
         'I led the team that developed liraglutide, approved as Victoza in 2010, and oversaw the development of semaglutide, which became Ozempic in 2017 and Wegovy in 2021. What began as the search for a better diabetes medicine ended up changing how obesity is treated.',
         'I hold a DMSc from the University of Copenhagen and was adjunct professor of translational medicine at Aarhus University from 2015 to 2020. After more than thirty years at Novo Nordisk, I am now turning to what comes next. In scientific circles I am known as “The Lady in Pink”.',
-      ],
-      timelineHead: 'Career Timeline',
-      timeline: [
-        { label: 'Chemical Engineering, Technical University of Denmark', detail: '' },
-        { label: 'Joined Novo Nordisk', detail: '1989' },
-        { label: 'Victoza (liraglutide) approved', detail: '2010' },
-        { label: 'DMSc, University of Copenhagen', detail: '2014' },
-        { label: 'Adjunct Professor, Aarhus University', detail: '2015–2020' },
-        { label: 'Ozempic (semaglutide) approved', detail: '2017' },
-        { label: 'Wegovy (semaglutide) approved', detail: '2021' },
       ],
     },
     mission: {
@@ -127,94 +118,98 @@ export const content: Record<Locale, PageContent> = {
     recognition: {
       label: 'Awards',
       heading: 'Honoured across medicine and science',
-      awards: [
+      groups: [
         {
-          year: '2026',
-          title: 'Cameron Prize for Therapeutics',
-          meta: 'University of Edinburgh',
-          links: [
+          head: 'Major awards',
+          items: [
             {
-              label: 'Announcement',
-              href: 'https://web.archive.org/web/20260309215102/https://www.ed.ac.uk/news/trio-honoured-for-transformational-obesity-treatment',
+              year: '2024',
+              title: 'Lasker~DeBakey Clinical Medical Research Award',
+              meta: 'Lasker Foundation · shared with Svetlana Mojsov and Joel Habener',
+              links: [
+                {
+                  label: 'Citation',
+                  href: 'https://laskerfoundation.org/winners/glp-1-based-therapy-for-obesity/',
+                },
+                {
+                  label: 'Acceptance remarks',
+                  href: 'https://laskerfoundation.org/winners/glp-1-based-therapy-for-obesity/#remarks',
+                },
+              ],
+            },
+            {
+              year: '2025',
+              title: 'Breakthrough Prize in Life Sciences',
+              meta: 'Breakthrough Prize Foundation',
+              links: [
+                { label: 'Laureate', href: 'https://breakthroughprize.org/Laureates/L3974' },
+                { label: 'Ceremony', href: 'https://breakthroughprize.org/Ceremonies/11' },
+                { label: 'Film', href: 'https://www.youtube.com/watch?v=gSPuYhmHtXA' },
+              ],
+            },
+            {
+              year: '2024',
+              title: 'Mani L. Bhaumik Breakthrough of the Year Award',
+              meta: 'Science / AAAS',
+              links: [
+                {
+                  label: 'Announcement',
+                  href: 'https://www.aaas.org/news/innovators-glp-1-obesity-bhaumik-breakthrough',
+                },
+              ],
             },
           ],
         },
         {
-          year: '2025',
-          title: 'Breakthrough Prize in Life Sciences',
-          meta: 'Breakthrough Prize Foundation',
-          links: [
-            { label: 'Laureate', href: 'https://breakthroughprize.org/Laureates/L3974' },
-            { label: 'Ceremony', href: 'https://breakthroughprize.org/Ceremonies/11' },
-            { label: 'Film', href: 'https://www.youtube.com/watch?v=gSPuYhmHtXA' },
-          ],
-        },
-        {
-          year: '2025',
-          title: 'Friends of the National Libraries Award',
-          meta: 'FNLM Annual Gala',
-          links: [{ label: 'Film', href: 'https://www.fnlm.org/2025-fnlm-annual-gala/' }],
-        },
-        {
-          year: '2025',
-          title: 'Lifetime Achievement Award',
-          meta: 'Stanford University',
-          links: [
+          head: 'More awards',
+          items: [
             {
-              label: 'Lecture',
-              href: 'https://med.stanford.edu/cvi/events/sdds2025-stanford-drug-discovery-symposium/2025-day2-event-recordings.html',
-            },
-          ],
-        },
-        {
-          year: '2024',
-          title: 'Lasker~DeBakey Clinical Medical Research Award',
-          meta: 'Lasker Foundation · shared with Svetlana Mojsov and Joel Habener',
-          links: [
-            {
-              label: 'Citation',
-              href: 'https://laskerfoundation.org/winners/glp-1-based-therapy-for-obesity/',
+              year: '2026',
+              title: 'Cameron Prize for Therapeutics',
+              meta: 'University of Edinburgh',
+              links: [
+                {
+                  label: 'Announcement',
+                  href: 'https://web.archive.org/web/20260309215102/https://www.ed.ac.uk/news/trio-honoured-for-transformational-obesity-treatment',
+                },
+              ],
             },
             {
-              label: 'Acceptance remarks',
-              href: 'https://laskerfoundation.org/winners/glp-1-based-therapy-for-obesity/#remarks',
+              year: '2024',
+              title: 'Fierce 50',
+              meta: 'Fierce Pharma',
+              links: [
+                {
+                  label: 'Interview',
+                  href: 'https://www.fiercepharma.com/pharma/lotte-bjerre-knudsen',
+                },
+              ],
             },
-          ],
-        },
-        {
-          year: '2024',
-          title: 'Mani L. Bhaumik Breakthrough of the Year Award',
-          meta: 'Science / AAAS',
-          links: [
             {
-              label: 'Announcement',
-              href: 'https://www.aaas.org/news/innovators-glp-1-obesity-bhaumik-breakthrough',
+              year: '2025',
+              title: 'Friends of the National Libraries Award',
+              meta: 'FNLM Annual Gala',
+              links: [{ label: 'Film', href: 'https://www.fnlm.org/2025-fnlm-annual-gala/' }],
+            },
+            {
+              year: '2024',
+              title: 'Golden Plate Award',
+              meta: 'American Academy of Achievement',
+              links: [
+                { label: 'Summit gallery', href: 'https://achievement.org/summit/2024/#gallery' },
+              ],
+            },
+            {
+              year: '2023',
+              title: 'Paul Langerhans Medal',
+              meta: 'German Diabetes Society (DDG)',
+            },
+            {
+              year: '2023',
+              title: 'STAT Biomedical Innovation Award',
+              meta: 'STAT',
             },
           ],
-        },
-        {
-          year: '2024',
-          title: 'Golden Plate Award',
-          meta: 'American Academy of Achievement',
-          links: [{ label: 'Summit gallery', href: 'https://achievement.org/summit/2024/#gallery' }],
-        },
-        {
-          year: '2024',
-          title: 'Fierce 50',
-          meta: 'Fierce Pharma',
-          links: [
-            { label: 'Interview', href: 'https://www.fiercepharma.com/pharma/lotte-bjerre-knudsen' },
-          ],
-        },
-        {
-          year: '2023',
-          title: 'Paul Langerhans Medal',
-          meta: 'German Diabetes Society (DDG)',
-        },
-        {
-          year: '2023',
-          title: 'STAT Biomedical Innovation Award',
-          meta: 'STAT',
         },
       ],
     },
@@ -378,6 +373,12 @@ export const content: Record<Locale, PageContent> = {
       email: 'PA@lottebjerreknudsen.com',
       links: [{ label: 'Google Scholar', href: scholar }],
     },
+    footer: {
+      credits: [
+        { prefix: 'Web design by', label: 'Andrew Denty', href: ANDREW_SITE },
+        { prefix: 'Photography by', label: 'Petra Kleis', href: 'https://petrakleis.com' },
+      ],
+    },
   },
 
   da: {
@@ -389,10 +390,10 @@ export const content: Record<Locale, PageContent> = {
     },
     langAria: 'Sprog',
     nav: [
-      { href: '#about', label: 'Om' },
+      { href: '#contact', label: 'Arbejd med Lotte' },
       { href: '#mission', label: 'Mission' },
+      { href: '#about', label: 'Om' },
       { href: '#awards', label: 'Priser & Medier' },
-      { href: '#contact', label: 'Kontakt' },
     ],
     hero: {
       taglineRows: [
@@ -408,16 +409,6 @@ export const content: Record<Locale, PageContent> = {
         'Jeg startede hos Novo Nordisk i 1989 og arbejdede i begyndelsen med enzymer til vaskemiddel, inden jeg gik over i diabetesforskningen og den molekylfamilie, der kom til at definere min karriere: GLP-1-receptoragonister.',
         'Jeg stod i spidsen for det team, der udviklede liraglutid — godkendt som Victoza i 2010 — og var med til at lede udviklingen af semaglutid, der blev til Ozempic i 2017 og Wegovy i 2021. Det, der begyndte som jagten på et bedre diabeteslægemiddel, endte med at ændre måden, fedme behandles på.',
         'Jeg har en doktorgrad (DMSc) fra Københavns Universitet og var adjungeret professor i translationel medicin ved Aarhus Universitet fra 2015 til 2020. Efter mere end tredive år hos Novo Nordisk retter jeg nu blikket mod det, der kommer næste. I videnskabelige kredse er jeg kendt som “The Lady in Pink”.',
-      ],
-      timelineHead: 'Tidslinje',
-      timeline: [
-        { label: 'Kemiingeniøruddannelse, Danmarks Tekniske Universitet', detail: '' },
-        { label: 'Startede hos Novo Nordisk', detail: '1989' },
-        { label: 'Victoza (liraglutid) godkendt', detail: '2010' },
-        { label: 'DMSc, Københavns Universitet', detail: '2014' },
-        { label: 'Adjungeret professor, Aarhus Universitet', detail: '2015–2020' },
-        { label: 'Ozempic (semaglutid) godkendt', detail: '2017' },
-        { label: 'Wegovy (semaglutid) godkendt', detail: '2021' },
       ],
     },
     mission: {
@@ -442,94 +433,96 @@ export const content: Record<Locale, PageContent> = {
     recognition: {
       label: 'Priser',
       heading: 'Anerkendt på tværs af medicin og videnskab',
-      awards: [
+      groups: [
         {
-          year: '2026',
-          title: 'Cameron Prize for Therapeutics',
-          meta: 'University of Edinburgh',
-          links: [
+          head: 'Hovedpriser',
+          items: [
             {
-              label: 'Omtale',
-              href: 'https://web.archive.org/web/20260309215102/https://www.ed.ac.uk/news/trio-honoured-for-transformational-obesity-treatment',
+              year: '2024',
+              title: 'Lasker~DeBakey Clinical Medical Research Award',
+              meta: 'Lasker Foundation · sammen med Svetlana Mojsov og Joel Habener',
+              links: [
+                {
+                  label: 'Begrundelse',
+                  href: 'https://laskerfoundation.org/winners/glp-1-based-therapy-for-obesity/',
+                },
+                {
+                  label: 'Takketale',
+                  href: 'https://laskerfoundation.org/winners/glp-1-based-therapy-for-obesity/#remarks',
+                },
+              ],
+            },
+            {
+              year: '2025',
+              title: 'Breakthrough Prize in Life Sciences',
+              meta: 'Breakthrough Prize Foundation',
+              links: [
+                { label: 'Modtager', href: 'https://breakthroughprize.org/Laureates/L3974' },
+                { label: 'Ceremoni', href: 'https://breakthroughprize.org/Ceremonies/11' },
+                { label: 'Film', href: 'https://www.youtube.com/watch?v=gSPuYhmHtXA' },
+              ],
+            },
+            {
+              year: '2024',
+              title: 'Mani L. Bhaumik Breakthrough of the Year Award',
+              meta: 'Science / AAAS',
+              links: [
+                {
+                  label: 'Omtale',
+                  href: 'https://www.aaas.org/news/innovators-glp-1-obesity-bhaumik-breakthrough',
+                },
+              ],
             },
           ],
         },
         {
-          year: '2025',
-          title: 'Breakthrough Prize in Life Sciences',
-          meta: 'Breakthrough Prize Foundation',
-          links: [
-            { label: 'Modtager', href: 'https://breakthroughprize.org/Laureates/L3974' },
-            { label: 'Ceremoni', href: 'https://breakthroughprize.org/Ceremonies/11' },
-            { label: 'Film', href: 'https://www.youtube.com/watch?v=gSPuYhmHtXA' },
-          ],
-        },
-        {
-          year: '2025',
-          title: 'Friends of the National Libraries Award',
-          meta: 'FNLM Annual Gala',
-          links: [{ label: 'Film', href: 'https://www.fnlm.org/2025-fnlm-annual-gala/' }],
-        },
-        {
-          year: '2025',
-          title: 'Lifetime Achievement Award',
-          meta: 'Stanford University',
-          links: [
+          head: 'Flere priser',
+          items: [
             {
-              label: 'Foredrag',
-              href: 'https://med.stanford.edu/cvi/events/sdds2025-stanford-drug-discovery-symposium/2025-day2-event-recordings.html',
-            },
-          ],
-        },
-        {
-          year: '2024',
-          title: 'Lasker~DeBakey Clinical Medical Research Award',
-          meta: 'Lasker Foundation · sammen med Svetlana Mojsov og Joel Habener',
-          links: [
-            {
-              label: 'Begrundelse',
-              href: 'https://laskerfoundation.org/winners/glp-1-based-therapy-for-obesity/',
+              year: '2026',
+              title: 'Cameron Prize for Therapeutics',
+              meta: 'University of Edinburgh',
+              links: [
+                {
+                  label: 'Omtale',
+                  href: 'https://web.archive.org/web/20260309215102/https://www.ed.ac.uk/news/trio-honoured-for-transformational-obesity-treatment',
+                },
+              ],
             },
             {
-              label: 'Takketale',
-              href: 'https://laskerfoundation.org/winners/glp-1-based-therapy-for-obesity/#remarks',
+              year: '2024',
+              title: 'Fierce 50',
+              meta: 'Fierce Pharma',
+              links: [
+                {
+                  label: 'Interview',
+                  href: 'https://www.fiercepharma.com/pharma/lotte-bjerre-knudsen',
+                },
+              ],
             },
-          ],
-        },
-        {
-          year: '2024',
-          title: 'Mani L. Bhaumik Breakthrough of the Year Award',
-          meta: 'Science / AAAS',
-          links: [
             {
-              label: 'Omtale',
-              href: 'https://www.aaas.org/news/innovators-glp-1-obesity-bhaumik-breakthrough',
+              year: '2025',
+              title: 'Friends of the National Libraries Award',
+              meta: 'FNLM Annual Gala',
+              links: [{ label: 'Film', href: 'https://www.fnlm.org/2025-fnlm-annual-gala/' }],
+            },
+            {
+              year: '2024',
+              title: 'Golden Plate Award',
+              meta: 'American Academy of Achievement',
+              links: [{ label: 'Galleri', href: 'https://achievement.org/summit/2024/#gallery' }],
+            },
+            {
+              year: '2023',
+              title: 'Paul Langerhans-medaljen',
+              meta: 'Deutsche Diabetes Gesellschaft (DDG)',
+            },
+            {
+              year: '2023',
+              title: 'STAT Biomedical Innovation Award',
+              meta: 'STAT',
             },
           ],
-        },
-        {
-          year: '2024',
-          title: 'Golden Plate Award',
-          meta: 'American Academy of Achievement',
-          links: [{ label: 'Galleri', href: 'https://achievement.org/summit/2024/#gallery' }],
-        },
-        {
-          year: '2024',
-          title: 'Fierce 50',
-          meta: 'Fierce Pharma',
-          links: [
-            { label: 'Interview', href: 'https://www.fiercepharma.com/pharma/lotte-bjerre-knudsen' },
-          ],
-        },
-        {
-          year: '2023',
-          title: 'Paul Langerhans-medaljen',
-          meta: 'Deutsche Diabetes Gesellschaft (DDG)',
-        },
-        {
-          year: '2023',
-          title: 'STAT Biomedical Innovation Award',
-          meta: 'STAT',
         },
       ],
     },
@@ -714,6 +707,12 @@ export const content: Record<Locale, PageContent> = {
       lead: 'For foredrag, rådgivning og forskningshenvendelser, skriv til Lottes kontor.',
       email: 'PA@lottebjerreknudsen.com',
       links: [{ label: 'Google Scholar', href: scholar }],
+    },
+    footer: {
+      credits: [
+        { prefix: 'Webdesign af', label: 'Andrew Denty', href: ANDREW_SITE },
+        { prefix: 'Fotografi af', label: 'Petra Kleis', href: 'https://petrakleis.com' },
+      ],
     },
   },
 };

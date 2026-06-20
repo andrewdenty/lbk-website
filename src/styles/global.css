@@ -384,43 +384,6 @@ section {
   gap: var(--stack);
 }
 
-/* Timeline ----------------------------------------------------------- */
-.timeline {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: clamp(32px, 5vw, 64px);
-  list-style: none;
-  width: 100%;
-}
-
-.timeline__item {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 24px;
-  padding: 16px 0 17px;
-  border-bottom: 1px solid var(--line);
-}
-
-.timeline__label {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: var(--fs-body);
-  line-height: 1.5;
-  color: var(--ink);
-}
-
-.timeline__year {
-  flex: none;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: var(--fs-body);
-  text-transform: uppercase;
-  color: var(--pink);
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
 /* ==========================================================================
    Mission
    ========================================================================== */
@@ -483,6 +446,18 @@ section {
   text-transform: uppercase;
   color: var(--ink);
   padding-bottom: 24px;
+}
+
+/* Featured awards — the headline honours, given visual emphasis ------- */
+.entry-group--featured .entry-group__head {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--pink);
+}
+
+.entry-group--featured .entry {
+  border-top-color: color-mix(in srgb, var(--pink) 32%, transparent);
 }
 
 .entries {
@@ -759,12 +734,44 @@ section {
   color: var(--pink);
 }
 
+.footer__bottom {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px 40px;
+  flex-wrap: wrap;
+}
+
 .footer__copy {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: var(--fs-eyebrow);
   text-transform: uppercase;
   color: var(--pink);
+}
+
+.footer__credits {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 24px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--fs-meta);
+  color: var(--grey);
+}
+
+.footer__credits a {
+  color: var(--grey);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: color-mix(in srgb, var(--grey) 40%, transparent);
+  transition: color 0.2s ease;
+}
+
+.footer__credits a:hover {
+  color: var(--pink);
+  text-decoration-color: var(--pink);
 }
 
 /* ==========================================================================
@@ -839,10 +846,6 @@ section {
 
   .hero__line--3 {
     padding-left: 2.6em;
-  }
-
-  .timeline {
-    grid-template-columns: 1fr;
   }
 
   .footer__top {
