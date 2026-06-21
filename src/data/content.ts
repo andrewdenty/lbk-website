@@ -35,6 +35,7 @@ export interface PageContent {
   langAria: string;
   nav: NavItem[];
   hero: { taglineRows: string[][] };
+  callouts: { label: string; items: { text: string }[] };
   about: {
     label: string;
     heading: string;
@@ -75,10 +76,10 @@ export const content: Record<Locale, PageContent> = {
     },
     langAria: 'Language',
     nav: [
-      { href: '#contact', label: 'Work with Lotte' },
       { href: '#mission', label: 'Mission' },
       { href: '#about', label: 'About' },
       { href: '#awards', label: 'Awards & Media' },
+      { href: '#contact', label: 'Work with Lotte' },
     ],
     hero: {
       taglineRows: [
@@ -86,14 +87,24 @@ export const content: Record<Locale, PageContent> = {
         ['Key Opinion Leader', 'Keynote Speaker'],
       ],
     },
+    callouts: {
+      label: 'In brief',
+      items: [
+        {
+          text: 'Lotte Bjerre Knudsen spent three decades quietly transforming how the world treats obesity and diabetes — and the medicines she helped bring to life are now changing millions of lives.',
+        },
+        {
+          text: 'One of the architects of the GLP-1 revolution, Lotte Bjerre Knudsen is a Lasker Award–winning scientist, and one of the most decorated figures in contemporary drug discovery.',
+        },
+      ],
+    },
     about: {
       label: 'About',
       heading: 'About Lotte',
       body: [
-        'My three decades of persistence helped unlock a new class of medicines.',
-        'I joined Novo Nordisk in 1989, first working on enzymes for laundry detergents before moving into diabetes research and the family of molecules that would define my career: GLP-1 receptor agonists.',
-        'I led the team that developed liraglutide, approved as Victoza in 2010, and oversaw the development of semaglutide, which became Ozempic in 2017 and Wegovy in 2021. What began as the search for a better diabetes medicine ended up changing how obesity is treated.',
-        'I hold a DMSc from the University of Copenhagen and was adjunct professor of translational medicine at Aarhus University from 2015 to 2020. After more than thirty years at Novo Nordisk, I am now turning to what comes next. In scientific circles I am known as “The Lady in Pink”.',
+        'Lotte Bjerre Knudsen is a pioneer of obesity medicines. One of the few people who saw the potential in treating obesity with GLP-1 and stayed tuned on it for 30 years. She graduated from Denmark\'s Technical university in 1989 and joined Novo Nordisk where she worked for 36 years. Her first job included creating what became the very first color detergents. She then went on to become a pioneer in GLP-1 and worked diligently for decades to help unfold the biology of the now so famous medicines for diabetes and obesity. Copenhagen University made her a Doctor of Scientific Medicine in 2014. Her latest role at Novo Nordisk was Chief Scientific Advisor and Head of IDEA, Innovation and Data Experimentation Advancement, where she worked to advance the combination of biology, AI and entrepreneurship.',
+        'She is currently an Honorary Professor in Translational Medicine at Aarhus University.',
+        'Lotte is one of the world\'s most decorated scientists. The only Dane to even win a Lasker Award – the Lasker Award is often called America\'s Nobel Prize. Other prestigious awards include The Breakthrough Prize of Life Sciences. This prize is awarded by the tech billionaires Mark Zuckerberg, Priscilla Chan, Julia and Yuri Milner, Sergey Brin and Anne Wojcicki. The purpose of the prize is to create attention around science and therefore it is handed out in Hollywood with many movie stars showing up to support science. The American Association for the Advancement of Science and the Journal Science has also awarded Lotte their Breakthrough Prize.',
       ],
     },
     mission: {
@@ -390,10 +401,10 @@ export const content: Record<Locale, PageContent> = {
     },
     langAria: 'Sprog',
     nav: [
-      { href: '#contact', label: 'Arbejd med Lotte' },
       { href: '#mission', label: 'Mission' },
       { href: '#about', label: 'Om' },
       { href: '#awards', label: 'Priser & Medier' },
+      { href: '#contact', label: 'Arbejd med Lotte' },
     ],
     hero: {
       taglineRows: [
@@ -401,14 +412,24 @@ export const content: Record<Locale, PageContent> = {
         ['Key opinion leader', 'Keynote-speaker'],
       ],
     },
+    callouts: {
+      label: 'Kort fortalt',
+      items: [
+        {
+          text: 'Lotte Bjerre Knudsen brugte tre årtier på at transformere den måde verden behandler fedme og diabetes — og de lægemidler, hun var med til at skabe, ændrer nu millioner af liv.',
+        },
+        {
+          text: 'Som en af arkitekterne bag GLP-1-revolutionen er Lotte Bjerre Knudsen en Lasker Award-vindende forsker og en af de mest dekorerede skikkelser inden for moderne lægemiddeludvikling.',
+        },
+      ],
+    },
     about: {
       label: 'Om',
       heading: 'Om Lotte',
       body: [
-        'Mine tre årtiers vedholdenhed var med til at åbne for en ny klasse af lægemidler.',
-        'Jeg startede hos Novo Nordisk i 1989 og arbejdede i begyndelsen med enzymer til vaskemiddel, inden jeg gik over i diabetesforskningen og den molekylfamilie, der kom til at definere min karriere: GLP-1-receptoragonister.',
-        'Jeg stod i spidsen for det team, der udviklede liraglutid — godkendt som Victoza i 2010 — og var med til at lede udviklingen af semaglutid, der blev til Ozempic i 2017 og Wegovy i 2021. Det, der begyndte som jagten på et bedre diabeteslægemiddel, endte med at ændre måden, fedme behandles på.',
-        'Jeg har en doktorgrad (DMSc) fra Københavns Universitet og var adjungeret professor i translationel medicin ved Aarhus Universitet fra 2015 til 2020. Efter mere end tredive år hos Novo Nordisk retter jeg nu blikket mod det, der kommer næste. I videnskabelige kredse er jeg kendt som “The Lady in Pink”.',
+        'Lotte Bjerre Knudsen er en pioner inden for fedmemedicin. Hun er en af de meget få, der så potentialet i at behandle fedme med GLP-1 og holdt fast i det i 30 år. Hun dimitterede fra Danmarks Tekniske Universitet i 1989 og begyndte hos Novo Nordisk, hvor hun arbejdede i 36 år. Hendes første job var at identificere det enzym, der blev til verdens allerførste vaskemiddel til farvet tøj. Herefter blev hun en pioner inden for GLP-1 og arbejdede målrettet i årtier på at afdække biologien bag de nu så berømte lægemidler mod diabetes og fedme. I 2014 forsvarede hun sin doktordisputats i medicinsk videnskab på Københavns Universitet. Hendes seneste rolle hos Novo Nordisk var Chief Scientific Advisor og leder af IDEA, Innovation and Data Experimentation Advancement, hvor hun arbejdede på at fremme kombinationen af biologi, kunstig intelligens og iværksætteri.',
+        'Hun er i dag æresprofessor i translationel medicin ved Aarhus Universitet.',
+        'Lotte er en af verdens mest dekorerede forskere. Hun er den eneste dansker, der nogensinde har vundet en Lasker Award, som populært kaldes Amerikas Nobelpris. Andre prestigefyldte priser inkluderer The Breakthrough Prize of Life Science, som er en pris uddelt af tech-mæcener som Mark Zuckerberg, Priscilla Chan, Julia og Yuri Milner, Sergej Brin og Anne Wojcicki. Prisens formål er at skabe opmærksomhed om videnskab, og derfor uddeles prisen i Hollywood ved en kæmpe fest, hvor Hollywoods største stjerner deltager for at støtte videnskaben. American Association for the Advancement of Science og tidsskriftet Science har ligeledes tildelt Lotte deres Breakthrough Prize.',
       ],
     },
     mission: {

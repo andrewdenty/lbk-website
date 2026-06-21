@@ -311,11 +311,29 @@ section {
   z-index: 1;
 }
 
-.hero__photo img {
+/* Crossfading hero portraits — stacked, only the active one shown ------ */
+.hero__slide {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: 50% 8%;
+  opacity: 0;
+  transition: opacity 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+}
+
+.hero__slide.is-active {
+  opacity: 1;
+}
+
+.hero__slide--green {
+  object-position: 50% 14%;
+}
+
+.hero__slide--grass {
+  object-position: 50% 6%;
 }
 
 .hero__text {
@@ -370,12 +388,139 @@ section {
 }
 
 /* ==========================================================================
+   Intro callouts (crossfade carousel)
+   ========================================================================== */
+.callouts .container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.callouts__carousel {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 3.4vw, 44px);
+}
+
+/* Slides share one grid cell so the band height stays fixed across swaps */
+.callouts__viewport {
+  display: grid;
+}
+
+.callout {
+  grid-area: 1 / 1;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.7s ease, transform 0.7s ease, visibility 0.7s;
+}
+
+.callout.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.callout__text {
+  max-width: var(--measure);
+}
+
+.callouts__body {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 4vw, 64px);
+}
+
+.callouts__viewport {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.callouts__cta {
+  flex: none;
+  align-self: center;
+}
+
+.callouts__dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+}
+
+.callouts__dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.callouts__dot::before {
+  content: '';
+  width: 7px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--grey);
+  opacity: 0.4;
+  transition: width 0.35s ease, background-color 0.35s ease, opacity 0.35s ease;
+}
+
+.callouts__dot:hover::before {
+  opacity: 0.75;
+}
+
+.callouts__dot.is-active::before {
+  width: 16px;
+  background: var(--pink);
+  opacity: 1;
+}
+
+/* ==========================================================================
    About
    ========================================================================== */
 #about .container {
   display: flex;
   flex-direction: column;
-  gap: var(--stack-lg);
+  gap: 40px;
+}
+
+.about__grid {
+  display: grid;
+  grid-template-columns: minmax(0, var(--measure)) 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.about__main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack);
+  max-width: var(--measure);
+}
+
+.about__main p {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.about__photo {
+  padding-top: 80px;
+}
+
+.about__photo img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 .block {
@@ -454,10 +599,6 @@ section {
   align-items: center;
   gap: 8px;
   color: var(--pink);
-}
-
-.entry-group--featured .entry {
-  border-top-color: color-mix(in srgb, var(--pink) 32%, transparent);
 }
 
 .entries {
@@ -757,7 +898,7 @@ section {
   gap: 8px 24px;
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: var(--fs-meta);
+  font-size: 12px;
   color: var(--grey);
 }
 
@@ -781,6 +922,17 @@ section {
   .am__grid {
     grid-template-columns: 1fr;
     gap: 64px;
+  }
+
+  .about__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about__photo {
+    padding-top: 0;
+    order: -1;
+    max-width: 420px;
   }
 
   .speak__grid {
@@ -823,13 +975,23 @@ section {
     gap: 18px;
   }
 
+  .callouts__body {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .callouts__cta {
+    align-self: flex-start;
+  }
+
   .hero__inner {
     display: block;
     min-height: 0;
   }
 
   .hero__photo {
-    position: static;
+    position: relative;
+    inset: auto;
     width: 100%;
     height: clamp(320px, 64vw, 460px);
     margin-bottom: 8px;
@@ -868,6 +1030,13 @@ section {
     scroll-behavior: auto;
   }
   .btn:hover {
+    transform: none;
+  }
+  .hero__slide,
+  .callout {
+    transition: none;
+  }
+  .callout {
     transform: none;
   }
 }
