@@ -5,6 +5,8 @@ import lotteGreen from '../assets/lotte-bjerre-knudsen-greenbg.webp';
 import lotteGrass from '../assets/lotte-bjerre-knudsen-grass.webp';
 import breakthroughPrize from '../assets/lotte-breakthrough-prize.webp';
 import lottePortrait from '../assets/lotte-portrait.webp';
+import lotteLaskerPrize from '../assets/lotte-lasker-prize.webp';
+import lotteAmericanAcademy from '../assets/lotte-american-academy.webp';
 import { content, type Locale } from '../data/content';
 import Entry from './Entry.astro';
 
@@ -45,6 +47,12 @@ const portraitAlt = isDa
 const aboutAlt = isDa
   ? 'Lotte Bjerre Knudsen i lyserødt jakkesæt blandt høje græsser'
   : 'Lotte Bjerre Knudsen in a pink suit among tall grasses';
+const laskerPrizeAlt = isDa
+  ? 'Lotte Bjerre Knudsen ved Lasker-prisoverrækkelsen'
+  : 'Lotte Bjerre Knudsen at the Lasker Award ceremony';
+const americanAcademyAlt = isDa
+  ? 'Lotte Bjerre Knudsen modtager AAAS Bhaumik Breakthrough of the Year-prisen'
+  : 'Lotte Bjerre Knudsen receiving the AAAS Bhaumik Breakthrough of the Year Award';
 
 const mailto = `mailto:${c.contact.email}`;
 const awardsMediaLabel = `${c.recognition.label} & ${c.media.label}`;
@@ -90,7 +98,7 @@ const contactHeading = `${c.contact.label} Lotte`;
       </div>
       <a class="btn hero__cta" href="#contact">
         {c.speaking.label}
-        <span class="btn__arrow" aria-hidden="true">→</span>
+        <span class="btn__arrow" aria-hidden="true">↓</span>
       </a>
     </div>
     <div class="hero__photo" data-hero-photo>
@@ -127,6 +135,7 @@ const contactHeading = `${c.contact.label} Lotte`;
           alt={aboutAlt}
           widths={[327, 420, 654, 840]}
           sizes="(max-width: 900px) 420px, 327px"
+          data-lightbox
         />
       </div>
     </div>
@@ -178,13 +187,36 @@ const contactHeading = `${c.contact.label} Lotte`;
                   {group.items.map((award, i) => (
                     <>
                       <Entry entry={award} />
+                      {gi === 0 && i === 0 && (
+                        <li class="entries__photo entries__photo--portrait">
+                          <Image
+                            src={lotteLaskerPrize}
+                            alt={laskerPrizeAlt}
+                            widths={[180, 360]}
+                            sizes="180px"
+                            data-lightbox
+                          />
+                        </li>
+                      )}
                       {gi === 0 && i === 1 && (
-                        <li class="entries__photo">
+                        <li class="entries__photo entries__photo--md">
                           <Image
                             src={breakthroughPrize}
                             alt={coupleAlt}
                             widths={[506, 1012]}
                             sizes="(max-width: 900px) 100vw, 506px"
+                            data-lightbox
+                          />
+                        </li>
+                      )}
+                      {gi === 0 && i === 2 && (
+                        <li class="entries__photo entries__photo--portrait">
+                          <Image
+                            src={lotteAmericanAcademy}
+                            alt={americanAcademyAlt}
+                            widths={[180, 360]}
+                            sizes="180px"
+                            data-lightbox
                           />
                         </li>
                       )}
@@ -224,6 +256,7 @@ const contactHeading = `${c.contact.label} Lotte`;
           alt={portraitAlt}
           widths={[327, 420, 654, 840]}
           sizes="(max-width: 900px) 420px, 327px"
+          data-lightbox
         />
       </div>
     </div>
@@ -312,4 +345,57 @@ const contactHeading = `${c.contact.label} Lotte`;
   }
 
   initHero();
+
+  // Lightbox — open any [data-lightbox] image in a modal dialog
+  function initLightbox() {
+    const lb = document.getElementById('lightbox') as HTMLDialogElement | null;
+    if (!lb) return;
+    const lbImg = lb.querySelector<HTMLImageElement>('.lightbox__img');
+    if (!lbImg) return;
+
+    const getLargestSrc = (img: HTMLImageElement) => {
+      if (!img.srcset) return img.src;
+      const sources = img.srcset.split(',').map((s) => {
+        const parts = s.trim().split(/\s+/);
+        return { url: parts[0], width: parseInt(parts[1] ?? '0', 10) || 0 };
+      });
+      sources.sort((a, b) => b.width - a.width);
+      return sources[0]?.url || img.src;
+    };
+
+    document.querySelectorAll<HTMLImageElement>('[data-lightbox]').forEach((img) => {
+      img.setAttribute('role', 'button');
+      img.setAttribute('tabindex', '0');
+      img.setAttribute('aria-haspopup', 'dialog');
+
+      const open = () => {
+        lbImg.src = getLargestSrc(img);
+        lbImg.alt = img.alt;
+        lb.showModal();
+      };
+
+      img.addEventListener('click', open);
+      img.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open();
+        }
+      });
+    });
+
+    lb.querySelector('.lightbox__close')?.addEventListener('click', () => lb.close());
+
+    lb.addEventListener('click', (e) => {
+      // Close when clicking the backdrop (the dialog element itself, not its children)
+      if (e.target === lb) lb.close();
+    });
+  }
+
+  initLightbox();
 </script>
+
+<!-- Lightbox dialog -->
+<dialog id="lightbox" class="lightbox" aria-label="Image viewer">
+  <button class="lightbox__close" aria-label="Close image viewer">&#x2715;</button>
+  <img class="lightbox__img" src="" alt="" />
+</dialog>
