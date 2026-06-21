@@ -34,7 +34,6 @@ export interface PageContent {
   meta: { title: string; description: string };
   langAria: string;
   nav: NavItem[];
-  hero: { taglineRows: string[][] };
   callouts: { label: string; items: { text: string }[] };
   about: {
     label: string;
@@ -50,6 +49,13 @@ export interface PageContent {
     questionsIntro: string;
     questions: string[];
     ctaText: string;
+  };
+  mentor: {
+    label: string;
+    heading: string;
+    body: string;
+    ctaText: string;
+    ctaSubject: string; // distinct mailto subject so the PA can triage
   };
   recognition: { label: string; heading: string; groups: MediaGroup[] };
   media: { label: string; heading: string; groups: MediaGroup[] };
@@ -81,12 +87,6 @@ export const content: Record<Locale, PageContent> = {
       { href: '#awards', label: 'Awards & Media' },
       { href: '#contact', label: 'Work with Lotte' },
     ],
-    hero: {
-      taglineRows: [
-        ['Life Sciences Innovator', 'Inventor'],
-        ['Key Opinion Leader', 'Keynote Speaker'],
-      ],
-    },
     callouts: {
       label: 'In brief',
       items: [
@@ -125,6 +125,13 @@ export const content: Record<Locale, PageContent> = {
         'Why, in scientific circles, Lotte is known as “The Lady in Pink”.',
       ],
       ctaText: 'Write to book Lotte',
+    },
+    mentor: {
+      label: 'Mentoring',
+      heading: 'Advice & sparring',
+      body: 'One-on-one advice and sparring on your journey in science — 30-minute sessions on select days between 16:00–17:00 (Copenhagen time).',
+      ctaText: 'Write to book a session',
+      ctaSubject: 'Mentoring session enquiry',
     },
     recognition: {
       label: 'Awards',
@@ -406,12 +413,6 @@ export const content: Record<Locale, PageContent> = {
       { href: '#awards', label: 'Priser & Medier' },
       { href: '#contact', label: 'Arbejd med Lotte' },
     ],
-    hero: {
-      taglineRows: [
-        ['Forsker i life science', 'Opfinder'],
-        ['Key opinion leader', 'Keynote-speaker'],
-      ],
-    },
     callouts: {
       label: 'Kort fortalt',
       items: [
@@ -450,6 +451,13 @@ export const content: Record<Locale, PageContent> = {
         'Hvorfor Lotte i videnskabelige kredse er kendt som “The Lady in Pink”.',
       ],
       ctaText: 'Skriv for at booke Lotte',
+    },
+    mentor: {
+      label: 'Mentoring',
+      heading: 'Rådgivning & sparring',
+      body: 'Personlig rådgivning og sparring på din rejse i videnskaben — 30-minutters sessioner på udvalgte dage mellem 16.00–17.00 (dansk tid).',
+      ctaText: 'Skriv for at booke en session',
+      ctaSubject: 'Forespørgsel om mentoring-session',
     },
     recognition: {
       label: 'Priser',

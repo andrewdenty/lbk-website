@@ -1,7 +1,7 @@
 /* ==========================================================================
    Lotte Bjerre Knudsen — design system
    Type:   Epilogue (display / labels / numerals) · Work Sans (body / UI)
-   Colour: pink #FF2F81 · ink #322F33 · grey #6F6C70 · cream #F7F5EF · paper #FFFEFA
+   Colour: pink #FF2F81 · ink #322F33 · grey #6F6C70 · cream #F7F5EF · cream-dark #EDEBE4 · paper #FFFEFA
    Motif:  the "oval" — a 7×4 pink stadium, slightly wider than tall
    ========================================================================== */
 
@@ -12,7 +12,8 @@
   --ink: #322f33; /* headings + body text */
   --grey: #6f6c70; /* secondary text, tags, dividers */
   --cream: #f7f5ef; /* alternating section background */
-  --paper: #fffefa; /* page, header + footer background */
+  --cream-dark: #edebe4; /* footer background */
+  --paper: #fffefa; /* page + header background */
   --line: #6f6c70; /* hairline dividers */
 
   /* Type families ------------------------------------------------------ */
@@ -368,92 +369,55 @@ section {
   padding-left: 4.375em;
 }
 
-.hero__tagline {
+/* Hero intro — the crossfading callouts that replaced the role tagline.
+   Width is held clear of the portrait on the right at every viewport. */
+.hero__intro {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: clamp(16px, 2vw, 24px);
   margin-top: clamp(28px, 3.4vw, 44px);
+  /* Hold the column clear of the portrait: the photo is anchored inside the
+     1180px container, so its left edge tracks ~50vw. Leave a gap before it. */
+  max-width: min(460px, 50vw - 130px);
 }
 
-.tagline-row {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: var(--fs-eyebrow);
-  line-height: 1.5;
-  text-transform: uppercase;
-  color: var(--grey);
-}
-
-/* ==========================================================================
-   Intro callouts (crossfade carousel)
-   ========================================================================== */
-.callouts .container {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
-
-.callouts__carousel {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(28px, 3.4vw, 44px);
-}
-
-/* Slides share one grid cell so the band height stays fixed across swaps */
-.callouts__viewport {
+/* Slides share one grid cell so the hero height stays stable across swaps */
+.hero__intro-viewport {
   display: grid;
 }
 
-.callout {
+.hero__callout {
   grid-area: 1 / 1;
-  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(16px, 1.6vw, 19px);
+  line-height: 1.45;
+  color: var(--ink);
+  text-wrap: balance;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(8px);
-  transition: opacity 0.7s ease, transform 0.7s ease, visibility 0.7s;
+  /* Crossfade tied to the hero portrait: same duration + easing, opacity only
+     (no vertical shift) so the first line stays put through the transition. */
+  transition: opacity 1.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.6s;
 }
 
-.callout.is-active {
+.hero__callout.is-active {
   opacity: 1;
   visibility: visible;
-  transform: none;
 }
 
-.callout__text {
-  max-width: var(--measure);
-}
-
-.callouts__body {
-  display: flex;
-  align-items: center;
-  gap: clamp(24px, 4vw, 64px);
-}
-
-.callouts__viewport {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-.callouts__cta {
-  flex: none;
-  align-self: center;
-}
-
-.callouts__dots {
+.hero__dots {
   display: inline-flex;
   align-items: center;
   gap: 0;
 }
 
-.callouts__dot {
+.hero__dot {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 16px;
-  height: 28px;
+  height: 24px;
   padding: 0;
   border: 0;
   background: transparent;
@@ -462,7 +426,7 @@ section {
   appearance: none;
 }
 
-.callouts__dot::before {
+.hero__dot::before {
   content: '';
   width: 7px;
   height: 4px;
@@ -472,14 +436,22 @@ section {
   transition: width 0.35s ease, background-color 0.35s ease, opacity 0.35s ease;
 }
 
-.callouts__dot:hover::before {
+.hero__dot:hover::before {
   opacity: 0.75;
 }
 
-.callouts__dot.is-active::before {
+.hero__dot.is-active::before {
   width: 16px;
   background: var(--pink);
   opacity: 1;
+}
+
+/* Hero CTA — a compact pill below the callout (smaller than the standard btn) */
+.hero__cta {
+  margin-top: clamp(24px, 3vw, 36px);
+  gap: 8px;
+  padding: 13px 26px;
+  font-size: var(--fs-body);
 }
 
 /* ==========================================================================
@@ -796,11 +768,47 @@ section {
   object-fit: cover;
 }
 
+/* Mentoring — compact secondary offer beneath the speaker block -------- */
+.mentor {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  max-width: var(--measure);
+  padding: clamp(24px, 3.2vw, 32px);
+  background: var(--cream);
+  border-radius: 20px;
+}
+
+.mentor__heading {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-statement);
+  line-height: 1.4;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.mentor__body {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--ink);
+  max-width: 52ch;
+}
+
+/* Smaller pill so the mentor CTA reads lighter than the primary button */
+.btn--sm {
+  padding: 12px 24px;
+  font-size: var(--fs-body);
+}
+
 /* ==========================================================================
    Footer
    ========================================================================== */
 .footer {
-  background: var(--paper);
+  background: var(--cream-dark);
   padding-block: var(--section-pad);
 }
 
@@ -975,13 +983,8 @@ section {
     gap: 18px;
   }
 
-  .callouts__body {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .callouts__cta {
-    align-self: flex-start;
+  .hero__intro {
+    max-width: none;
   }
 
   .hero__inner {
@@ -1033,10 +1036,7 @@ section {
     transform: none;
   }
   .hero__slide,
-  .callout {
+  .hero__callout {
     transition: none;
-  }
-  .callout {
-    transform: none;
   }
 }

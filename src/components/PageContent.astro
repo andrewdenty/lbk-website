@@ -47,6 +47,7 @@ const aboutAlt = isDa
   : 'Lotte Bjerre Knudsen in a pink suit among tall grasses';
 
 const mailto = `mailto:${c.contact.email}`;
+const mentorMailto = `mailto:${c.contact.email}?subject=${encodeURIComponent(c.mentor.ctaSubject)}`;
 const awardsMediaLabel = `${c.recognition.label} & ${c.media.label}`;
 const contactLabel = `${c.contact.label} Lotte:`;
 ---
@@ -60,20 +61,38 @@ const contactLabel = `${c.contact.label} Lotte:`;
         <span class="hero__line hero__line--2">Bjerre</span>
         <span class="hero__line hero__line--3">Knudsen</span>
       </h1>
-      <div class="hero__tagline">
-        {
-          c.hero.taglineRows.map((row) => (
-            <p class="tagline-row">
-              {row.map((seg, i) => (
-                <>
-                  {i > 0 && <span class="oval" aria-hidden="true" />}
-                  <span>{seg}</span>
-                </>
-              ))}
-            </p>
-          ))
-        }
+      <div class="hero__intro" data-callouts>
+        <div class="hero__intro-viewport">
+          {
+            c.callouts.items.map((item, i) => (
+              <p
+                class={`hero__callout${i === 0 ? ' is-active' : ''}`}
+                data-callout-slide
+              >
+                {item.text}
+              </p>
+            ))
+          }
+        </div>
+        <div class="hero__dots" role="tablist" aria-label={c.callouts.label}>
+          {
+            c.callouts.items.map((_, i) => (
+              <button
+                type="button"
+                class={`hero__dot${i === 0 ? ' is-active' : ''}`}
+                data-callout-dot
+                role="tab"
+                aria-selected={i === 0 ? 'true' : 'false'}
+                aria-label={`${slideWord} ${i + 1}`}
+              />
+            ))
+          }
+        </div>
       </div>
+      <a class="btn hero__cta" href="#contact">
+        {c.speaking.label}
+        <span class="btn__arrow" aria-hidden="true">→</span>
+      </a>
     </div>
     <div class="hero__photo" data-hero-photo>
       {
@@ -90,46 +109,6 @@ const contactLabel = `${c.contact.label} Lotte:`;
           />
         ))
       }
-    </div>
-  </div>
-</section>
-
-<!-- Intro callouts (carousel) -->
-<section id="intro" class="callouts">
-  <div class="container">
-    <div class="callouts__carousel" data-callouts>
-      <div class="callouts__dots" role="tablist" aria-label={c.callouts.label}>
-        {
-          c.callouts.items.map((_, i) => (
-            <button
-              type="button"
-              class={`callouts__dot${i === 0 ? ' is-active' : ''}`}
-              data-callout-dot
-              role="tab"
-              aria-selected={i === 0 ? 'true' : 'false'}
-              aria-label={`${slideWord} ${i + 1}`}
-            />
-          ))
-        }
-      </div>
-      <div class="callouts__body">
-        <div class="callouts__viewport">
-          {
-            c.callouts.items.map((item, i) => (
-              <blockquote
-                class={`callout${i === 0 ? ' is-active' : ''}`}
-                data-callout-slide
-              >
-                <p class="statement callout__text">{item.text}</p>
-              </blockquote>
-            ))
-          }
-        </div>
-        <a class="btn callouts__cta" href="#contact">
-          {c.speaking.label}
-          <span class="btn__arrow btn__arrow--down" aria-hidden="true">↓</span>
-        </a>
-      </div>
     </div>
   </div>
 </section>
@@ -257,54 +236,59 @@ const contactLabel = `${c.contact.label} Lotte:`;
         />
       </div>
     </div>
+
+    <div class="mentor">
+      <p class="eyebrow">{c.mentor.label}</p>
+      <h2 class="mentor__heading">{c.mentor.heading}</h2>
+      <p class="mentor__body">{c.mentor.body}</p>
+      <a class="btn btn--sm" href={mentorMailto}>
+        {c.mentor.ctaText}
+        <span class="btn__arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
   </div>
 </section>
 
 <script>
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  // Hero — crossfade between the rotating portraits every 10 seconds.
-  function initHeroRotation() {
-    const stage = document.querySelector<HTMLElement>('[data-hero-photo]');
-    if (!stage) return;
-    const slides = Array.from(
-      stage.querySelectorAll<HTMLElement>('[data-hero-slide]')
-    );
-    if (slides.length < 2 || reduceMotion.matches) return;
+  // Hero — the portrait crossfade and the callout carousel run off one shared
+  // clock, so the photo and the text always transition together as a pair.
+  function initHero() {
+    const photo = document.querySelector<HTMLElement>('[data-hero-photo]');
+    const intro = document.querySelector<HTMLElement>('[data-callouts]');
 
-    let current = 0;
-    window.setInterval(() => {
-      slides[current].classList.remove('is-active');
-      current = (current + 1) % slides.length;
-      slides[current].classList.add('is-active');
-    }, 10000);
-  }
+    const slides = photo
+      ? Array.from(photo.querySelectorAll<HTMLElement>('[data-hero-slide]'))
+      : [];
+    const texts = intro
+      ? Array.from(intro.querySelectorAll<HTMLElement>('[data-callout-slide]'))
+      : [];
+    const dots = intro
+      ? Array.from(intro.querySelectorAll<HTMLButtonElement>('[data-callout-dot]'))
+      : [];
 
-  // Intro callouts — a minimal crossfade carousel with oval indicators.
-  function initCallouts() {
-    const root = document.querySelector<HTMLElement>('[data-callouts]');
-    if (!root) return;
-    const slides = Array.from(
-      root.querySelectorAll<HTMLElement>('[data-callout-slide]')
-    );
-    const dots = Array.from(
-      root.querySelectorAll<HTMLButtonElement>('[data-callout-dot]')
-    );
-    if (slides.length < 2) return;
+    const count = Math.max(slides.length, texts.length);
+    if (count < 2) return;
 
     let current = 0;
     let timer = 0;
 
+    const setActive = (els: HTMLElement[], i: number) => {
+      els.forEach((el, n) => el.classList.toggle('is-active', n === i % els.length));
+    };
+
     const show = (next: number) => {
-      const target = (next + slides.length) % slides.length;
+      const target = ((next % count) + count) % count;
       if (target === current) return;
-      slides[current].classList.remove('is-active');
-      dots[current]?.classList.remove('is-active');
-      dots[current]?.setAttribute('aria-selected', 'false');
       current = target;
-      slides[current].classList.add('is-active');
-      dots[current]?.classList.add('is-active');
-      dots[current]?.setAttribute('aria-selected', 'true');
+      setActive(slides, current);
+      setActive(texts, current);
+      dots.forEach((dot, n) => {
+        const on = n === current % dots.length;
+        dot.classList.toggle('is-active', on);
+        dot.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
     };
 
     const stop = () => {
@@ -315,7 +299,7 @@ const contactLabel = `${c.contact.label} Lotte:`;
     const start = () => {
       if (reduceMotion.matches) return;
       stop();
-      timer = window.setInterval(() => show(current + 1), 8000);
+      timer = window.setInterval(() => show(current + 1), 10000);
     };
 
     dots.forEach((dot, i) =>
@@ -325,11 +309,13 @@ const contactLabel = `${c.contact.label} Lotte:`;
       })
     );
 
-    root.addEventListener('mouseenter', stop);
-    root.addEventListener('mouseleave', start);
+    if (intro) {
+      intro.addEventListener('mouseenter', stop);
+      intro.addEventListener('mouseleave', start);
+    }
+
     start();
   }
 
-  initHeroRotation();
-  initCallouts();
+  initHero();
 </script>
