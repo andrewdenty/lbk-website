@@ -743,19 +743,26 @@ section {
   background: var(--pink);
 }
 
+.speak__mentor {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: var(--measure);
+}
+
+.speak__mentor p {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--ink);
+}
+
 .speak__contact {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding-top: 16px;
-}
-
-.speak__contact-label {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: var(--fs-title);
-  line-height: 1.5;
-  color: var(--ink);
+  max-width: var(--measure);
 }
 
 .speak__photo {
@@ -768,41 +775,6 @@ section {
   object-fit: cover;
 }
 
-/* Mentoring — compact secondary offer beneath the speaker block -------- */
-.mentor {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
-  max-width: var(--measure);
-  padding: clamp(24px, 3.2vw, 32px);
-  background: var(--cream);
-  border-radius: 20px;
-}
-
-.mentor__heading {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: var(--fs-statement);
-  line-height: 1.4;
-  color: var(--ink);
-  text-wrap: balance;
-}
-
-.mentor__body {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: var(--fs-body);
-  line-height: 1.5;
-  color: var(--ink);
-  max-width: 52ch;
-}
-
-/* Smaller pill so the mentor CTA reads lighter than the primary button */
-.btn--sm {
-  padding: 12px 24px;
-  font-size: var(--fs-body);
-}
 
 /* ==========================================================================
    Footer
