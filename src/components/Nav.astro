@@ -53,10 +53,53 @@ const daHref = withBase('da/');
         lang="da">DA</a
       >
     </div>
+
+    <button
+      class="nav__burger"
+      id="nav-burger"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="nav-mobile"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <div class="nav__mobile" id="nav-mobile" aria-hidden="true">
+    <nav aria-label="Mobile primary">
+      <ul class="nav__mobile-list">
+        {
+          links.map((link) => (
+            <li>
+              <a class="nav__mobile-link" href={link.href}>
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <div class="nav__mobile-lang" role="group" aria-label={langAria}>
+      <a
+        href={enHref}
+        aria-current={lang === 'en' ? 'true' : undefined}
+        hreflang="en"
+        lang="en">EN</a
+      >
+      <a
+        href={daHref}
+        aria-current={lang === 'da' ? 'true' : undefined}
+        hreflang="da"
+        lang="da">DA</a
+      >
+    </div>
   </div>
 </header>
 
 <script>
+  // Scroll-spy
   const links = Array.from(
     document.querySelectorAll<HTMLAnchorElement>('[data-nav]'),
   );
@@ -79,5 +122,26 @@ const daHref = withBase('da/');
   byId.forEach((_, id) => {
     const section = document.getElementById(id);
     if (section) observer.observe(section);
+  });
+
+  // Hamburger menu
+  const burger = document.getElementById('nav-burger') as HTMLButtonElement | null;
+  const mobileMenu = document.getElementById('nav-mobile');
+
+  burger?.addEventListener('click', () => {
+    const expanded = burger.getAttribute('aria-expanded') === 'true';
+    burger.setAttribute('aria-expanded', String(!expanded));
+    mobileMenu?.setAttribute('aria-hidden', String(expanded));
+    mobileMenu?.classList.toggle('is-open', !expanded);
+    burger.setAttribute('aria-label', expanded ? 'Open menu' : 'Close menu');
+  });
+
+  mobileMenu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      burger?.setAttribute('aria-expanded', 'false');
+      burger?.setAttribute('aria-label', 'Open menu');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      mobileMenu.classList.remove('is-open');
+    });
   });
 </script>

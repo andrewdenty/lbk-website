@@ -69,18 +69,6 @@ const contactHeading = `${c.contact.label} Lotte`;
         <span class="hero__line hero__line--3">Knudsen</span>
       </h1>
       <div class="hero__intro" data-callouts>
-        <div class="hero__intro-viewport">
-          {
-            c.callouts.items.map((item, i) => (
-              <p
-                class={`hero__callout${i === 0 ? ' is-active' : ''}`}
-                data-callout-slide
-              >
-                {item.text}
-              </p>
-            ))
-          }
-        </div>
         <div class="hero__dots" role="tablist" aria-label={c.callouts.label}>
           {
             c.callouts.items.map((_, i) => (
@@ -92,6 +80,18 @@ const contactHeading = `${c.contact.label} Lotte`;
                 aria-selected={i === 0 ? 'true' : 'false'}
                 aria-label={`${slideWord} ${i + 1}`}
               />
+            ))
+          }
+        </div>
+        <div class="hero__intro-viewport">
+          {
+            c.callouts.items.map((item, i) => (
+              <p
+                class={`hero__callout${i === 0 ? ' is-active' : ''}`}
+                data-callout-slide
+              >
+                {item.text}
+              </p>
             ))
           }
         </div>
@@ -268,8 +268,9 @@ const contactHeading = `${c.contact.label} Lotte`;
 
     <div class="speak__contact">
       <h2 class="h2">{contactHeading}</h2>
-      <a class="btn" href={mailto}>
-        {c.contact.email}
+      <p>You can reach Lotte by email at {c.contact.email}</p>
+      <a class="btn btn--compact" href={mailto}>
+        Email Lotte
         <span class="btn__arrow" aria-hidden="true">→</span>
       </a>
     </div>
