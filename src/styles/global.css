@@ -1306,3 +1306,18 @@ section {
   from { opacity: 0; transform: scale(0.96); }
   to   { opacity: 1; transform: scale(1); }
 }
+
+/* ==========================================================================
+   Scroll-reveal — requires JS (.has-reveal on <html>) + no reduced-motion
+   ========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  .has-reveal [data-reveal] > * {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+  }
+  .has-reveal [data-reveal].is-revealed > * { opacity: 1; transform: none; }
+  .has-reveal [data-reveal].is-revealed > *:nth-child(2) { transition-delay: 0.08s; }
+  .has-reveal [data-reveal].is-revealed > *:nth-child(3) { transition-delay: 0.16s; }
+  .has-reveal [data-reveal].is-revealed > *:nth-child(4) { transition-delay: 0.24s; }
+}

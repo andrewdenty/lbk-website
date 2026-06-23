@@ -122,7 +122,7 @@ const contactHeading = `${c.contact.label} Lotte`;
 
 <!-- About -->
 <section id="about">
-  <div class="container">
+  <div class="container" data-reveal>
     <p class="eyebrow">{c.about.label}</p>
     <div class="about__grid">
       <div class="about__main">
@@ -152,7 +152,7 @@ const contactHeading = `${c.contact.label} Lotte`;
 
 <!-- Mission -->
 <section id="mission" class="section--cream">
-  <div class="container">
+  <div class="container" data-reveal>
     <p class="eyebrow">{c.mission.label}</p>
     <p class="statement">{c.mission.statement}</p>
   </div>
@@ -160,7 +160,7 @@ const contactHeading = `${c.contact.label} Lotte`;
 
 <!-- Awards & Media -->
 <section id="awards">
-  <div class="container">
+  <div class="container" data-reveal>
     <p class="eyebrow">{awardsMediaLabel}</p>
     <div class="am__grid">
       <div id="media" class="am__col">
@@ -242,7 +242,7 @@ const contactHeading = `${c.contact.label} Lotte`;
 
 <!-- Work with Lotte (speaking + contact) -->
 <section id="contact" class="section--cream">
-  <div class="container">
+  <div class="container" data-reveal>
     <p class="eyebrow">{c.speaking.label}</p>
     <div class="speak__grid">
       <div class="speak__main">
@@ -287,6 +287,23 @@ const contactHeading = `${c.contact.label} Lotte`;
 
 <script>
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function initReveal() {
+    if (reduceMotion.matches) return;
+    const targets = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
+    if (!targets.length) return;
+    document.documentElement.classList.add('has-reveal');
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.1 });
+    targets.forEach((el) => io.observe(el));
+  }
+  initReveal();
 
   // Hero — the portrait crossfade and the callout carousel run off one shared
   // clock, so the photo and the text always transition together as a pair.
