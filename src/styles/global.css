@@ -570,6 +570,7 @@ section {
 
 .about__photo {
   padding-top: 80px;
+  overflow: hidden;
 }
 
 .about__photo img {
@@ -772,6 +773,7 @@ section {
 /* Embedded photo within the awards list ------------------------------ */
 .entries__photo {
   padding-bottom: 24px;
+  overflow: hidden;
 }
 
 .entries__photo img {
@@ -884,6 +886,7 @@ section {
 
 .speak__photo {
   padding-top: 80px;
+  overflow: hidden;
 }
 
 .speak__photo img {
@@ -892,6 +895,18 @@ section {
   object-fit: cover;
 }
 
+/* Photo zoom-on-hover ------------------------------------------------ */
+.about__photo img,
+.speak__photo img,
+.entries__photo img {
+  transition: transform 0.55s var(--ease-out);
+}
+
+.about__photo:hover img,
+.speak__photo:hover img,
+.entries__photo:hover img {
+  transform: scale(1.02);
+}
 
 /* ==========================================================================
    Footer
@@ -1209,6 +1224,11 @@ section {
   }
   .lightbox__img {
     animation: none;
+  }
+  .about__photo:hover img,
+  .speak__photo:hover img,
+  .entries__photo:hover img {
+    transform: none;
   }
 }
 
