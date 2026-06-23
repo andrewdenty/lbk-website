@@ -128,6 +128,14 @@ const contactHeading = `${c.contact.label} Lotte`;
       <div class="about__main">
         <h2 class="h2">{c.about.heading}</h2>
         {c.about.body.map((para) => <p>{para}</p>)}
+        <dl class="about__facts">
+          {c.about.facts.map((fact) => (
+            <div class="fact">
+              <dt class="fact__value">{fact.value}</dt>
+              <dd class="fact__label">{fact.label}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
       <div class="about__photo">
         <Image

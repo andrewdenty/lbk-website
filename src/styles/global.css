@@ -584,6 +584,31 @@ section {
   gap: var(--stack);
 }
 
+.about__facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 24px 32px;
+  margin-top: 16px;
+}
+
+.fact { display: flex; flex-direction: column; gap: 4px; }
+
+.fact__value {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(18px, 1.8vw, 20px);
+  line-height: 1.1;
+  color: var(--pink);
+}
+
+.fact__label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--fs-meta);
+  line-height: 1.3;
+  color: var(--grey);
+}
+
 /* ==========================================================================
    Mission
    ========================================================================== */
