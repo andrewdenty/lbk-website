@@ -45,6 +45,7 @@ const daHref = withBase('da/');
         hreflang="en"
         lang="en">EN</a
       >
+      <span class="nav__lang-sep" aria-hidden="true">/</span>
       <a
         class="nav__lang-opt"
         href={daHref}
@@ -88,6 +89,7 @@ const daHref = withBase('da/');
         hreflang="en"
         lang="en">EN</a
       >
+      <span class="nav__lang-sep" aria-hidden="true">/</span>
       <a
         href={daHref}
         aria-current={lang === 'da' ? 'true' : undefined}
@@ -144,4 +146,17 @@ const daHref = withBase('da/');
       mobileMenu.classList.remove('is-open');
     });
   });
+
+  // Scrolled-header state
+  const nav = document.querySelector('.nav') as HTMLElement | null;
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        nav?.classList.toggle('is-scrolled', window.scrollY > 8);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
 </script>
