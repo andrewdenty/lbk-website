@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { content, type Locale } from '../data/content';
+import { content, scholar as scholarUrl, type Locale } from '../data/content';
 
 interface Props {
   lang: Locale;
@@ -16,6 +16,37 @@ const favicon = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const enHref = `${base}/`;
 const daHref = `${base}/da/`;
+
+const siteUrl = Astro.site ?? new URL('https://lottebjerreknudsen.com/');
+const enUrl = new URL(enHref, siteUrl).toString();
+const daUrl = new URL(daHref, siteUrl).toString();
+const canonicalURL = new URL(Astro.url.pathname, siteUrl).toString();
+const ogImageURL = new URL(`${base}/og-image.jpg`, siteUrl).toString();
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Lotte Bjerre Knudsen',
+  url: lang === 'da' ? daUrl : enUrl,
+  image: ogImageURL,
+  description: c.meta.description,
+  jobTitle: 'Honorary Professor in Translational Medicine',
+  affiliation: { '@type': 'CollegeOrUniversity', name: 'Aarhus University' },
+  alumniOf: [
+    { '@type': 'CollegeOrUniversity', name: 'Technical University of Denmark' },
+    { '@type': 'CollegeOrUniversity', name: 'University of Copenhagen' },
+  ],
+  award: [
+    'Lasker~DeBakey Clinical Medical Research Award',
+    'Breakthrough Prize in Life Sciences',
+  ],
+  sameAs: [
+    'https://en.wikipedia.org/wiki/Lotte_Bjerre_Knudsen',
+    'https://www.linkedin.com/in/lotte-bjerre-knudsen/',
+    'https://x.com/lotte_bjerre',
+    scholarUrl,
+  ],
+};
 ---
 
 <!doctype html>
@@ -28,14 +59,28 @@ const daHref = `${base}/da/`;
 
     <title>{c.meta.title}</title>
     <meta name="description" content={c.meta.description} />
+    <link rel="canonical" href={canonicalURL} />
 
-    <link rel="alternate" hreflang="en" href={enHref} />
-    <link rel="alternate" hreflang="da" href={daHref} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="da" href={daUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={c.meta.title} />
     <meta property="og:description" content={c.meta.description} />
     <meta property="og:locale" content={lang === 'da' ? 'da_DK' : 'en'} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Portrait of Lotte Bjerre Knudsen" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={c.meta.title} />
+    <meta name="twitter:description" content={c.meta.description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
