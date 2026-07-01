@@ -65,7 +65,7 @@ export interface PageContent {
   footer: { credits: Credit[] };
 }
 
-const scholar = 'https://scholar.google.com/citations?user=s-0BmrMAAAAJ&hl=en';
+export const scholar = 'https://scholar.google.com/citations?user=s-0BmrMAAAAJ&hl=en';
 const ANDREW_SITE = 'https://andrewdenty.com';
 
 export const content: Record<Locale, PageContent> = {
