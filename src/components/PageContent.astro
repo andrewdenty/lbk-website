@@ -51,8 +51,8 @@ const laskerPrizeAlt = isDa
   ? 'Lotte Bjerre Knudsen ved Lasker-prisoverrækkelsen'
   : 'Lotte Bjerre Knudsen at the Lasker Award ceremony';
 const americanAcademyAlt = isDa
-  ? 'Lotte Bjerre Knudsen modtager AAAS Bhaumik Breakthrough of the Year-prisen'
-  : 'Lotte Bjerre Knudsen receiving the AAAS Bhaumik Breakthrough of the Year Award';
+  ? 'Lotte Bjerre Knudsen med Jimmy Page ved American Academy of Achievement'
+  : 'Lotte Bjerre Knudsen with Jimmy Page at the American Academy of Achievement';
 
 const mailto = `mailto:${c.contact.email}`;
 const awardsMediaLabel = `${c.recognition.label} & ${c.media.label}`;
@@ -217,7 +217,7 @@ const contactHeading = `${c.contact.label} Lotte`;
                           />
                         </li>
                       )}
-                      {gi === 0 && i === 2 && (
+                      {gi === 1 && i === 3 && (
                         <li class="entries__photo entries__photo--portrait">
                           <Image
                             src={lotteAmericanAcademy}

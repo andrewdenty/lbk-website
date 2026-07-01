@@ -164,7 +164,7 @@ export const content: Record<Locale, PageContent> = {
             {
               year: '2025',
               title: 'Breakthrough Prize in Life Sciences',
-              meta: 'Breakthrough Prize Foundation',
+              meta: 'Breakthrough Prize Foundation · shared with Jens Juul Holst, Joel Habener, Svetlana Mojsov and Daniel Drucker',
               links: [
                 { label: 'Laureate', href: 'https://breakthroughprize.org/Laureates/L3974' },
                 { label: 'Ceremony', href: 'https://breakthroughprize.org/Ceremonies/11' },
@@ -174,7 +174,7 @@ export const content: Record<Locale, PageContent> = {
             {
               year: '2024',
               title: 'Mani L. Bhaumik Breakthrough of the Year Award',
-              meta: 'Science / AAAS',
+              meta: 'Science / AAAS · shared with Richard DiMarchi',
               links: [
                 {
                   label: 'Announcement',
@@ -417,7 +417,7 @@ export const content: Record<Locale, PageContent> = {
       { href: '#about', label: 'Om' },
       { href: '#mission', label: 'Mission' },
       { href: '#awards', label: 'Priser & Medier' },
-      { href: '#contact', label: 'Arbejd med Lotte' },
+      { href: '#contact', label: 'Connect med Lotte' },
     ],
     callouts: {
       label: 'Kort fortalt',
@@ -447,10 +447,10 @@ export const content: Record<Locale, PageContent> = {
     mission: {
       label: 'Min mission',
       statement:
-        'Efter at have været med til at åbne for en af medicinens mest skelsættende opdagelser er det min mission at bruge den platform — som forsker, formidler og leder — til at tage kampen op mod verdens afhængighedskrise: først maden, dernæst alkohol, stoffer og den digitale verden. Og at inspirere den næste generation af forskere og ledere til at føre videnskaben længere, end vi nogensinde troede muligt.',
+        'Efter at have været med til at skabe den måske mest revolutionerende nye medicin nogensinde er det min mission at bruge den platform – som forsker, formidler og leder – til at hjælpe med at bekæmpe afhængighed i alle former: mad, alkohol, stoffer, digitale medier og overforbrug, samt at inspirere en hel generation af unge forskere til at føre videnskaben længere end vi hidtil har troet muligt.',
     },
     speaking: {
-      label: 'Arbejd med Lotte',
+      label: 'Connect med Lotte',
       heading: 'Book Lotte til et foredrag',
       lead: 'Lotte er en internationalt anerkendt foredragsholder, der taler med stor passion og viden — og efterlader sit publikum både klogere og gladere.',
       body: 'Fra de første forsøg i laboratoriet til de lægemidler, der i dag forandrer verden, har Lotte været med hele vejen. Foredragene tilpasses det enkelte publikum — mere eller mindre formelle, mere eller mindre videnskabelige — så de også er for dig, der ikke kender emnet i forvejen.',
@@ -475,7 +475,7 @@ export const content: Record<Locale, PageContent> = {
       heading: 'Anerkendt på tværs af medicin og videnskab',
       groups: [
         {
-          head: 'Hovedpriser',
+          head: 'de største priser',
           items: [
             {
               year: '2024',
@@ -495,9 +495,9 @@ export const content: Record<Locale, PageContent> = {
             {
               year: '2025',
               title: 'Breakthrough Prize in Life Sciences',
-              meta: 'Breakthrough Prize Foundation',
+              meta: 'Breakthrough Prize Foundation · sammen med Jens Juul Holst, Joel Habener, Svetlana Mojsov og Daniel Drucker',
               links: [
-                { label: 'Modtager', href: 'https://breakthroughprize.org/Laureates/L3974' },
+                { label: 'Begrundelse', href: 'https://breakthroughprize.org/Laureates/L3974' },
                 { label: 'Ceremoni', href: 'https://breakthroughprize.org/Ceremonies/11' },
                 { label: 'Film', href: 'https://www.youtube.com/watch?v=gSPuYhmHtXA' },
               ],
@@ -505,7 +505,7 @@ export const content: Record<Locale, PageContent> = {
             {
               year: '2024',
               title: 'Mani L. Bhaumik Breakthrough of the Year Award',
-              meta: 'Science / AAAS',
+              meta: 'Science / AAAS · delt med Richard DiMarchi',
               links: [
                 {
                   label: 'Omtale',
@@ -554,7 +554,7 @@ export const content: Record<Locale, PageContent> = {
             },
             {
               year: '2023',
-              title: 'Paul Langerhans-medaljen',
+              title: 'Paul Langerhans medaljen',
               meta: 'Deutsche Diabetes Gesellschaft (DDG)',
             },
             {
