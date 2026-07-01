@@ -413,10 +413,6 @@ section {
   object-position: 50% 14%;
 }
 
-.hero__slide--grass {
-  object-position: 50% 6%;
-}
-
 .hero__text {
   position: relative;
   z-index: 2;
@@ -577,12 +573,6 @@ section {
   width: 100%;
   height: auto;
   object-fit: cover;
-}
-
-.block {
-  display: flex;
-  flex-direction: column;
-  gap: var(--stack);
 }
 
 .about__facts {

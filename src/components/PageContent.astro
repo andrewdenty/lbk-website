@@ -276,9 +276,9 @@ const contactHeading = `${c.contact.label} Lotte`;
 
     <div class="speak__contact">
       <h2 class="h2">{contactHeading}</h2>
-      <p>You can reach Lotte by email at {c.contact.email}</p>
+      <p>{c.contact.lead}</p>
       <a class="btn btn--compact" href={mailto}>
-        Email Lotte
+        {c.contact.ctaText}
         <span class="btn__arrow" aria-hidden="true">→</span>
       </a>
     </div>

@@ -51,13 +51,7 @@ export interface PageContent {
     questions: string[];
     ctaText: string;
   };
-  mentor: {
-    label: string;
-    heading: string;
-    body: string;
-    ctaText: string;
-    ctaSubject: string; // distinct mailto subject so the PA can triage
-  };
+  mentor: { label: string; heading: string; body: string };
   recognition: { label: string; heading: string; groups: MediaGroup[] };
   media: { label: string; heading: string; groups: MediaGroup[] };
   contact: {
@@ -65,6 +59,7 @@ export interface PageContent {
     heading: string;
     lead: string;
     email: string;
+    ctaText: string;
     links: LinkRef[];
   };
   footer: { credits: Credit[] };
@@ -136,8 +131,6 @@ export const content: Record<Locale, PageContent> = {
       label: 'Mentoring',
       heading: 'Advice & sparring',
       body: 'One-on-one advice and sparring on your journey in science — 30-minute sessions on select days between 16:00–17:00 (Copenhagen time).',
-      ctaText: 'Write to book a session',
-      ctaSubject: 'Mentoring session enquiry',
     },
     recognition: {
       label: 'Awards',
@@ -395,6 +388,7 @@ export const content: Record<Locale, PageContent> = {
       heading: 'Get in touch',
       lead: 'For speaking, advisory, and research enquiries, write to Lotte’s office.',
       email: 'PA@lottebjerreknudsen.com',
+      ctaText: 'Email Lotte',
       links: [{ label: 'Google Scholar', href: scholar }],
     },
     footer: {
@@ -467,8 +461,6 @@ export const content: Record<Locale, PageContent> = {
       label: 'Mentoring',
       heading: 'Rådgivning & sparring',
       body: 'Personlig rådgivning og sparring på din rejse i videnskaben — 30-minutters sessioner på udvalgte dage mellem 16.00–17.00 (dansk tid).',
-      ctaText: 'Skriv for at booke en session',
-      ctaSubject: 'Forespørgsel om mentoring-session',
     },
     recognition: {
       label: 'Priser',
@@ -746,6 +738,7 @@ export const content: Record<Locale, PageContent> = {
       heading: 'Kom i kontakt',
       lead: 'For foredrag, rådgivning og forskningshenvendelser, skriv til Lottes kontor.',
       email: 'PA@lottebjerreknudsen.com',
+      ctaText: 'Skriv til Lotte',
       links: [{ label: 'Google Scholar', href: scholar }],
     },
     footer: {
