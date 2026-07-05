@@ -106,7 +106,7 @@ export const content: Record<Locale, PageContent> = {
       body: [
         'Lotte Bjerre Knudsen is a pioneer of obesity medicines. One of the few people who saw the potential in treating obesity with GLP-1 and stayed tuned on it for 30 years. She graduated from Denmark\'s Technical university in 1989 and joined Novo Nordisk where she worked for 36 years. Her first job included creating what became the very first color detergents. She then went on to become a pioneer in GLP-1 and worked diligently for decades to help unfold the biology of the now so famous medicines for diabetes and obesity. Copenhagen University made her a Doctor of Scientific Medicine in 2014. Her latest role at Novo Nordisk was Chief Scientific Advisor and Head of IDEA, Innovation and Data Experimentation Advancement, where she worked to advance the combination of biology, AI and entrepreneurship.',
         'She is currently an Honorary Professor in Translational Medicine at Aarhus University.',
-        'Lotte is one of the world\'s most decorated scientists. The only Dane to even win a Lasker Award – the Lasker Award is often called America\'s Nobel Prize. Other prestigious awards include The Breakthrough Prize of Life Sciences. This prize is awarded by the tech billionaires Mark Zuckerberg, Priscilla Chan, Julia and Yuri Milner, Sergey Brin and Anne Wojcicki. The purpose of the prize is to create attention around science and therefore it is handed out in Hollywood with many movie stars showing up to support science. The American Association for the Advancement of Science and the Journal Science has also awarded Lotte their Breakthrough Prize.',
+        'Lotte is one of the world\'s most decorated scientists. The only Dane to ever win a Lasker Award – the Lasker Award is often called America\'s Nobel Prize. Other prestigious awards include The Breakthrough Prize of Life Sciences. This prize is awarded by the tech billionaires Mark Zuckerberg, Priscilla Chan, Julia and Yuri Milner, Sergey Brin and Anne Wojcicki. The purpose of the prize is to create attention around science and therefore it is handed out in Hollywood with many movie stars showing up to support science. The American Association for the Advancement of Science and the Journal Science has also awarded Lotte their Breakthrough Prize.',
       ],
       facts: [
         { value: '36 years', label: 'at Novo Nordisk' },
@@ -158,7 +158,7 @@ export const content: Record<Locale, PageContent> = {
                 },
                 {
                   label: 'Acceptance remarks',
-                  href: 'https://laskerfoundation.org/winners/glp-1-based-therapy-for-obesity/#remarks',
+                  href: 'https://laskerfoundation.org/winners/glp-1-based-therapy-for-obesity/#tab-58427e5064503b905c8',
                 },
               ],
             },
@@ -197,6 +197,10 @@ export const content: Record<Locale, PageContent> = {
                   label: 'Announcement',
                   href: 'https://web.archive.org/web/20260309215102/https://www.ed.ac.uk/news/trio-honoured-for-transformational-obesity-treatment',
                 },
+                {
+                  label: 'Wikipedia',
+                  href: 'https://en.wikipedia.org/wiki/Cameron_Prize_for_Therapeutics_of_the_University_of_Edinburgh',
+                },
               ],
             },
             {
@@ -212,9 +216,9 @@ export const content: Record<Locale, PageContent> = {
             },
             {
               year: '2025',
-              title: 'Friends of the National Libraries Award',
+              title: 'Friends of the National Library of Medicine Award',
               meta: 'FNLM Annual Gala',
-              links: [{ label: 'Film', href: 'https://www.fnlm.org/2025-fnlm-annual-gala/' }],
+              links: [{ label: 'Gala', href: 'https://www.fnlm.org/2025-fnlm-annual-gala/' }],
             },
             {
               year: '2024',
@@ -228,11 +232,27 @@ export const content: Record<Locale, PageContent> = {
               year: '2023',
               title: 'Paul Langerhans Medal',
               meta: 'German Diabetes Society (DDG)',
+              links: [
+                {
+                  label: 'Wikipedia',
+                  href: 'https://de.wikipedia.org/wiki/Paul-Langerhans-Medaille',
+                },
+              ],
             },
             {
               year: '2023',
               title: 'STAT Biomedical Innovation Award',
               meta: 'STAT',
+              links: [
+                {
+                  label: 'Profile',
+                  href: 'https://www.statnews.com/status-list/2024/lotte-knudsen/',
+                },
+                {
+                  label: 'Video',
+                  href: 'https://www.facebook.com/statnews/videos/lotte-knudsen-who-pushed-novo-nordisk-into-the-ozempic-era-won-the-2023-stat-inn/1060482181802275/',
+                },
+              ],
             },
           ],
         },
@@ -490,7 +510,7 @@ export const content: Record<Locale, PageContent> = {
                 },
                 {
                   label: 'Takketale',
-                  href: 'https://laskerfoundation.org/winners/glp-1-based-therapy-for-obesity/#remarks',
+                  href: 'https://laskerfoundation.org/winners/glp-1-based-therapy-for-obesity/#tab-58427e5064503b905c8',
                 },
               ],
             },
@@ -529,6 +549,10 @@ export const content: Record<Locale, PageContent> = {
                   label: 'Omtale',
                   href: 'https://web.archive.org/web/20260309215102/https://www.ed.ac.uk/news/trio-honoured-for-transformational-obesity-treatment',
                 },
+                {
+                  label: 'Wikipedia',
+                  href: 'https://en.wikipedia.org/wiki/Cameron_Prize_for_Therapeutics_of_the_University_of_Edinburgh',
+                },
               ],
             },
             {
@@ -544,9 +568,9 @@ export const content: Record<Locale, PageContent> = {
             },
             {
               year: '2025',
-              title: 'Friends of the National Libraries Award',
+              title: 'Friends of the National Library of Medicine Award',
               meta: 'FNLM Annual Gala',
-              links: [{ label: 'Film', href: 'https://www.fnlm.org/2025-fnlm-annual-gala/' }],
+              links: [{ label: 'Gala', href: 'https://www.fnlm.org/2025-fnlm-annual-gala/' }],
             },
             {
               year: '2024',
@@ -558,11 +582,27 @@ export const content: Record<Locale, PageContent> = {
               year: '2023',
               title: 'Paul Langerhans medaljen',
               meta: 'Deutsche Diabetes Gesellschaft (DDG)',
+              links: [
+                {
+                  label: 'Wikipedia',
+                  href: 'https://de.wikipedia.org/wiki/Paul-Langerhans-Medaille',
+                },
+              ],
             },
             {
               year: '2023',
               title: 'STAT Biomedical Innovation Award',
               meta: 'STAT',
+              links: [
+                {
+                  label: 'Profil',
+                  href: 'https://www.statnews.com/status-list/2024/lotte-knudsen/',
+                },
+                {
+                  label: 'Video',
+                  href: 'https://www.facebook.com/statnews/videos/lotte-knudsen-who-pushed-novo-nordisk-into-the-ozempic-era-won-the-2023-stat-inn/1060482181802275/',
+                },
+              ],
             },
           ],
         },
