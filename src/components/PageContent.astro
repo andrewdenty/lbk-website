@@ -54,6 +54,15 @@ const americanAcademyAlt = isDa
   ? 'Lotte Bjerre Knudsen med Jimmy Page ved American Academy of Achievement'
   : 'Lotte Bjerre Knudsen with Jimmy Page at the American Academy of Achievement';
 
+// Friends of the National Libraries gala film — seeks to 16:44, where Lotte
+// is introduced and begins her remarks.
+const fnlmVideoTitle = isDa
+  ? 'Friends of the National Library of Medicine Award — Lottes tale'
+  : 'Friends of the National Library of Medicine Award — Lotte’s remarks';
+const fnlmVideoCaption = isDa
+  ? 'Lotte introduceres 16:44 inde i optagelsen.'
+  : 'Lotte is introduced at 16:44 into the recording.';
+
 const mailto = `mailto:${c.contact.email}`;
 const mailtoMentor = `${mailto}?subject=${encodeURIComponent(c.mentor.mailSubject)}`;
 const awardsMediaLabel = `${c.recognition.label} & ${c.media.label}`;
@@ -215,6 +224,21 @@ const awardsMediaLabel = `${c.recognition.label} & ${c.media.label}`;
                             sizes="(max-width: 900px) 100vw, 506px"
                             data-lightbox
                           />
+                        </li>
+                      )}
+                      {gi === 1 && i === 2 && (
+                        <li class="entries__embed">
+                          <div class="embed">
+                            <iframe
+                              src="https://player.vimeo.com/video/1118114510?h=af440141dc#t=16m44s"
+                              title={fnlmVideoTitle}
+                              loading="lazy"
+                              frameborder="0"
+                              allow="autoplay; fullscreen; picture-in-picture"
+                              allowfullscreen
+                            />
+                          </div>
+                          <p class="embed__caption">{fnlmVideoCaption}</p>
                         </li>
                       )}
                       {gi === 1 && i === 3 && (
