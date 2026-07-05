@@ -781,7 +781,10 @@ section {
 }
 
 /* ==========================================================================
-   Work with Lotte (speaking + contact)
+   Work with Lotte (speaking + mentoring + contact)
+   Built from the site's own vocabulary: the About section's text +
+   offset-photo grid on top, the Awards section's hairline dividers and
+   uppercase group heads below. No panels — type sits on the cream.
    ========================================================================== */
 #contact .container {
   display: flex;
@@ -789,40 +792,99 @@ section {
   gap: 40px;
 }
 
-.speak__grid {
+.work__grid {
   display: grid;
   grid-template-columns: minmax(0, var(--measure)) 1fr;
   gap: 40px;
   align-items: start;
 }
 
-.speak__main {
+.work__main {
   display: flex;
   flex-direction: column;
-  gap: var(--stack);
+  gap: 24px;
   max-width: var(--measure);
 }
 
-.speak__main p {
+.work__lead {
+  font-size: var(--fs-title);
+  line-height: 1.55;
+}
+
+.work__photo {
+  padding-top: 80px;
+  overflow: hidden;
+}
+
+.work__photo img {
+  width: 100%;
+  height: auto;
+}
+
+/* Mentoring + contact — two divided columns, echoing the awards lists --- */
+.work__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--col-gap);
+  row-gap: 40px;
+  margin-top: clamp(8px, 2vw, 24px);
+}
+
+.work__cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: 8px; /* extra breathing room above the hairline */
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.work__cta {
+  margin-top: 8px;
+}
+
+.work__email {
   font-family: var(--font-body);
-  font-weight: 500;
+  font-weight: 600;
   font-size: var(--fs-body);
-  line-height: 1.5;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--ink) 30%, transparent);
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.work__email:hover {
+  color: var(--pink);
+  text-decoration-color: var(--pink);
+}
+
+/* Text-link CTA (mentoring) --------------------------------------------- */
+.work__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--fs-body);
+  color: var(--pink);
+  transition: color 0.2s ease;
+}
+
+.work__link:hover {
   color: var(--ink);
 }
 
-.speak__bullets {
+.work__bullets {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.speak__lead-in {
-  font-family: var(--font-body);
+.work__lead-in {
   font-weight: 600;
   font-size: var(--fs-title);
-  line-height: 1.5;
-  color: var(--ink);
 }
 
 .bullets {
@@ -830,6 +892,10 @@ section {
   flex-direction: column;
   gap: 16px;
   list-style: none;
+}
+
+.bullets--tight {
+  gap: 10px;
 }
 
 .bullet {
@@ -852,48 +918,15 @@ section {
   background: var(--pink);
 }
 
-.speak__mentor {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  max-width: var(--measure);
-}
-
-.speak__mentor p {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: var(--fs-body);
-  line-height: 1.5;
-  color: var(--ink);
-}
-
-.speak__contact {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  max-width: var(--measure);
-}
-
-.speak__photo {
-  padding-top: 80px;
-  overflow: hidden;
-}
-
-.speak__photo img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
 /* Photo zoom-on-hover ------------------------------------------------ */
 .about__photo img,
-.speak__photo img,
+.work__photo img,
 .entries__photo img {
   transition: transform 0.55s var(--ease-out);
 }
 
 .about__photo:hover img,
-.speak__photo:hover img,
+.work__photo:hover img,
 .entries__photo:hover img {
   transform: scale(1.02);
 }
@@ -1038,15 +1071,18 @@ section {
     max-width: 420px;
   }
 
-  .speak__grid {
+  .work__grid {
     grid-template-columns: 1fr;
     gap: 40px;
   }
 
-  .speak__photo {
+  .work__photo {
     padding-top: 0;
-    order: -1;
     max-width: 420px;
+  }
+
+  .work__row {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1216,7 +1252,7 @@ section {
     animation: none;
   }
   .about__photo:hover img,
-  .speak__photo:hover img,
+  .work__photo:hover img,
   .entries__photo:hover img {
     transform: none;
   }

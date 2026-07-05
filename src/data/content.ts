@@ -49,9 +49,15 @@ export interface PageContent {
     body: string;
     questionsIntro: string;
     questions: string[];
-    ctaText: string;
   };
-  mentor: { label: string; heading: string; body: string };
+  mentor: {
+    label: string;
+    heading: string;
+    body: string;
+    details: string[];
+    ctaText: string;
+    mailSubject: string;
+  };
   recognition: { label: string; heading: string; groups: MediaGroup[] };
   media: { label: string; heading: string; groups: MediaGroup[] };
   contact: {
@@ -125,12 +131,14 @@ export const content: Record<Locale, PageContent> = {
         'How you keep dreaming about solutions to the world’s biggest problems.',
         'Why, in scientific circles, Lotte is known as “The Lady in Pink”.',
       ],
-      ctaText: 'Write to book Lotte',
     },
     mentor: {
       label: 'Mentoring',
       heading: 'Advice & sparring',
-      body: 'One-on-one advice and sparring on your journey in science — 30-minute sessions on select days between 16:00–17:00 (Copenhagen time).',
+      body: 'One-on-one advice and sparring on your journey in science.',
+      details: ['30-minute sessions', 'Select days, 16:00–17:00 (Copenhagen time)'],
+      ctaText: 'Enquire about mentoring',
+      mailSubject: 'Mentoring enquiry',
     },
     recognition: {
       label: 'Awards',
@@ -385,7 +393,7 @@ export const content: Record<Locale, PageContent> = {
     },
     contact: {
       label: 'Contact',
-      heading: 'Get in touch',
+      heading: 'Contact Lotte',
       lead: 'For speaking, advisory, and research enquiries, write to Lotte’s office.',
       email: 'PA@lottebjerreknudsen.com',
       ctaText: 'Email Lotte',
@@ -455,12 +463,14 @@ export const content: Record<Locale, PageContent> = {
         'Hvordan man bliver ved med at drømme om løsninger på verdens største problemer.',
         'Hvorfor Lotte i videnskabelige kredse er kendt som “The Lady in Pink”.',
       ],
-      ctaText: 'Skriv for at booke Lotte',
     },
     mentor: {
       label: 'Mentoring',
       heading: 'Rådgivning & sparring',
-      body: 'Personlig rådgivning og sparring på din rejse i videnskaben — 30-minutters sessioner på udvalgte dage mellem 16.00–17.00 (dansk tid).',
+      body: 'Personlig rådgivning og sparring på din rejse i videnskaben.',
+      details: ['30-minutters sessioner', 'Udvalgte dage, kl. 16.00–17.00 (dansk tid)'],
+      ctaText: 'Skriv om mentoring',
+      mailSubject: 'Forespørgsel om mentoring',
     },
     recognition: {
       label: 'Priser',
@@ -735,7 +745,7 @@ export const content: Record<Locale, PageContent> = {
     },
     contact: {
       label: 'Kontakt',
-      heading: 'Kom i kontakt',
+      heading: 'Kontakt Lotte',
       lead: 'For foredrag, rådgivning og forskningshenvendelser, skriv til Lottes kontor.',
       email: 'PA@lottebjerreknudsen.com',
       ctaText: 'Skriv til Lotte',
