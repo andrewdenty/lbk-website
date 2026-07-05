@@ -55,8 +55,8 @@ const americanAcademyAlt = isDa
   : 'Lotte Bjerre Knudsen with Jimmy Page at the American Academy of Achievement';
 
 const mailto = `mailto:${c.contact.email}`;
+const mailtoMentor = `${mailto}?subject=${encodeURIComponent(c.mentor.mailSubject)}`;
 const awardsMediaLabel = `${c.recognition.label} & ${c.media.label}`;
-const contactHeading = `${c.contact.label} Lotte`;
 ---
 
 <!-- Hero -->
@@ -240,25 +240,27 @@ const contactHeading = `${c.contact.label} Lotte`;
   </div>
 </section>
 
-<!-- Work with Lotte (speaking + contact) -->
+<!-- Work with Lotte (speaking + mentoring + contact) -->
 <section id="contact" class="section--cream">
   <div class="container" data-reveal>
     <p class="eyebrow">{c.speaking.label}</p>
-    <div class="speak__grid">
-      <div class="speak__main">
+
+    <!-- Speaking — mirrors the About section's text + offset-photo grid -->
+    <div class="work__grid">
+      <div class="work__main">
         <h2 class="h2">{c.speaking.heading}</h2>
-        <p>{c.speaking.lead}</p>
+        <p class="work__lead">{c.speaking.lead}</p>
         <p>{c.speaking.body}</p>
 
-        <div class="speak__bullets">
-          <p class="speak__lead-in">{c.speaking.questionsIntro}</p>
+        <div class="work__bullets">
+          <p class="work__lead-in">{c.speaking.questionsIntro}</p>
           <ul class="bullets">
             {c.speaking.questions.map((q) => <li class="bullet">{q}</li>)}
           </ul>
         </div>
       </div>
 
-      <div class="speak__photo">
+      <div class="work__photo">
         <Image
           src={lottePortrait}
           alt={portraitAlt}
@@ -269,18 +271,29 @@ const contactHeading = `${c.contact.label} Lotte`;
       </div>
     </div>
 
-    <div class="speak__mentor">
-      <h2 class="h2">{c.mentor.heading}</h2>
-      <p>{c.mentor.body}</p>
-    </div>
+    <!-- Mentoring + contact — the Awards section's divider-and-head pattern -->
+    <div class="work__row">
+      <div class="work__cell">
+        <h3 class="h2">{c.mentor.heading}</h3>
+        <p>{c.mentor.body}</p>
+        <ul class="bullets bullets--tight">
+          {c.mentor.details.map((d) => <li class="bullet">{d}</li>)}
+        </ul>
+        <a class="work__link" href={mailtoMentor}>
+          {c.mentor.ctaText}
+          <span class="btn__arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
 
-    <div class="speak__contact">
-      <h2 class="h2">{contactHeading}</h2>
-      <p>{c.contact.lead}</p>
-      <a class="btn btn--compact" href={mailto}>
-        {c.contact.ctaText}
-        <span class="btn__arrow" aria-hidden="true">→</span>
-      </a>
+      <div class="work__cell">
+        <h3 class="h2">{c.contact.heading}</h3>
+        <p>{c.contact.lead}</p>
+        <a class="work__email" href={mailto}>{c.contact.email}</a>
+        <a class="btn btn--compact work__cta" href={mailto}>
+          {c.contact.ctaText}
+          <span class="btn__arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
     </div>
   </div>
 </section>
