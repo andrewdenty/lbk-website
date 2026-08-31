@@ -68,11 +68,15 @@ export interface PageContent {
     ctaText: string;
     links: LinkRef[];
   };
-  footer: { credits: Credit[] };
+  footer: { credits: Credit[]; entities: string[] };
 }
 
 export const scholar = 'https://scholar.google.com/citations?user=s-0BmrMAAAAJ&hl=en';
 const ANDREW_SITE = 'https://andrewdenty.com';
+const LEGAL_ENTITIES = [
+  'Lotte Bjerre Knudsen ApS · CVR 46695763',
+  'Angel Bjerre Holding ApS · CVR 46687108',
+];
 
 export const content: Record<Locale, PageContent> = {
   en: {
@@ -424,6 +428,7 @@ export const content: Record<Locale, PageContent> = {
         { prefix: 'Web design by', label: 'Andrew Denty', href: ANDREW_SITE },
         { prefix: 'Photography by', label: 'Petra Kleis', href: 'https://petrakleis.com' },
       ],
+      entities: LEGAL_ENTITIES,
     },
   },
 
@@ -796,6 +801,7 @@ export const content: Record<Locale, PageContent> = {
         { prefix: 'Webdesign af', label: 'Andrew Denty', href: ANDREW_SITE },
         { prefix: 'Fotografi af', label: 'Petra Kleis', href: 'https://petrakleis.com' },
       ],
+      entities: LEGAL_ENTITIES,
     },
   },
 };

@@ -4,9 +4,10 @@ import type { Credit, NavItem } from '../data/content';
 interface Props {
   links: NavItem[];
   credits: Credit[];
+  entities: string[];
 }
 
-const { links, credits } = Astro.props;
+const { links, credits, entities } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
@@ -34,7 +35,12 @@ const year = new Date().getFullYear();
     </div>
 
     <div class="footer__bottom">
-      <p class="footer__copy">© {year} Lotte Bjerre Knudsen</p>
+      <div class="footer__legal">
+        <p class="footer__copy">© {year} Lotte Bjerre Knudsen</p>
+        <p class="footer__entities">
+          {entities.map((entity) => <span class="footer__entity">{entity}</span>)}
+        </p>
+      </div>
       <p class="footer__credits">
         {
           credits.map((credit) => (
