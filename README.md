@@ -42,8 +42,9 @@ If the site does not appear, enable Pages manually under
 ├── .github/workflows/deploy.yml   # GitHub Pages deploy workflow
 ├── public/                        # static assets (favicon, robots.txt, .nojekyll)
 ├── src/
-│   ├── components/                # Nav (with language toggle), Footer, PageContent, Entry
+│   ├── components/                # Nav (with language toggle), Footer, PageContent, Entry, Mentoring
 │   ├── data/                      # content.ts — all copy + links for both languages
+│   │                              # sections.ts — which sections are switched on
 │   ├── layouts/                   # BaseLayout
 │   ├── pages/                     # index.astro (English), da.astro (Danish)
 │   └── styles/                    # global.css
@@ -59,6 +60,17 @@ The site is bilingual: English at `/` and Danish at `/da/`, switched via the
 by locale — edit the text there and both the page and its translation update.
 `PageContent.astro` renders every section from that data, so the two pages stay
 structurally identical.
+
+## Held-back sections
+
+The site launched in September 2026 in a stripped-back form. The mission
+statement, the "Invite Lotte to Speak" block and the major/minor split of the
+awards list are all still written and still type-checked — they are switched off
+in [`src/data/sections.ts`](src/data/sections.ts). Flip those flags to `true` to
+bring the full site back; no copy needs rewriting.
+
+The tag `full-site-v1` is a snapshot of the markup as it rendered before those
+edits: `git show full-site-v1:src/components/PageContent.astro`.
 
 ## Design
 

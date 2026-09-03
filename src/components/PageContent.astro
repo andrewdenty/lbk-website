@@ -8,7 +8,9 @@ import lottePortrait from '../assets/lotte-portrait.webp';
 import lotteLaskerPrize from '../assets/lotte-lasker-prize.webp';
 import lotteAmericanAcademy from '../assets/lotte-american-academy.webp';
 import { content, type Locale } from '../data/content';
+import { sections } from '../data/sections';
 import Entry from './Entry.astro';
+import Mentoring from './Mentoring.astro';
 
 interface Props {
   lang: Locale;
@@ -64,8 +66,19 @@ const fnlmVideoCaption = isDa
   : 'Lotte is introduced at 16:44 into the recording.';
 
 const mailto = `mailto:${c.contact.email}`;
-const mailtoMentor = `${mailto}?subject=${encodeURIComponent(c.mentor.mailSubject)}`;
 const awardsMediaLabel = `${c.recognition.label} & ${c.media.label}`;
+
+// Awards — tiered into "major" and "more" on the full site; on the stripped-back
+// launch they collapse into one unheaded list so no award is ranked below another.
+const awardGroups = sections.awardTiers
+  ? c.recognition.groups
+  : [{ head: c.recognition.label, items: c.recognition.groups.flatMap((g) => g.items) }];
+
+// The cream/paper alternation runs hero → about → mission → awards → contact.
+// With the mission statement held back, it shifts down a section so About,
+// Awards and Contact don't run together as one unbroken stretch.
+const awardsBg = sections.mission ? '' : 'section--cream';
+const contactBg = sections.mission ? 'section--cream' : '';
 ---
 
 <!-- Hero -->
@@ -106,7 +119,7 @@ const awardsMediaLabel = `${c.recognition.label} & ${c.media.label}`;
         </div>
       </div>
       <a class="btn btn--compact hero__cta" href="#contact">
-        {c.speaking.label}
+        {sections.speaking ? c.speaking.label : c.contact.heading}
         <span class="btn__arrow" aria-hidden="true">↓</span>
       </a>
     </div>
@@ -159,52 +172,45 @@ const awardsMediaLabel = `${c.recognition.label} & ${c.media.label}`;
   </div>
 </section>
 
-<!-- Mission -->
-<section id="mission" class="section--cream">
-  <div class="container" data-reveal>
-    <p class="eyebrow">{c.mission.label}</p>
-    <p class="statement">{c.mission.statement}</p>
-  </div>
-</section>
+<!-- Mission — held back until the full launch (see data/sections.ts) -->
+{
+  sections.mission && (
+    <section id="mission" class="section--cream">
+      <div class="container" data-reveal>
+        <p class="eyebrow">{c.mission.label}</p>
+        <p class="statement">{c.mission.statement}</p>
+      </div>
+    </section>
+  )
+}
 
-<!-- Awards & Media -->
-<section id="awards">
+<!-- Awards & Media — awards lead, as the section heading reads -->
+<section id="awards" class:list={[awardsBg]}>
   <div class="container" data-reveal>
     <p class="eyebrow">{awardsMediaLabel}</p>
     <div class="am__grid">
-      <div id="media" class="am__col">
-        <h2 class="h2" set:html={c.media.heading} />
-        <div class="am__lists">
-          {
-            c.media.groups.map((group) => (
-              <div class="entry-group">
-                <p class="entry-group__head">{group.head}</p>
-                <ul class="entries">
-                  {group.items.map((item) => (
-                    <Entry entry={item} />
-                  ))}
-                </ul>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-
       <div class="am__col">
         <h2 class="h2">{c.recognition.heading}</h2>
         <div class="am__lists">
           {
-            c.recognition.groups.map((group, gi) => (
-              <div class:list={['entry-group', { 'entry-group--featured': gi === 0 }]}>
-                <p class="entry-group__head">
-                  {gi === 0 && <span class="oval" aria-hidden="true" />}
-                  {group.head}
-                </p>
+            awardGroups.map((group, gi) => (
+              <div
+                class:list={[
+                  'entry-group',
+                  { 'entry-group--featured': sections.awardTiers && gi === 0 },
+                ]}
+              >
+                {group.head && (
+                  <p class="entry-group__head">
+                    {sections.awardTiers && gi === 0 && <span class="oval" aria-hidden="true" />}
+                    {group.head}
+                  </p>
+                )}
                 <ul class="entries">
-                  {group.items.map((award, i) => (
+                  {group.items.map((award) => (
                     <>
                       <Entry entry={award} />
-                      {gi === 0 && i === 0 && (
+                      {award.slot === 'lasker' && (
                         <li class="entries__photo entries__photo--portrait">
                           <Image
                             src={lotteLaskerPrize}
@@ -215,7 +221,7 @@ const awardsMediaLabel = `${c.recognition.label} & ${c.media.label}`;
                           />
                         </li>
                       )}
-                      {gi === 0 && i === 1 && (
+                      {award.slot === 'breakthrough' && (
                         <li class="entries__photo entries__photo--md">
                           <Image
                             src={breakthroughPrize}
@@ -226,7 +232,7 @@ const awardsMediaLabel = `${c.recognition.label} & ${c.media.label}`;
                           />
                         </li>
                       )}
-                      {gi === 1 && i === 2 && (
+                      {award.slot === 'fnlm' && (
                         <li class="entries__embed">
                           <div class="embed">
                             <iframe
@@ -241,7 +247,7 @@ const awardsMediaLabel = `${c.recognition.label} & ${c.media.label}`;
                           <p class="embed__caption">{fnlmVideoCaption}</p>
                         </li>
                       )}
-                      {gi === 1 && i === 3 && (
+                      {award.slot === 'academy' && (
                         <li class="entries__photo entries__photo--portrait">
                           <Image
                             src={lotteAmericanAcademy}
@@ -260,28 +266,72 @@ const awardsMediaLabel = `${c.recognition.label} & ${c.media.label}`;
           }
         </div>
       </div>
+
+      <div id="media" class="am__col">
+        <h2 class="h2" set:html={c.media.heading} />
+        <div class="am__lists">
+          {
+            c.media.groups.map((group) => (
+              <div class="entry-group">
+                <p class="entry-group__head">{group.head}</p>
+                <ul class="entries">
+                  {group.items.map((item) => (
+                    <Entry entry={item} />
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Work with Lotte (speaking + mentoring + contact) -->
-<section id="contact" class="section--cream">
+<!-- Contact — the speaking offer sits behind sections.speaking; the mentoring
+     and contact details stay put at the foot of the page either way -->
+<section id="contact" class:list={[contactBg]}>
   <div class="container" data-reveal>
-    <p class="eyebrow">{c.speaking.label}</p>
+    <p class="eyebrow">{sections.speaking ? c.speaking.label : c.contact.label}</p>
 
-    <!-- Speaking — mirrors the About section's text + offset-photo grid -->
-    <div class="work__grid">
+    <!-- Text + photo, mirroring the About section's grid -->
+    <div class:list={['work__grid', { 'work__grid--balanced': !sections.speaking }]}>
       <div class="work__main">
-        <h2 class="h2">{c.speaking.heading}</h2>
-        <p class="work__lead">{c.speaking.lead}</p>
-        <p>{c.speaking.body}</p>
+        {
+          sections.speaking ? (
+            <>
+              <h2 class="h2">{c.speaking.heading}</h2>
+              <p class="work__lead">{c.speaking.lead}</p>
+              <p>{c.speaking.body}</p>
 
-        <div class="work__bullets">
-          <p class="work__lead-in">{c.speaking.questionsIntro}</p>
-          <ul class="bullets">
-            {c.speaking.questions.map((q) => <li class="bullet">{q}</li>)}
-          </ul>
-        </div>
+              <div class="work__bullets">
+                <p class="work__lead-in">{c.speaking.questionsIntro}</p>
+                <ul class="bullets">
+                  {c.speaking.questions.map((q) => (
+                    <li class="bullet">{q}</li>
+                  ))}
+                </ul>
+              </div>
+            </>
+          ) : (
+            <>
+              <div class="work__cell work__cell--plain">
+                <h2 class="h2">{c.contact.heading}</h2>
+                <a class="work__email" href={mailto}>
+                  {c.contact.email}
+                </a>
+                <a class="btn btn--compact work__cta" href={mailto}>
+                  {c.contact.ctaText}
+                  <span class="btn__arrow" aria-hidden="true">
+                    →
+                  </span>
+                </a>
+              </div>
+
+              <Mentoring mentor={c.mentor} mailto={mailto} compact />
+            </>
+          )
+        }
       </div>
 
       <div class="work__photo">
@@ -295,30 +345,28 @@ const awardsMediaLabel = `${c.recognition.label} & ${c.media.label}`;
       </div>
     </div>
 
-    <!-- Mentoring + contact — the Awards section's divider-and-head pattern -->
-    <div class="work__row">
-      <div class="work__cell">
-        <h3 class="h2">{c.mentor.heading}</h3>
-        <p>{c.mentor.body}</p>
-        <ul class="bullets bullets--tight">
-          {c.mentor.details.map((d) => <li class="bullet">{d}</li>)}
-        </ul>
-        <a class="work__link" href={mailtoMentor}>
-          {c.mentor.ctaText}
-          <span class="btn__arrow" aria-hidden="true">→</span>
-        </a>
-      </div>
+    <!-- With the speaking block above, mentoring and contact pair off below it -->
+    {
+      sections.speaking && (
+        <div class="work__row">
+          <Mentoring mentor={c.mentor} mailto={mailto} />
 
-      <div class="work__cell">
-        <h3 class="h2">{c.contact.heading}</h3>
-        <p>{c.contact.lead}</p>
-        <a class="work__email" href={mailto}>{c.contact.email}</a>
-        <a class="btn btn--compact work__cta" href={mailto}>
-          {c.contact.ctaText}
-          <span class="btn__arrow" aria-hidden="true">→</span>
-        </a>
-      </div>
-    </div>
+          <div class="work__cell">
+            <h3 class="h2">{c.contact.heading}</h3>
+            <p>{c.contact.lead}</p>
+            <a class="work__email" href={mailto}>
+              {c.contact.email}
+            </a>
+            <a class="btn btn--compact work__cta" href={mailto}>
+              {c.contact.ctaText}
+              <span class="btn__arrow" aria-hidden="true">
+                →
+              </span>
+            </a>
+          </div>
+        </div>
+      )
+    }
   </div>
 </section>
 
