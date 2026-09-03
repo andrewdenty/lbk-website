@@ -1,0 +1,27 @@
+---
+import type { PageContent } from '../data/content';
+
+interface Props {
+  mentor: PageContent['mentor'];
+  mailto: string;
+  /** Sitting under another block rather than leading a section — takes the
+   *  smaller list-head style of the awards and media lists, and leans on the
+   *  space above it instead of a dividing rule. */
+  compact?: boolean;
+}
+
+const { mentor, mailto, compact = false } = Astro.props;
+const mailtoMentor = `${mailto}?subject=${encodeURIComponent(mentor.mailSubject)}`;
+---
+
+<div class:list={['work__cell', { 'work__cell--plain': compact }]}>
+  <h3 class={compact ? 'work__head' : 'h2'}>{mentor.heading}</h3>
+  <p>{mentor.body}</p>
+  <ul class="bullets bullets--tight">
+    {mentor.details.map((d) => <li class="bullet">{d}</li>)}
+  </ul>
+  <a class="work__link" href={mailtoMentor}>
+    {mentor.ctaText}
+    <span class="btn__arrow" aria-hidden="true">→</span>
+  </a>
+</div>

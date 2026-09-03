@@ -845,6 +845,21 @@ section {
   overflow: hidden;
 }
 
+/* Contact standing on its own — the column is too short to carry the offset
+   photo, so text and photo centre against each other instead of hanging from
+   the top, and the blocks inside it are separated by space rather than a rule */
+.work__grid--balanced {
+  align-items: center;
+}
+
+.work__grid--balanced .work__photo {
+  padding-top: 0;
+}
+
+.work__grid--balanced .work__main {
+  gap: clamp(40px, 5vw, 64px);
+}
+
 .work__photo img {
   width: 100%;
   height: auto;
@@ -867,6 +882,23 @@ section {
   margin-top: 8px; /* extra breathing room above the hairline */
   padding-top: 24px;
   border-top: 1px solid var(--line);
+}
+
+/* Undivided — stacked blocks that lean on spacing instead of a rule */
+.work__cell--plain {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+/* Sub-heading inside a work cell — the weight and size of the awards and media
+   list heads, so the two read at the same level */
+.work__head {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-eyebrow);
+  text-transform: uppercase;
+  color: var(--ink);
 }
 
 .work__cta {
@@ -1115,6 +1147,12 @@ section {
   .work__grid {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+
+  /* Stacked, the photo needs more air beneath the text than the text blocks
+     have between themselves, or it reads as part of the last one */
+  .work__grid--balanced {
+    row-gap: 56px;
   }
 
   .work__photo {

@@ -1,3 +1,5 @@
+import { sections } from './sections';
+
 export type Locale = 'en' | 'da';
 
 export interface NavItem {
@@ -22,6 +24,9 @@ export interface Entry {
   year?: string;
   tag?: string;
   links?: LinkRef[];
+  /** Anchors a photo or video to this entry, so the images stay attached to the
+   *  right award however the list is grouped or ordered. */
+  slot?: 'lasker' | 'breakthrough' | 'fnlm' | 'academy';
 }
 
 export interface MediaGroup {
@@ -89,9 +94,9 @@ export const content: Record<Locale, PageContent> = {
     langAria: 'Language',
     nav: [
       { href: '#about', label: 'About' },
-      { href: '#mission', label: 'Mission' },
+      ...(sections.mission ? [{ href: '#mission', label: 'Mission' }] : []),
       { href: '#awards', label: 'Awards & Media' },
-      { href: '#contact', label: 'Work with Lotte' },
+      { href: '#contact', label: sections.speaking ? 'Work with Lotte' : 'Contact' },
     ],
     callouts: {
       label: 'In brief',
@@ -110,7 +115,7 @@ export const content: Record<Locale, PageContent> = {
       body: [
         'Lotte Bjerre Knudsen is a pioneer of obesity medicines. One of the few people who saw the potential in treating obesity with GLP-1 and stayed tuned on it for 30 years. She graduated from the Danish Technical University (DTU) in 1989 and joined Novo Nordisk where she worked for 36 years. Her first job included creating what became the very first color detergents. She then went on to become a pioneer in GLP-1 and worked diligently for decades to help unfold the biology of the now so famous medicines for diabetes and obesity. Copenhagen University made her a Doctor of Scientific Medicine in 2014. Her latest role at Novo Nordisk was Chief Scientific Advisor and Head of IDEA, Innovation and Data Experimentation Advancement, where she worked to advance the combination of biology, AI and entrepreneurship.',
         'She is currently an Honorary Professor in Translational Medicine at Aarhus University.',
-        'Lotte is one of the world\'s most decorated scientists. The only Dane to ever win a Lasker Award – the Lasker Award is often called America\'s Nobel Prize. Other prestigious awards include The Breakthrough Prize of Life Sciences. This prize is awarded by the tech billionaires Mark Zuckerberg, Priscilla Chan, Julia and Yuri Milner, Sergey Brin and Anne Wojcicki. The purpose of the prize is to create attention around science and therefore it is handed out in Hollywood with many movie stars showing up to support science. The American Association for the Advancement of Science and the Journal Science has also awarded Lotte their Breakthrough Prize.',
+        'Lotte is one of the world\'s most decorated scientists. The only Dane to ever win a Lasker Award – the Lasker Award is often called America\'s Nobel Prize. Other prestigious awards include The Breakthrough Prize of Life Sciences. The American Association for the Advancement of Science and the Journal Science has also awarded Lotte their Breakthrough Prize.',
       ],
       facts: [
         { value: '36 years', label: 'at Novo Nordisk' },
@@ -154,6 +159,7 @@ export const content: Record<Locale, PageContent> = {
             {
               year: '2024',
               title: 'Lasker~DeBakey Clinical Medical Research Award',
+              slot: 'lasker',
               meta: 'Lasker Foundation · shared with Svetlana Mojsov and Joel Habener',
               links: [
                 {
@@ -169,6 +175,7 @@ export const content: Record<Locale, PageContent> = {
             {
               year: '2025',
               title: 'Breakthrough Prize in Life Sciences',
+              slot: 'breakthrough',
               meta: 'Breakthrough Prize Foundation · shared with Jens Juul Holst, Joel Habener, Svetlana Mojsov and Daniel Drucker',
               links: [
                 { label: 'Laureate', href: 'https://breakthroughprize.org/Laureates/L3974' },
@@ -221,12 +228,14 @@ export const content: Record<Locale, PageContent> = {
             {
               year: '2025',
               title: 'Friends of the National Library of Medicine Award',
+              slot: 'fnlm',
               meta: 'FNLM Annual Gala',
               links: [{ label: 'Gala', href: 'https://www.fnlm.org/2025-fnlm-annual-gala/' }],
             },
             {
               year: '2024',
               title: 'Golden Plate Award',
+              slot: 'academy',
               meta: 'American Academy of Achievement',
               links: [
                 { label: 'Summit gallery', href: 'https://achievement.org/summit/2024/#gallery' },
@@ -346,6 +355,17 @@ export const content: Record<Locale, PageContent> = {
               ],
             },
             {
+              title: 'JAMA — A Healthy Dialogue',
+              meta: 'GLP-1s: from gut hormone discovery to a public health revolution · with Jens Juul Holst',
+              tag: 'Podcast',
+              links: [
+                {
+                  label: 'Listen',
+                  href: 'https://jamanetwork.com/journals/jama/fullarticle/2853149',
+                },
+              ],
+            },
+            {
               title: 'Shivering with Curiosity',
               meta: 'American Academy of Achievement',
               tag: 'Podcast',
@@ -442,9 +462,9 @@ export const content: Record<Locale, PageContent> = {
     langAria: 'Sprog',
     nav: [
       { href: '#about', label: 'Om' },
-      { href: '#mission', label: 'Mission' },
+      ...(sections.mission ? [{ href: '#mission', label: 'Mission' }] : []),
       { href: '#awards', label: 'Priser & Medier' },
-      { href: '#contact', label: 'Connect med Lotte' },
+      { href: '#contact', label: sections.speaking ? 'Connect med Lotte' : 'Kontakt' },
     ],
     callouts: {
       label: 'Kort fortalt',
@@ -463,7 +483,7 @@ export const content: Record<Locale, PageContent> = {
       body: [
         'Lotte Bjerre Knudsen er en pioner inden for fedmemedicin. Hun er en af de meget få, der så potentialet i at behandle fedme med GLP-1 og holdt fast i det i 30 år. Hun dimitterede fra Danmarks Tekniske Universitet (DTU) i 1989 og begyndte hos Novo Nordisk, hvor hun arbejdede i 36 år. Hendes første job var at identificere det enzym, der blev til verdens allerførste vaskemiddel til farvet tøj. Herefter blev hun en pioner inden for GLP-1 og arbejdede målrettet i årtier på at afdække biologien bag de nu så berømte lægemidler mod diabetes og fedme. I 2014 forsvarede hun sin doktordisputats i medicinsk videnskab på Københavns Universitet. Hendes seneste rolle hos Novo Nordisk var Chief Scientific Advisor og leder af IDEA, Innovation and Data Experimentation Advancement, hvor hun arbejdede på at fremme kombinationen af biologi, kunstig intelligens og iværksætteri.',
         'Hun er i dag æresprofessor i translationel medicin ved Aarhus Universitet.',
-        'Lotte er en af verdens mest dekorerede forskere. Hun er den eneste dansker, der nogensinde har vundet en Lasker Award, som populært kaldes Amerikas Nobelpris. Andre prestigefyldte priser inkluderer The Breakthrough Prize of Life Science, som er en pris uddelt af tech-mæcener som Mark Zuckerberg, Priscilla Chan, Julia og Yuri Milner, Sergej Brin og Anne Wojcicki. Prisens formål er at skabe opmærksomhed om videnskab, og derfor uddeles prisen i Hollywood ved en kæmpe fest, hvor Hollywoods største stjerner deltager for at støtte videnskaben. American Association for the Advancement of Science og tidsskriftet Science har ligeledes tildelt Lotte deres Breakthrough Prize.',
+        'Lotte er en af verdens mest dekorerede forskere. Hun er den eneste dansker, der nogensinde har vundet en Lasker Award, som populært kaldes Amerikas Nobelpris. Andre prestigefyldte priser inkluderer The Breakthrough Prize of Life Science. American Association for the Advancement of Science og tidsskriftet Science har ligeledes tildelt Lotte deres Breakthrough Prize.',
       ],
       facts: [
         { value: '36 år', label: 'hos Novo Nordisk' },
@@ -507,6 +527,7 @@ export const content: Record<Locale, PageContent> = {
             {
               year: '2024',
               title: 'Lasker~DeBakey Clinical Medical Research Award',
+              slot: 'lasker',
               meta: 'Lasker Foundation · sammen med Svetlana Mojsov og Joel Habener',
               links: [
                 {
@@ -522,6 +543,7 @@ export const content: Record<Locale, PageContent> = {
             {
               year: '2025',
               title: 'Breakthrough Prize in Life Sciences',
+              slot: 'breakthrough',
               meta: 'Breakthrough Prize Foundation · sammen med Jens Juul Holst, Joel Habener, Svetlana Mojsov og Daniel Drucker',
               links: [
                 { label: 'Begrundelse', href: 'https://breakthroughprize.org/Laureates/L3974' },
@@ -574,12 +596,14 @@ export const content: Record<Locale, PageContent> = {
             {
               year: '2025',
               title: 'Friends of the National Library of Medicine Award',
+              slot: 'fnlm',
               meta: 'FNLM Annual Gala',
               links: [{ label: 'Gala', href: 'https://www.fnlm.org/2025-fnlm-annual-gala/' }],
             },
             {
               year: '2024',
               title: 'Golden Plate Award',
+              slot: 'academy',
               meta: 'American Academy of Achievement',
               links: [{ label: 'Galleri', href: 'https://achievement.org/summit/2024/#gallery' }],
             },
@@ -715,6 +739,17 @@ export const content: Record<Locale, PageContent> = {
                 {
                   label: 'Novo Nordisk-afsnit',
                   href: 'https://www.acquired.fm/episodes/novo-nordisk-ozempic',
+                },
+              ],
+            },
+            {
+              title: 'JAMA — A Healthy Dialogue',
+              meta: 'GLP-1: fra opdagelsen af et tarmhormon til en revolution i folkesundheden · med Jens Juul Holst',
+              tag: 'Podcast',
+              links: [
+                {
+                  label: 'Lyt',
+                  href: 'https://jamanetwork.com/journals/jama/fullarticle/2853149',
                 },
               ],
             },
